@@ -9,12 +9,15 @@
 /* Begin PBXBuildFile section */
 		942E57BC26ABBD9000F96E9D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E57BB26ABBD9000F96E9D /* AppDelegate.swift */; };
 		942E57BE26ABBD9000F96E9D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E57BD26ABBD9000F96E9D /* SceneDelegate.swift */; };
-		942E57C026ABBD9000F96E9D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E57BF26ABBD9000F96E9D /* ViewController.swift */; };
 		942E57C326ABBD9000F96E9D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 942E57C126ABBD9000F96E9D /* Main.storyboard */; };
 		942E57C526ABBD9100F96E9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 942E57C426ABBD9100F96E9D /* Assets.xcassets */; };
 		942E57C826ABBD9100F96E9D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 942E57C626ABBD9100F96E9D /* LaunchScreen.storyboard */; };
 		942E57D326ABBD9100F96E9D /* MyTripsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E57D226ABBD9100F96E9D /* MyTripsTests.swift */; };
 		942E57DE26ABBD9100F96E9D /* MyTripsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E57DD26ABBD9100F96E9D /* MyTripsUITests.swift */; };
+		942E57EC26ACAF4B00F96E9D /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E57EB26ACAF4B00F96E9D /* HistoryViewController.swift */; };
+		942E57EE26ACAF6800F96E9D /* TripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E57ED26ACAF6800F96E9D /* TripViewController.swift */; };
+		942E57F126ACB10A00F96E9D /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E57F026ACB10A00F96E9D /* ModelData.swift */; };
+		942E57F426ACC08C00F96E9D /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E57F326ACC08C00F96E9D /* Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +41,6 @@
 		942E57B826ABBD9000F96E9D /* MyTrips.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTrips.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		942E57BB26ABBD9000F96E9D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		942E57BD26ABBD9000F96E9D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		942E57BF26ABBD9000F96E9D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		942E57C226ABBD9000F96E9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		942E57C426ABBD9100F96E9D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		942E57C726ABBD9100F96E9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +51,10 @@
 		942E57D926ABBD9100F96E9D /* MyTripsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyTripsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		942E57DD26ABBD9100F96E9D /* MyTripsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTripsUITests.swift; sourceTree = "<group>"; };
 		942E57DF26ABBD9100F96E9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		942E57EB26ACAF4B00F96E9D /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		942E57ED26ACAF6800F96E9D /* TripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripViewController.swift; sourceTree = "<group>"; };
+		942E57F026ACB10A00F96E9D /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
+		942E57F326ACC08C00F96E9D /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,9 +105,10 @@
 		942E57BA26ABBD9000F96E9D /* MyTrips */ = {
 			isa = PBXGroup;
 			children = (
-				942E57BB26ABBD9000F96E9D /* AppDelegate.swift */,
-				942E57BD26ABBD9000F96E9D /* SceneDelegate.swift */,
-				942E57BF26ABBD9000F96E9D /* ViewController.swift */,
+				942E57F026ACB10A00F96E9D /* ModelData.swift */,
+				942E57F326ACC08C00F96E9D /* Helpers.swift */,
+				942E57F226ACB11A00F96E9D /* Delegates */,
+				942E57EF26ACAF7800F96E9D /* ViewControllers */,
 				942E57C126ABBD9000F96E9D /* Main.storyboard */,
 				942E57C426ABBD9100F96E9D /* Assets.xcassets */,
 				942E57C626ABBD9100F96E9D /* LaunchScreen.storyboard */,
@@ -126,6 +133,24 @@
 				942E57DF26ABBD9100F96E9D /* Info.plist */,
 			);
 			path = MyTripsUITests;
+			sourceTree = "<group>";
+		};
+		942E57EF26ACAF7800F96E9D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				942E57EB26ACAF4B00F96E9D /* HistoryViewController.swift */,
+				942E57ED26ACAF6800F96E9D /* TripViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		942E57F226ACB11A00F96E9D /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				942E57BB26ABBD9000F96E9D /* AppDelegate.swift */,
+				942E57BD26ABBD9000F96E9D /* SceneDelegate.swift */,
+			);
+			path = Delegates;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,9 +283,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				942E57C026ABBD9000F96E9D /* ViewController.swift in Sources */,
+				942E57EE26ACAF6800F96E9D /* TripViewController.swift in Sources */,
+				942E57F426ACC08C00F96E9D /* Helpers.swift in Sources */,
 				942E57BC26ABBD9000F96E9D /* AppDelegate.swift in Sources */,
+				942E57F126ACB10A00F96E9D /* ModelData.swift in Sources */,
 				942E57BE26ABBD9000F96E9D /* SceneDelegate.swift in Sources */,
+				942E57EC26ACAF4B00F96E9D /* HistoryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
