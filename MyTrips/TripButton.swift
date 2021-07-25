@@ -9,14 +9,8 @@ import UIKit
 
 class TripButton: UIButton {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
     var trip: Bool = false
+    var location: Bool = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,9 +25,11 @@ class TripButton: UIButton {
     
     func toggle() {
         if trip {   // Stop the trip
-            self.titleLabel?.text = "Start New Trip"
+            self.setTitle("Start New Trip", for: .normal)
+            self.backgroundColor = UIColor.black
         } else {    // Start the trip
-            self.titleLabel?.text = "End Trip"
+            self.setTitle("End Trip", for: .normal)
+            self.backgroundColor = UIColor.systemRed
         }
         trip = !trip
     }

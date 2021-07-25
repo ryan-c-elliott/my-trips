@@ -39,6 +39,9 @@
                                     <constraint firstAttribute="height" constant="50" id="6PU-JC-0Ob"/>
                                 </constraints>
                                 <state key="normal" title="Start New Trip"/>
+                                <connections>
+                                    <action selector="tripButtonTapped:" destination="M27-Lg-qB5" eventType="touchUpInside" id="fnn-9U-Khl"/>
+                                </connections>
                             </button>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Gnc-hc-cW7">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
