@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>asdfasd</string>
+	<string>Find start and end of trip</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>asdfasdf</string>
+	<string>Find start and end of trip</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
