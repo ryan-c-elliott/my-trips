@@ -31,14 +31,41 @@
                     <view key="view" contentMode="scaleToFill" id="Syb-X2-Gn4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gib-RE-seY" customClass="TripButton" customModule="MyTrips" customModuleProvider="target">
+                                <rect key="frame" x="50" y="738" width="314" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="6PU-JC-0Ob"/>
+                                </constraints>
+                                <state key="normal" title="Start New Trip"/>
+                            </button>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Gnc-hc-cW7">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                            </mapView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="kr5-By-5em"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="kr5-By-5em" firstAttribute="bottom" secondItem="Gib-RE-seY" secondAttribute="bottom" constant="25" id="9Vf-eP-QSj"/>
+                            <constraint firstItem="Gnc-hc-cW7" firstAttribute="trailing" secondItem="kr5-By-5em" secondAttribute="trailing" id="Fg6-QO-ARa"/>
+                            <constraint firstItem="Gib-RE-seY" firstAttribute="centerX" secondItem="Syb-X2-Gn4" secondAttribute="centerX" id="VhB-QK-nYb"/>
+                            <constraint firstItem="kr5-By-5em" firstAttribute="trailing" secondItem="Gib-RE-seY" secondAttribute="trailing" constant="50" id="fgN-7a-W4u"/>
+                            <constraint firstItem="Gnc-hc-cW7" firstAttribute="top" secondItem="Syb-X2-Gn4" secondAttribute="top" id="iFa-q4-94q"/>
+                            <constraint firstItem="Gib-RE-seY" firstAttribute="leading" secondItem="kr5-By-5em" secondAttribute="leading" constant="50" id="nAZ-7B-imf"/>
+                            <constraint firstItem="Gnc-hc-cW7" firstAttribute="leading" secondItem="kr5-By-5em" secondAttribute="leading" id="rIW-og-r5L"/>
+                            <constraint firstItem="Gnc-hc-cW7" firstAttribute="bottom" secondItem="kr5-By-5em" secondAttribute="bottom" id="uNS-xU-ySw"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="1tR-Fe-1ah"/>
+                    <connections>
+                        <outlet property="map" destination="Gnc-hc-cW7" id="2TC-8S-xdH"/>
+                        <outlet property="tripButton" destination="Gib-RE-seY" id="RtS-fN-srn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bhA-dA-1Mm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="387" y="-540"/>
+            <point key="canvasLocation" x="386.95652173913044" y="-540.40178571428567"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Fbz-Vd-aXh">

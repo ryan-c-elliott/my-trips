@@ -18,6 +18,7 @@
 		942E57EE26ACAF6800F96E9D /* TripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E57ED26ACAF6800F96E9D /* TripViewController.swift */; };
 		942E57F126ACB10A00F96E9D /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E57F026ACB10A00F96E9D /* ModelData.swift */; };
 		942E57F426ACC08C00F96E9D /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E57F326ACC08C00F96E9D /* Helpers.swift */; };
+		942E57F626ACC4CB00F96E9D /* TripButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E57F526ACC4CB00F96E9D /* TripButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		942E57ED26ACAF6800F96E9D /* TripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripViewController.swift; sourceTree = "<group>"; };
 		942E57F026ACB10A00F96E9D /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		942E57F326ACC08C00F96E9D /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		942E57F526ACC4CB00F96E9D /* TripButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TripButton.swift; path = MyTrips/TripButton.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 		942E57BA26ABBD9000F96E9D /* MyTrips */ = {
 			isa = PBXGroup;
 			children = (
+				942E57F526ACC4CB00F96E9D /* TripButton.swift */,
 				942E57F026ACB10A00F96E9D /* ModelData.swift */,
 				942E57F326ACC08C00F96E9D /* Helpers.swift */,
 				942E57F226ACB11A00F96E9D /* Delegates */,
@@ -289,6 +292,7 @@
 				942E57F126ACB10A00F96E9D /* ModelData.swift in Sources */,
 				942E57BE26ABBD9000F96E9D /* SceneDelegate.swift in Sources */,
 				942E57EC26ACAF4B00F96E9D /* HistoryViewController.swift in Sources */,
+				942E57F626ACC4CB00F96E9D /* TripButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

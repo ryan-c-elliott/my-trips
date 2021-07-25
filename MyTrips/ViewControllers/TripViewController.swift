@@ -6,12 +6,28 @@
 //
 
 import UIKit
+import MapKit
 
 class TripViewController: UIViewController {
 
+    
+    @IBOutlet weak var tripButton: TripButton!
+    @IBOutlet weak var map: MKMapView!
+    
+    let manager: CLLocationManager = CLLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Map
+        self.map.isZoomEnabled = false
+        self.map.isScrollEnabled = false
+        self.map.isPitchEnabled = false
+        self.map.isRotateEnabled = false
+            
+            
+        
+        
         // Do any additional setup after loading the view.
     }
     
