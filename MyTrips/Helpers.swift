@@ -13,6 +13,10 @@ func toLocation(_ loc: CLLocation) -> Location {
     return Location(latitude: coords.latitude, longitude: coords.longitude)
 }
 
+func mid(_ v1: Double, _ v2: Double) -> Double {
+    (v1 + v2) / 2
+}
+
 func toCLLocation(_ loc: Location) -> CLLocation {
     CLLocation(latitude: loc.latitude, longitude: loc.longitude)
 }

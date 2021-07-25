@@ -7,29 +7,30 @@
 
 import Foundation
 import CoreLocation
+import MapKit
 
 class Trip: Codable  {
     
-    var startTime: Date = Date()
+    var startTime: Date
     var startLoc: Location
-    var endTime: Date? = nil
-    var endLoc: Location? = nil
+    var endTime: Date
+    var endLoc: Location
+    var distance: Double
     
     /* * Initializers * */
     
-    init(_ start: CLLocation) {
-        self.startLoc = toLocation(start)
+    init(route: MKRoute) {
+        self.distance = route.distance
+        self.startLoc = Location(route.steps[0].polyline.points()[0])
+        self.endLoc = Location(route.steps.last!.polyline.points()[0])
         
     }
     
     /* * Setters * */
     
-    func setEndTime(_ end: Date) {
-        self.endTime = end
-    }
-    
-    func setEndLoc(_ end: CLLocation) {
+    func setEnd(_ end: CLLocation) {
         self.endLoc = toLocation(end)
+        self.endTime = end.timestamp
     }
     
     /* * Codable * */
@@ -59,8 +60,26 @@ class Trip: Codable  {
     
 }
 
+
 struct Location: Codable {
     let latitude: Double
     let longitude: Double
     
+    init(_ point: MKMapPoint) {
+        self.init(point.coordinate)
+    }
+    
+    init(_ location: CLLocation) {
+        self.init(location.coordinate)
+    }
+    
+    init(_ coords: CLLocationCoordinate2D) {
+        self.latitude = coords.latitude
+        self.longitude = coords.longitude
+    }
+    
+    init(latitude: Double, longitude: Double) {
+        self.latitude = latitude
+        self.longitude = longitude
+    }
 }

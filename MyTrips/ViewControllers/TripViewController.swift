@@ -17,7 +17,6 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
     
     
     var manager: CLLocationManager = CLLocationManager()
-    //var coords: CLLocationCoordinate2D? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +64,27 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
         if self.tripButton.trip {   // Trip was just started
             self.map.centerCoordinate = manager.location!.coordinate
         } else {    // Trip was just ended
-            
+            let request = MKDirections.Request()
+            let newLoc = manager.location!
+            let coords1 = self.map.centerCoordinate
+            let coords2 = newLoc.coordinate
+            let lat = mid(coords1.latitude, coords2.latitude)
+            let long = mid(coords1.longitude,  coords2.longitude)
+            //self.map.centerCoordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+            let source = MKPlacemark(coordinate: coords1)
+            let dest = MKPlacemark(coordinate: coords2)
+            request.source = MKMapItem(placemark: source)
+            request.destination = MKMapItem(placemark: dest)
+            request.transportType = MKDirectionsTransportType.automobile
+            request.requestsAlternateRoutes = false
+            let directions = MKDirections(request: request)
+            directions.calculate { (response, error) in
+                if let response = response, let route = response.routes.first {
+                    
+                } else {
+                    print("couldn't calculate route")
+                }
+            }
         }
         
     }
@@ -121,7 +140,6 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
             return
         }
 
-        
         sender.toggle()
         self.manager.requestLocation()
         
