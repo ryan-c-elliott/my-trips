@@ -11,53 +11,59 @@ import MapKit
 
 class Trip: Codable  {
     
-    var startTime: Date
-    var startLoc: Location
-    var endTime: Date
-    var endLoc: Location
+    var start: Location
+    var startDate: Date
+    var end: Location
+    var endDate: Date
     var distance: Double
     
     /* * Initializers * */
     
-    init(route: MKRoute) {
+    init(startDate: Date, endDate: Date, route: MKRoute) {
         self.distance = route.distance
-        self.startLoc = Location(route.steps[0].polyline.points()[0])
-        self.endLoc = Location(route.steps.last!.polyline.points()[0])
+        self.start = Location(route.steps[0].polyline.points()[0])
+        self.startDate = startDate
+        self.end = Location(route.steps.last!.polyline.points()[0])
+        self.endDate = endDate
         
     }
     
-    /* * Setters * */
-    
-    func setEnd(_ end: CLLocation) {
-        self.endLoc = toLocation(end)
-        self.endTime = end.timestamp
-    }
     
     /* * Codable * */
     
     enum CodingKeys: String, CodingKey {
-        case startTime
-        case startLoc
-        case endTime
-        case endLoc
+        case start
+        case startDate
+        case end
+        case endDate
+        case distance
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(startTime, forKey: .startTime)
-        try container.encode(startLoc, forKey: .startLoc)
-        try container.encode(endTime, forKey: .endTime)
-        try container.encode(endLoc, forKey: .endLoc)
+        try container.encode(start, forKey: .start)
+        try container.encode(startDate, forKey: .startDate)
+        try container.encode(end, forKey: .end)
+        try container.encode(endDate, forKey: .endDate)
+        try container.encode(distance, forKey: .distance)
     }
     
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        self.startTime = try values.decode(Date.self, forKey: .startTime)
-        self.startLoc = try values.decode(Location.self, forKey: .startLoc)
-        self.endTime = try values.decode(Date.self, forKey: .endTime)
-        self.endLoc = try values.decode(Location.self, forKey: .endLoc)
+        
+        self.start = try values.decode(Location.self, forKey: .start)
+        self.startDate = try values.decode(Date.self, forKey: .startDate)
+        self.end = try values.decode(Location.self, forKey: .end)
+        self.endDate = try values.decode(Date.self, forKey: .endDate)
+        self.distance = try values.decode(Double.self, forKey: .distance)
     }
     
+}
+
+
+struct ResponseData: Codable {
+    var startDate: Date
+    var trips: [Trip]
 }
 
 

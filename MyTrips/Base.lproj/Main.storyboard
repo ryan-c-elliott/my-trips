@@ -15,10 +15,27 @@
                     <view key="view" contentMode="scaleToFill" id="4mx-db-T1M">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e6h-BP-dQp" customClass="CalendarView" customModule="KDCalendar">
+                                <rect key="frame" x="0.0" y="44" width="414" height="300"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="kRQ-4Z-Jox"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="UiC-24-5oG"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="e6h-BP-dQp" firstAttribute="leading" secondItem="UiC-24-5oG" secondAttribute="leading" id="IB1-mG-yKs"/>
+                            <constraint firstItem="UiC-24-5oG" firstAttribute="trailing" secondItem="e6h-BP-dQp" secondAttribute="trailing" id="Z69-9f-8fK"/>
+                            <constraint firstItem="e6h-BP-dQp" firstAttribute="top" secondItem="UiC-24-5oG" secondAttribute="top" id="hGX-1f-esO"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="nUN-Ud-Zep"/>
+                    <tabBarItem key="tabBarItem" title="History" image="list.bullet.rectangle" catalog="system" id="nUN-Ud-Zep"/>
+                    <connections>
+                        <outlet property="calendar" destination="e6h-BP-dQp" id="anf-ob-79D"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gbl-pz-JyP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -60,7 +77,7 @@
                             <constraint firstItem="Gnc-hc-cW7" firstAttribute="bottom" secondItem="kr5-By-5em" secondAttribute="bottom" id="uNS-xU-ySw"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="1tR-Fe-1ah"/>
+                    <tabBarItem key="tabBarItem" title="Trip" image="location" catalog="system" id="1tR-Fe-1ah"/>
                     <connections>
                         <outlet property="map" destination="Gnc-hc-cW7" id="2TC-8S-xdH"/>
                         <outlet property="tripButton" destination="Gib-RE-seY" id="RtS-fN-srn"/>
@@ -90,6 +107,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="list.bullet.rectangle" catalog="system" width="128" height="93"/>
+        <image name="location" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

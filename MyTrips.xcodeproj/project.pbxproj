@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,6 +19,7 @@
 		942E57F126ACB10A00F96E9D /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E57F026ACB10A00F96E9D /* ModelData.swift */; };
 		942E57F426ACC08C00F96E9D /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E57F326ACC08C00F96E9D /* Helpers.swift */; };
 		942E57F626ACC4CB00F96E9D /* TripButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E57F526ACC4CB00F96E9D /* TripButton.swift */; };
+		948BB49E26B1D09C00FD604F /* KDCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 948BB49D26B1D09C00FD604F /* KDCalendar */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				948BB49E26B1D09C00FD604F /* KDCalendar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,6 +174,9 @@
 			dependencies = (
 			);
 			name = MyTrips;
+			packageProductDependencies = (
+				948BB49D26B1D09C00FD604F /* KDCalendar */,
+			);
 			productName = MyTrips;
 			productReference = 942E57B826ABBD9000F96E9D /* MyTrips.app */;
 			productType = "com.apple.product-type.application";
@@ -243,6 +248,9 @@
 				Base,
 			);
 			mainGroup = 942E57AF26ABBD9000F96E9D;
+			packageReferences = (
+				948BB49C26B1D09C00FD604F /* XCRemoteSwiftPackageReference "CalendarView" */,
+			);
 			productRefGroup = 942E57B926ABBD9000F96E9D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -625,6 +633,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		948BB49C26B1D09C00FD604F /* XCRemoteSwiftPackageReference "CalendarView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mmick66/CalendarView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.8.9;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		948BB49D26B1D09C00FD604F /* KDCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 948BB49C26B1D09C00FD604F /* XCRemoteSwiftPackageReference "CalendarView" */;
+			productName = KDCalendar;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 942E57B026ABBD9000F96E9D /* Project object */;
 }

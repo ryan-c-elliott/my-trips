@@ -14,17 +14,16 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var tripButton: TripButton!
     @IBOutlet weak var map: MKMapView!
     
-    
-    
     var manager: CLLocationManager = CLLocationManager()
+    var start: CLLocation = CLLocation()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         // Manager
         self.manager.delegate = self
         self.manager.requestWhenInUseAuthorization()
-        self.manager.requestLocation()
         // Maybe set desiredAccuracy later?
         // Remember you can use manager.location to get the most recently retrieved location
         
@@ -33,6 +32,7 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
         self.map.isScrollEnabled = false
         self.map.isPitchEnabled = false
         self.map.isRotateEnabled = false
+        self.setRegion()
         
         // Trip Button
         self.view.bringSubviewToFront(self.tripButton)
@@ -61,16 +61,18 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
     // When new location is retrieved
     func locationManager(_ manager: CLLocationManager,
                          didUpdateLocations locations: [CLLocation]) {
+        let loc = manager.location!
         if self.tripButton.trip {   // Trip was just started
-            self.map.centerCoordinate = manager.location!.coordinate
+            self.start = loc
+            self.setRegion()
         } else {    // Trip was just ended
+            
+            let coords1 = self.start.coordinate
+            let coords2 = loc.coordinate
+            self.setRegion(start: coords1, end: coords2)
+            
+            // Find route
             let request = MKDirections.Request()
-            let newLoc = manager.location!
-            let coords1 = self.map.centerCoordinate
-            let coords2 = newLoc.coordinate
-            let lat = mid(coords1.latitude, coords2.latitude)
-            let long = mid(coords1.longitude,  coords2.longitude)
-            //self.map.centerCoordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
             let source = MKPlacemark(coordinate: coords1)
             let dest = MKPlacemark(coordinate: coords2)
             request.source = MKMapItem(placemark: source)
@@ -80,7 +82,12 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
             let directions = MKDirections(request: request)
             directions.calculate { (response, error) in
                 if let response = response, let route = response.routes.first {
-                    
+                    (self.parent!.children[1] as! HistoryViewController).trips.append(Trip(
+                        startDate: self.start.timestamp,
+                        endDate: loc.timestamp,
+                        route: route
+                    ))
+                    self.map.addOverlay(route.polyline, level: MKOverlayLevel.aboveRoads)
                 } else {
                     print("couldn't calculate route")
                 }
@@ -88,6 +95,8 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
         }
         
     }
+
+    /* * Location Manager * */
 
     // When the authorization status of the app is changed
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
@@ -146,6 +155,31 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
         // Most work will be done in the locationManagerDidUpdateLocations function
         
         
+    }
+    
+    func setRegion() {
+        self.map.setRegion(
+            MKCoordinateRegion(
+                center: start.coordinate,
+                latitudinalMeters: 500,
+                longitudinalMeters: 500
+            ),
+            animated: true
+        )
+        
+    }
+    
+    func setRegion(start: CLLocationCoordinate2D, end: CLLocationCoordinate2D) {
+        let lat = mid(start.latitude, end.latitude)
+        let long = mid(start.longitude,  end.longitude)
+        self.map.setRegion(
+            MKCoordinateRegion(
+                center: CLLocationCoordinate2D(latitude: lat, longitude: long),
+                latitudinalMeters: abs(start.latitude - end.latitude) + 500,
+                longitudinalMeters: abs(start.longitude - end.longitude) + 500
+            ),
+            animated: true
+        )
     }
     
 }
