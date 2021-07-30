@@ -19,6 +19,8 @@
 		942E57F126ACB10A00F96E9D /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E57F026ACB10A00F96E9D /* ModelData.swift */; };
 		942E57F426ACC08C00F96E9D /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E57F326ACC08C00F96E9D /* Helpers.swift */; };
 		942E57F626ACC4CB00F96E9D /* TripButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E57F526ACC4CB00F96E9D /* TripButton.swift */; };
+		944E062826B4751200A49B81 /* JTAppleCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 944E062726B4751200A49B81 /* JTAppleCalendar */; };
+		944E062B26B476EF00A49B81 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 944E062A26B476EF00A49B81 /* FSCalendar */; };
 		948BB49E26B1D09C00FD604F /* KDCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 948BB49D26B1D09C00FD604F /* KDCalendar */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +68,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				948BB49E26B1D09C00FD604F /* KDCalendar in Frameworks */,
+				944E062B26B476EF00A49B81 /* FSCalendar in Frameworks */,
+				944E062826B4751200A49B81 /* JTAppleCalendar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,6 +180,8 @@
 			name = MyTrips;
 			packageProductDependencies = (
 				948BB49D26B1D09C00FD604F /* KDCalendar */,
+				944E062726B4751200A49B81 /* JTAppleCalendar */,
+				944E062A26B476EF00A49B81 /* FSCalendar */,
 			);
 			productName = MyTrips;
 			productReference = 942E57B826ABBD9000F96E9D /* MyTrips.app */;
@@ -250,6 +256,8 @@
 			mainGroup = 942E57AF26ABBD9000F96E9D;
 			packageReferences = (
 				948BB49C26B1D09C00FD604F /* XCRemoteSwiftPackageReference "CalendarView" */,
+				944E062626B4751200A49B81 /* XCRemoteSwiftPackageReference "JTAppleCalendar" */,
+				944E062926B476EF00A49B81 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 			);
 			productRefGroup = 942E57B926ABBD9000F96E9D /* Products */;
 			projectDirPath = "";
@@ -635,6 +643,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		944E062626B4751200A49B81 /* XCRemoteSwiftPackageReference "JTAppleCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/patchthecode/JTAppleCalendar";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.3;
+			};
+		};
+		944E062926B476EF00A49B81 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.2;
+			};
+		};
 		948BB49C26B1D09C00FD604F /* XCRemoteSwiftPackageReference "CalendarView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mmick66/CalendarView.git";
@@ -646,6 +670,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		944E062726B4751200A49B81 /* JTAppleCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 944E062626B4751200A49B81 /* XCRemoteSwiftPackageReference "JTAppleCalendar" */;
+			productName = JTAppleCalendar;
+		};
+		944E062A26B476EF00A49B81 /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 944E062926B476EF00A49B81 /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
+		};
 		948BB49D26B1D09C00FD604F /* KDCalendar */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 948BB49C26B1D09C00FD604F /* XCRemoteSwiftPackageReference "CalendarView" */;

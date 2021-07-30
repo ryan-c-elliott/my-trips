@@ -82,7 +82,7 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
             let directions = MKDirections(request: request)
             directions.calculate { (response, error) in
                 if let response = response, let route = response.routes.first {
-                    (self.parent!.children[1] as! HistoryViewController).trips.append(Trip(
+                    (self.parent!.children[1] as! HistoryViewController).data.trips.append(Trip(
                         startDate: self.start.timestamp,
                         endDate: loc.timestamp,
                         route: route

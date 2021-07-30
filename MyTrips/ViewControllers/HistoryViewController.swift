@@ -6,57 +6,74 @@
 //
 
 import UIKit
+import JTAppleCalendar
 import KDCalendar
+import FSCalendar
 
-class HistoryViewController: UIViewController, CalendarViewDataSource, CalendarViewDelegate {
+class HistoryViewController: UIViewController /*, CalendarViewDataSource, CalendarViewDelegate */{
 
 
-    @IBOutlet weak var calendar: CalendarView!
+    @IBOutlet weak var calendar: FSCalendar!
     
-    var trips: [Trip] = [] // change to load a json
+    var data: ResponseData = loadJson(url: getURL(filename: "data")!) ?? ResponseData(startDate: Date(), trips: [])
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
-        // Do any additional setup after loading the view.
+        let today = Date()
+        /* KDCalendar
+        self.calendar.setDisplayDate(today, animated: false)
+        self.calendar.style.firstWeekday = .sunday
+        self.calendar.direction = .vertical
+      */
     }
     
-    
+    /* KDCalendar
     /* * CalendarView DataSource and Delegate * */
     
     func startDate() -> Date {
-        <#code#>
+        //data.startDate
+        var comps = DateComponents()
+        comps.month = -3
+        return self.calendar.calendar.date(byAdding: comps, to: Date())!
     }
     
     func endDate() -> Date {
-        <#code#>
+        Date()
     }
     
     func headerString(_ date: Date) -> String? {
-        <#code#>
+        nil
     }
     
     func calendar(_ calendar: CalendarView, didScrollToMonth date: Date) {
-        <#code#>
+        
     }
     
     func calendar(_ calendar: CalendarView, didSelectDate date: Date, withEvents events: [CalendarEvent]) {
-        <#code#>
+            
     }
     
     func calendar(_ calendar: CalendarView, canSelectDate date: Date) -> Bool {
-        <#code#>
+        
+        switch (date.compare(endDate()), date.compare(startDate())) {
+            case (.orderedDescending, _), (_, .orderedAscending):
+                return false
+            default:
+                return true
+        }
+ 
+
     }
     
     func calendar(_ calendar: CalendarView, didDeselectDate date: Date) {
-        <#code#>
+            
     }
     
     func calendar(_ calendar: CalendarView, didLongPressDate date: Date, withEvents events: [CalendarEvent]?) {
-        <#code#>
+            
     }
-    
+    */
 
 
 }
