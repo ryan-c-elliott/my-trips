@@ -20,12 +20,12 @@ class Trip: Codable  {
     /* * Initializers * */
     
     init(startDate: Date, endDate: Date, route: MKRoute) {
-        self.distance = route.distance
+        
         self.start = Location(route.steps[0].polyline.points()[0])
         self.startDate = startDate
         self.end = Location(route.steps.last!.polyline.points()[0])
         self.endDate = endDate
-        
+        self.distance = route.distance
     }
     
     
@@ -61,8 +61,9 @@ class Trip: Codable  {
 }
 
 
+
+
 struct ResponseData: Codable {
-    var startDate: Date
     var trips: [Trip]
 }
 

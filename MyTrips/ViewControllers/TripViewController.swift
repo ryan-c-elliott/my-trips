@@ -67,14 +67,13 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
             self.setRegion()
         } else {    // Trip was just ended
             
-            let coords1 = self.start.coordinate
-            let coords2 = loc.coordinate
-            self.setRegion(start: coords1, end: coords2)
+            let endCoords = loc.coordinate
+            self.setRegion(end: endCoords)
             
             // Find route
             let request = MKDirections.Request()
-            let source = MKPlacemark(coordinate: coords1)
-            let dest = MKPlacemark(coordinate: coords2)
+            let source = MKPlacemark(coordinate: self.start.coordinate)
+            let dest = MKPlacemark(coordinate: endCoords)
             request.source = MKMapItem(placemark: source)
             request.destination = MKMapItem(placemark: dest)
             request.transportType = MKDirectionsTransportType.automobile
@@ -82,7 +81,8 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
             let directions = MKDirections(request: request)
             directions.calculate { (response, error) in
                 if let response = response, let route = response.routes.first {
-                    (self.parent!.children[1] as! HistoryViewController).data.trips.append(Trip(
+                    var trips = (self.parent!.children[1] as! HistoryViewController).data.trips
+                    trips.append(Trip(
                         startDate: self.start.timestamp,
                         endDate: loc.timestamp,
                         route: route
@@ -169,14 +169,16 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
-    func setRegion(start: CLLocationCoordinate2D, end: CLLocationCoordinate2D) {
-        let lat = mid(start.latitude, end.latitude)
-        let long = mid(start.longitude,  end.longitude)
+    func setRegion(end: CLLocationCoordinate2D) {
+        let slat = self.start.coordinate.latitude
+        let slong = self.start.coordinate.longitude
+        let lat = mid(slat, end.latitude)
+        let long = mid(slong,  end.longitude)
         self.map.setRegion(
             MKCoordinateRegion(
                 center: CLLocationCoordinate2D(latitude: lat, longitude: long),
-                latitudinalMeters: abs(start.latitude - end.latitude) + 500,
-                longitudinalMeters: abs(start.longitude - end.longitude) + 500
+                latitudinalMeters: abs(slat - end.latitude) + 500,
+                longitudinalMeters: abs(slong - end.longitude) + 500
             ),
             animated: true
         )
