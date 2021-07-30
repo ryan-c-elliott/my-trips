@@ -10,10 +10,13 @@ import JTAppleCalendar
 import KDCalendar
 import FSCalendar
 
-class HistoryViewController: UIViewController{
+class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    
 
 
     @IBOutlet weak var calendar: FSCalendar!
+    @IBOutlet weak var tableView: UITableView!
     
     var data: ResponseData = loadJson(url: getURL(filename: "data")!) ?? ResponseData(startDate: Date(), trips: [])
     
@@ -21,10 +24,20 @@ class HistoryViewController: UIViewController{
         super.viewDidLoad()
         
         
+        // Gets rid of the faded months on the left and right of the header
         self.calendar.appearance.headerMinimumDissolvedAlpha = 0
         
     }
     
+    /* * UITableViewDataSource * */
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        <#code#>
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        <#code#>
+    }
     
 
 
