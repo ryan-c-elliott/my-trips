@@ -25,6 +25,8 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     var calendar: Calendar = Calendar(identifier: .gregorian)
     
     let dateComponents: Set<Calendar.Component> = [.day, .month, .year]
+    let dateFormatter: DateFormatter = DateFormatter()
+    let cellReuseIdentifier = "cell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,9 +41,28 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
         }
         
+        // DateFormatter
+        dateFormatter.dateStyle = .medium
+        dateFormatter.locale = Locale(identifier: "en_US")
+        
+        // Print stuff
+        for i in sectionStarts {
+            print(i, terminator: " ")
+        }
+        print()
+        print()
+        print(data)
+        
         // FSCalendar
-        // Gets rid of the faded months on the left and right of the header
         self.calendarView.appearance.headerMinimumDissolvedAlpha = 0
+        self.calendarView.calendarHeaderView.scrollDirection = .vertical
+        self.calendarView.headerHeight = 50
+        
+        
+        // TableView
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
         
     }
     
@@ -57,7 +78,18 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        let cell: UITableViewCell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)! as UITableViewCell
+        
+        let trip = self.data.trips[indexPath.row + sectionStarts[indexPath.section]]
+        
+        
+        cell.textLabel?.text = trip.startDate.description
+                
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        self.dateFormatter.string(from: self.data.trips[sectionStarts[section]].startDate)
     }
     
 

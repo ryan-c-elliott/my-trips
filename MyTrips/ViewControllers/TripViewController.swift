@@ -70,7 +70,7 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
             let endCoords = loc.coordinate
             self.setRegion(end: endCoords)
             
-            // Find route
+            // Convert to MKPlacemark
             let request = MKDirections.Request()
             let source = MKPlacemark(coordinate: self.start.coordinate)
             let dest = MKPlacemark(coordinate: endCoords)
@@ -78,15 +78,19 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
             request.destination = MKMapItem(placemark: dest)
             request.transportType = MKDirectionsTransportType.automobile
             request.requestsAlternateRoutes = false
+            
+            // Find directions
             let directions = MKDirections(request: request)
             directions.calculate { (response, error) in
                 if let response = response, let route = response.routes.first {
-                    var trips = (self.parent!.children[1] as! HistoryViewController).data.trips
-                    trips.append(Trip(
+                    let historyViewController = self.parent!.children[1] as! HistoryViewController
+                    var data = historyViewController.data
+                    data.trips.append(Trip(
                         startDate: self.start.timestamp,
                         endDate: loc.timestamp,
                         route: route
                     ))
+                    tripsWrite(data: data)
                     self.map.addOverlay(route.polyline, level: MKOverlayLevel.aboveRoads)
                 } else {
                     print("couldn't calculate route")

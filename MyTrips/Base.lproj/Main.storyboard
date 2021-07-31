@@ -59,7 +59,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gib-RE-seY" customClass="TripButton" customModule="MyTrips" customModuleProvider="target">
-                                <rect key="frame" x="157.5" y="738" width="99" height="50"/>
+                                <rect key="frame" x="25" y="738" width="364" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="6PU-JC-0Ob"/>
@@ -80,8 +80,10 @@
                             <constraint firstItem="Gnc-hc-cW7" firstAttribute="trailing" secondItem="kr5-By-5em" secondAttribute="trailing" id="Fg6-QO-ARa"/>
                             <constraint firstItem="Gib-RE-seY" firstAttribute="centerX" secondItem="Syb-X2-Gn4" secondAttribute="centerX" id="VhB-QK-nYb"/>
                             <constraint firstItem="Gnc-hc-cW7" firstAttribute="top" secondItem="Syb-X2-Gn4" secondAttribute="top" id="iFa-q4-94q"/>
+                            <constraint firstItem="Gib-RE-seY" firstAttribute="leading" secondItem="kr5-By-5em" secondAttribute="leading" constant="25" id="qYc-3J-q8T"/>
                             <constraint firstItem="Gnc-hc-cW7" firstAttribute="leading" secondItem="kr5-By-5em" secondAttribute="leading" id="rIW-og-r5L"/>
                             <constraint firstItem="Gnc-hc-cW7" firstAttribute="bottom" secondItem="kr5-By-5em" secondAttribute="bottom" id="uNS-xU-ySw"/>
+                            <constraint firstItem="kr5-By-5em" firstAttribute="trailing" secondItem="Gib-RE-seY" secondAttribute="trailing" constant="25" id="yL7-9f-6rl"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Trip" image="location" catalog="system" id="1tR-Fe-1ah"/>

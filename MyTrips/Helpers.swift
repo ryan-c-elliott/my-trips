@@ -49,4 +49,37 @@ func getURL(filename: String) -> URL? {
     return nil
 }
 
+func write<T: Encodable>(url: URL, data: T) {
+    do {
 
+        try JSONEncoder().encode(data)
+            .write(to: url)
+    } catch {
+        print("json failed to encode")
+    }
+}
+
+func tripsWrite(data: ResponseData) {
+    write(url: getURL(filename: "data")!, data: data)
+}
+
+func toJson<T: Encodable>(_ object: T) -> String? {
+    do {
+        let jsonData = try JSONEncoder().encode(object)
+        return String(data: jsonData, encoding: String.Encoding.utf8)!
+    } catch {
+        print("object couldn't be encoded")
+    }
+    return nil
+    
+}
+
+func print(_ data: ResponseData) {
+    for trip in data.trips {
+        print("Distance: \(trip.distance)")
+        print("Start: \(trip.startDate)")
+        print("End: \(trip.endDate)")
+        print()
+    }
+    
+}
