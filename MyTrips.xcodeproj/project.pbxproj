@@ -19,10 +19,9 @@
 		942E57F126ACB10A00F96E9D /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E57F026ACB10A00F96E9D /* ModelData.swift */; };
 		942E57F426ACC08C00F96E9D /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E57F326ACC08C00F96E9D /* Helpers.swift */; };
 		942E57F626ACC4CB00F96E9D /* TripButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E57F526ACC4CB00F96E9D /* TripButton.swift */; };
-		944E062826B4751200A49B81 /* JTAppleCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 944E062726B4751200A49B81 /* JTAppleCalendar */; };
 		944E062B26B476EF00A49B81 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 944E062A26B476EF00A49B81 /* FSCalendar */; };
 		944E062D26B72F5A00A49B81 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944E062C26B72F5A00A49B81 /* TabBarController.swift */; };
-		948BB49E26B1D09C00FD604F /* KDCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 948BB49D26B1D09C00FD604F /* KDCalendar */; };
+		944E062F26B7379E00A49B81 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944E062E26B7379E00A49B81 /* CalendarCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,8 +59,9 @@
 		942E57ED26ACAF6800F96E9D /* TripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripViewController.swift; sourceTree = "<group>"; };
 		942E57F026ACB10A00F96E9D /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		942E57F326ACC08C00F96E9D /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
-		942E57F526ACC4CB00F96E9D /* TripButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TripButton.swift; path = MyTrips/TripButton.swift; sourceTree = SOURCE_ROOT; };
+		942E57F526ACC4CB00F96E9D /* TripButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TripButton.swift; path = MyTrips/SubClasses/TripButton.swift; sourceTree = SOURCE_ROOT; };
 		944E062C26B72F5A00A49B81 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		944E062E26B7379E00A49B81 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,9 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				948BB49E26B1D09C00FD604F /* KDCalendar in Frameworks */,
 				944E062B26B476EF00A49B81 /* FSCalendar in Frameworks */,
-				944E062826B4751200A49B81 /* JTAppleCalendar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,14 +113,13 @@
 		942E57BA26ABBD9000F96E9D /* MyTrips */ = {
 			isa = PBXGroup;
 			children = (
-				942E57F526ACC4CB00F96E9D /* TripButton.swift */,
 				942E57F026ACB10A00F96E9D /* ModelData.swift */,
 				942E57F326ACC08C00F96E9D /* Helpers.swift */,
+				944E063026B737AC00A49B81 /* SubClasses */,
 				942E57F226ACB11A00F96E9D /* Delegates */,
 				942E57EF26ACAF7800F96E9D /* ViewControllers */,
-				942E57C126ABBD9000F96E9D /* Main.storyboard */,
+				944E063126B737D100A49B81 /* Storyboards */,
 				942E57C426ABBD9100F96E9D /* Assets.xcassets */,
-				942E57C626ABBD9100F96E9D /* LaunchScreen.storyboard */,
 				942E57C926ABBD9100F96E9D /* Info.plist */,
 			);
 			path = MyTrips;
@@ -149,9 +146,9 @@
 		942E57EF26ACAF7800F96E9D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				942E57EB26ACAF4B00F96E9D /* HistoryViewController.swift */,
 				944E062C26B72F5A00A49B81 /* TabBarController.swift */,
 				942E57ED26ACAF6800F96E9D /* TripViewController.swift */,
+				942E57EB26ACAF4B00F96E9D /* HistoryViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -163,6 +160,24 @@
 				942E57BD26ABBD9000F96E9D /* SceneDelegate.swift */,
 			);
 			path = Delegates;
+			sourceTree = "<group>";
+		};
+		944E063026B737AC00A49B81 /* SubClasses */ = {
+			isa = PBXGroup;
+			children = (
+				942E57F526ACC4CB00F96E9D /* TripButton.swift */,
+				944E062E26B7379E00A49B81 /* CalendarCell.swift */,
+			);
+			path = SubClasses;
+			sourceTree = "<group>";
+		};
+		944E063126B737D100A49B81 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				942E57C126ABBD9000F96E9D /* Main.storyboard */,
+				942E57C626ABBD9100F96E9D /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,8 +197,6 @@
 			);
 			name = MyTrips;
 			packageProductDependencies = (
-				948BB49D26B1D09C00FD604F /* KDCalendar */,
-				944E062726B4751200A49B81 /* JTAppleCalendar */,
 				944E062A26B476EF00A49B81 /* FSCalendar */,
 			);
 			productName = MyTrips;
@@ -258,8 +271,6 @@
 			);
 			mainGroup = 942E57AF26ABBD9000F96E9D;
 			packageReferences = (
-				948BB49C26B1D09C00FD604F /* XCRemoteSwiftPackageReference "CalendarView" */,
-				944E062626B4751200A49B81 /* XCRemoteSwiftPackageReference "JTAppleCalendar" */,
 				944E062926B476EF00A49B81 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 			);
 			productRefGroup = 942E57B926ABBD9000F96E9D /* Products */;
@@ -309,6 +320,7 @@
 				944E062D26B72F5A00A49B81 /* TabBarController.swift in Sources */,
 				942E57F426ACC08C00F96E9D /* Helpers.swift in Sources */,
 				942E57BC26ABBD9000F96E9D /* AppDelegate.swift in Sources */,
+				944E062F26B7379E00A49B81 /* CalendarCell.swift in Sources */,
 				942E57F126ACB10A00F96E9D /* ModelData.swift in Sources */,
 				942E57BE26ABBD9000F96E9D /* SceneDelegate.swift in Sources */,
 				942E57EC26ACAF4B00F96E9D /* HistoryViewController.swift in Sources */,
@@ -647,14 +659,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		944E062626B4751200A49B81 /* XCRemoteSwiftPackageReference "JTAppleCalendar" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/patchthecode/JTAppleCalendar";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.0.3;
-			};
-		};
 		944E062926B476EF00A49B81 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/WenchaoD/FSCalendar";
@@ -663,31 +667,13 @@
 				minimumVersion = 2.8.2;
 			};
 		};
-		948BB49C26B1D09C00FD604F /* XCRemoteSwiftPackageReference "CalendarView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/mmick66/CalendarView.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.8.9;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		944E062726B4751200A49B81 /* JTAppleCalendar */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 944E062626B4751200A49B81 /* XCRemoteSwiftPackageReference "JTAppleCalendar" */;
-			productName = JTAppleCalendar;
-		};
 		944E062A26B476EF00A49B81 /* FSCalendar */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 944E062926B476EF00A49B81 /* XCRemoteSwiftPackageReference "FSCalendar" */;
 			productName = FSCalendar;
-		};
-		948BB49D26B1D09C00FD604F /* KDCalendar */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 948BB49C26B1D09C00FD604F /* XCRemoteSwiftPackageReference "CalendarView" */;
-			productName = KDCalendar;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

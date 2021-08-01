@@ -32,11 +32,12 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         trips = (self.parent as! TabBarController).data.trips
         
         // Set up sectionStarts
-        var last: DateComponents = calendar.dateComponents(dateComponents, from: Date.distantPast)
+        var last: DateComponents = self.calendar.dateComponents(self.dateComponents, from: Date.distantPast)
         for i in 0..<self.trips.count {
-            let curr = calendar.dateComponents(dateComponents, from: self.trips[i].startDate)
+            let date = self.trips[i].startDate
+            let curr = self.calendar.dateComponents(self.dateComponents, from: date)
             if curr != last {
-                sectionStarts.append(i)
+                self.sectionStarts.append(i)
                 last = curr
             }
         }
@@ -54,43 +55,16 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         print(data)
         */
         // FSCalendar
-        let appearance = self.calendarView.appearance
-        appearance.headerMinimumDissolvedAlpha = 0
-        let topColor: UIColor = UIColor(red: 0, green: 100/255, blue: 0, alpha: 1)
-        appearance.headerTitleColor = topColor
-        appearance.weekdayTextColor = topColor
-        appearance.todayColor = self.todayButton.titleColor(for: .normal)
-        appearance.selectionColor = .systemRed
         self.calendarView.calendarHeaderView.scrollDirection = .vertical
-        self.calendarView.headerHeight = 25
+        self.calendarView.register(CalendarCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+
         
         
         
         
         
         // Header Buttons
-        /*
-        print(self.calendarView.headerHeight)
-        
-        print(self.calendarView.frame.width)
-        
-        let buttonWidth: CGFloat = 50
-        let xpos = self.view.frame.width - buttonWidth - 12.5
-        let title = "Today"
-        let todayButton = UIButton(frame: CGRect(
-                                    x: xpos,
-                                    y: 0,
-                                    width: buttonWidth,
-                                    height: 25
-        ))
-        todayButton.setTitle(title, for: .normal)
-        todayButton.setTitleColor(appearance.headerTitleColor, for: .normal)
-        todayButton.titleLabel?.font = appearance.headerTitleFont
-        self.calendarView.calendarHeaderView.addSubview(todayButton)
- */
         self.calendarView.bringSubviewToFront(self.todayButton)
-        
-        
         
         // TableView
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
@@ -98,6 +72,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.tableView.dataSource = self
         
     }
+    
     
     @IBAction func todayButtonTapped(_ sender: UIButton) {
         self.calendarView.select(self.calendarView.today)
