@@ -100,7 +100,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     @IBAction func todayButtonTapped(_ sender: UIButton) {
-        
+        self.calendarView.select(self.calendarView.today)
     }
     
     
