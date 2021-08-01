@@ -16,12 +16,11 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
 
 
     @IBOutlet weak var calendarView: FSCalendar!
+    @IBOutlet weak var todayButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
-    var data: ResponseData = loadJson(url: getURL(filename: "data")!) ?? ResponseData(trips: [])
     
-    // Helps organize the tableView
-    var sectionStarts: [Int] = []
+    var sectionStarts: [Int] = [] // Helps organize the tableView
     var calendar: Calendar = Calendar(identifier: .gregorian)
     
     let dateComponents: Set<Calendar.Component> = [.day, .month, .year]
@@ -31,10 +30,13 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let parent = self.parent as! TabBarController
+        let trips = parent.data.trips
+        
         // Set up sectionStarts
         var last: DateComponents = calendar.dateComponents(dateComponents, from: Date.distantPast)
-        for i in 0..<data.trips.count {
-            let curr = calendar.dateComponents(dateComponents, from: data.trips[i].startDate)
+        for i in 0..<trips.count {
+            let curr = calendar.dateComponents(dateComponents, from: trips[i].startDate)
             if curr != last {
                 sectionStarts.append(i)
                 last = curr
@@ -44,7 +46,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         // DateFormatter
         dateFormatter.dateStyle = .medium
         dateFormatter.locale = Locale(identifier: "en_US")
-        
+        /*
         // Print stuff
         for i in sectionStarts {
             print(i, terminator: " ")
@@ -52,11 +54,44 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         print()
         print()
         print(data)
-        
+        */
         // FSCalendar
-        self.calendarView.appearance.headerMinimumDissolvedAlpha = 0
+        let appearance = self.calendarView.appearance
+        appearance.headerMinimumDissolvedAlpha = 0
+        let topColor: UIColor = UIColor(red: 0, green: 100/255, blue: 0, alpha: 1)
+        appearance.headerTitleColor = topColor
+        appearance.weekdayTextColor = topColor
+        appearance.todayColor = self.todayButton.titleColor(for: .normal)
+        appearance.selectionColor = .systemRed
         self.calendarView.calendarHeaderView.scrollDirection = .vertical
-        self.calendarView.headerHeight = 50
+        self.calendarView.headerHeight = 25
+        
+        
+        
+        
+        
+        // Header Buttons
+        /*
+        print(self.calendarView.headerHeight)
+        
+        print(self.calendarView.frame.width)
+        
+        let buttonWidth: CGFloat = 50
+        let xpos = self.view.frame.width - buttonWidth - 12.5
+        let title = "Today"
+        let todayButton = UIButton(frame: CGRect(
+                                    x: xpos,
+                                    y: 0,
+                                    width: buttonWidth,
+                                    height: 25
+        ))
+        todayButton.setTitle(title, for: .normal)
+        todayButton.setTitleColor(appearance.headerTitleColor, for: .normal)
+        todayButton.titleLabel?.font = appearance.headerTitleFont
+        self.calendarView.calendarHeaderView.addSubview(todayButton)
+ */
+        self.calendarView.bringSubviewToFront(self.todayButton)
+        
         
         
         // TableView
@@ -66,6 +101,9 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         
     }
     
+    @IBAction func todayButtonTapped(_ sender: UIButton) {
+        
+    }
     /* * UITableView * */
     
     func numberOfSections(in tableView: UITableView) -> Int {
