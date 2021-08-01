@@ -19,10 +19,9 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var todayButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
-    
+    var trips: [Trip] = []
     var sectionStarts: [Int] = [] // Helps organize the tableView
-    var calendar: Calendar = Calendar(identifier: .gregorian)
-    
+    let calendar: Calendar = Calendar(identifier: .gregorian)
     let dateComponents: Set<Calendar.Component> = [.day, .month, .year]
     let dateFormatter: DateFormatter = DateFormatter()
     let cellReuseIdentifier = "cell"
@@ -30,13 +29,12 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let parent = self.parent as! TabBarController
-        let trips = parent.data.trips
+        trips = (self.parent as! TabBarController).data.trips
         
         // Set up sectionStarts
         var last: DateComponents = calendar.dateComponents(dateComponents, from: Date.distantPast)
-        for i in 0..<trips.count {
-            let curr = calendar.dateComponents(dateComponents, from: trips[i].startDate)
+        for i in 0..<self.trips.count {
+            let curr = calendar.dateComponents(dateComponents, from: self.trips[i].startDate)
             if curr != last {
                 sectionStarts.append(i)
                 last = curr
@@ -104,6 +102,8 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBAction func todayButtonTapped(_ sender: UIButton) {
         
     }
+    
+    
     /* * UITableView * */
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -111,14 +111,14 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let next = section == sectionStarts.count-1 ? self.data.trips.count : sectionStarts[section+1]
+        let next = section == sectionStarts.count-1 ? self.trips.count : sectionStarts[section+1]
         return next - sectionStarts[section]
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)! as UITableViewCell
         
-        let trip = self.data.trips[indexPath.row + sectionStarts[indexPath.section]]
+        let trip = self.trips[indexPath.row + sectionStarts[indexPath.section]]
         
         
         cell.textLabel?.text = trip.startDate.description
@@ -127,7 +127,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        self.dateFormatter.string(from: self.data.trips[sectionStarts[section]].startDate)
+        self.dateFormatter.string(from: self.trips[sectionStarts[section]].startDate)
     }
     
 
