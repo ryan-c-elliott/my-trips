@@ -10,7 +10,7 @@ import JTAppleCalendar
 import KDCalendar
 import FSCalendar
 
-class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDelegate, FSCalendarDataSource {
     
     
 
@@ -45,6 +45,8 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         // DateFormatter
         dateFormatter.dateStyle = .medium
         dateFormatter.locale = Locale(identifier: "en_US")
+        
+        
         /*
         // Print stuff
         for i in sectionStarts {
@@ -54,6 +56,8 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         print()
         print(data)
         */
+        
+        
         // FSCalendar
         self.calendarView.calendarHeaderView.scrollDirection = .vertical
         self.calendarView.register(CalendarCell.self, forCellReuseIdentifier: cellReuseIdentifier)
@@ -78,6 +82,13 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.calendarView.select(self.calendarView.today)
     }
     
+    
+    /* * FSCalendar * */
+    
+    
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        
+    }
     
     /* * UITableView * */
     
