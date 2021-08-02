@@ -73,7 +73,7 @@ func toJson<T: Encodable>(_ object: T) -> String? {
     return nil
     
 }
-
+/*
 func print(_ data: ResponseData) {
     for trip in data.trips {
         print("Distance: \(trip.distance)")
@@ -83,3 +83,4 @@ func print(_ data: ResponseData) {
     }
     
 }
+ */

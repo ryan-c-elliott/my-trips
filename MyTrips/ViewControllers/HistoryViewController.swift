@@ -11,15 +11,12 @@ import KDCalendar
 import FSCalendar
 
 class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDelegate, FSCalendarDataSource {
-    
-    
-
 
     @IBOutlet weak var calendarView: FSCalendar!
     @IBOutlet weak var todayButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
-    var trips: [Trip] = []
+    //var trips: [Trip] = []
     var components: Components = Components() // Helps tableView react to calendar selection
     //var sectionStarts: [Int] = [] // Helps organize the tableView
     
@@ -31,12 +28,12 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        trips = (self.parent as! TabBarController).data.trips
-        
+        self.components = (self.parent as! TabBarController).data.components
+        /*
         for trip in trips {
             components.add(trip)
         }
-        
+        */
         /*
         // Set up sectionStarts
         var last: DateComponents = self.components(.distantPast)

@@ -9,12 +9,18 @@ import UIKit
 
 class TabBarController: UITabBarController {
 
-    var data: ResponseData = loadJson(url: getURL(filename: "data")!) ?? ResponseData(trips: [])
+    var data: ResponseData = loadJson(url: getURL(filename: "data")!) ?? ResponseData(components: Components())
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    func reloadData() {
+        let history = self.children[1] as! HistoryViewController
+        history.calendarView.reloadData()
+        history.tableView.reloadData()
     }
     
 

@@ -83,13 +83,15 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
             let directions = MKDirections(request: request)
             directions.calculate { (response, error) in
                 if let response = response, let route = response.routes.first {
-                    var data = (self.parent as! TabBarController).data
-                    data.trips.append(Trip(
+                    let parent = self.parent as! TabBarController
+                    let data = parent.data
+                    data.components.add(Trip(
                         startDate: self.start.timestamp,
                         endDate: loc.timestamp,
                         route: route
                     ))
                     tripsWrite(data: data)
+                    parent.reloadData()
                     self.map.addOverlay(route.polyline, level: MKOverlayLevel.aboveRoads)
                 } else {
                     print("couldn't calculate route")
