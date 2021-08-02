@@ -9,7 +9,7 @@ import UIKit
 import FSCalendar
 
 class CalendarCell: FSCalendarCell {
-    
+    /*
     
     init(_ delegate: HistoryViewController) {
         self.delegate = delegate
@@ -29,8 +29,10 @@ class CalendarCell: FSCalendarCell {
         
         super.monthPosition.rawValue
         
-        self.delegate.tableView.scrollToRow(at: <#T##IndexPath#>, at: .top, animated: true)
+        self.delegate.tableView(
+        self.delegate.tableView.scrollToRow(at: , at: .top, animated: true)
         
         super.performSelecting()
     }
+ */
 }
