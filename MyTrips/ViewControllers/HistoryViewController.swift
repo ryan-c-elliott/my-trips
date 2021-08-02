@@ -20,7 +20,9 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var tableView: UITableView!
     
     var trips: [Trip] = []
+    var components: Components = Components() // Helps tableView react to calendar selection
     var sectionStarts: [Int] = [] // Helps organize the tableView
+    
     let calendar: Calendar = Calendar(identifier: .gregorian)
     let dateComponents: Set<Calendar.Component> = [.day, .month, .year]
     let dateFormatter: DateFormatter = DateFormatter()
@@ -32,12 +34,13 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         trips = (self.parent as! TabBarController).data.trips
         
         // Set up sectionStarts
-        var last: DateComponents = self.calendar.dateComponents(self.dateComponents, from: Date.distantPast)
+        var last: DateComponents = self.components(.distantPast)
         for i in 0..<self.trips.count {
             let date = self.trips[i].startDate
-            let curr = self.calendar.dateComponents(self.dateComponents, from: date)
+            let curr = self.components(date)
             if curr != last {
                 self.sectionStarts.append(i)
+                self.dateStarts.append(curr)
                 last = curr
             }
         }
@@ -77,17 +80,29 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         
     }
     
+    /* * Actions * */
     
     @IBAction func todayButtonTapped(_ sender: UIButton) {
         self.calendarView.select(self.calendarView.today)
     }
     
+    /* * Helpers * */
+    
+    func components(_ date: Date) -> DateComponents {
+        self.calendar.dateComponents(self.dateComponents, from: date)
+    }
+    
+    func sectionFor(_ date: Date) -> Int {
+        self.dateStarts[self.components(date)]
+    }
     
     /* * FSCalendar * */
     
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        let indexPath = IndexPath(row: 0, section: sectionFor(date))
         
+        self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }
     
     /* * UITableView * */
@@ -97,7 +112,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let next = section == sectionStarts.count-1 ? self.trips.count : sectionStarts[section+1]
+        let next = section == numberOfSections(in: tableView)-1 ? self.trips.count : sectionStarts[section+1]
         return next - sectionStarts[section]
     }
     
