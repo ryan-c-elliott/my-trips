@@ -62,6 +62,32 @@ class Components {
         
         
     }
+    
+    func get(section: Int) -> [Trip] {
+        /*
+        if section < 0 || section >= self.sectionCount {
+            return nil
+        }
+ */
+        var i = 0
+        var sectionCount = self.years[i].sectionCount
+        while section >= sectionCount {
+            i += 1
+            sectionCount += self.years[i].sectionCount
+        }
+        sectionCount -= self.years[i].sectionCount
+        return self.years[i].get(section: section - sectionCount)
+    }
+    
+    func get(row: Int, section: Int) -> Trip {
+        /*
+        if let trips = get(section: section), row > 0 && row < trips.count {
+            return trips[row]
+        }
+        return nil
+ */
+        return get(section: section)[row]
+    }
 }
 
 
@@ -117,6 +143,18 @@ class Year {
         let (row, section) = self.months[i].rowAndSectionFor(date, components: components)
         return (row, section + sections)
     }
+    
+    func get(section: Int) -> [Trip] {
+        var i = 0
+        var sectionCount = self.months[i].days.count
+        while section >= sectionCount {
+            i += 1
+            sectionCount += self.months[i].days.count
+        }
+        sectionCount -= self.months[i].days.count
+        return self.months[i].get(section: section - sectionCount)
+    }
+    
 }
 
 class Month {
@@ -162,6 +200,10 @@ class Month {
         }
         
         return (self.days[i].rowFor(date), sections)
+    }
+    
+    func get(section: Int) -> [Trip] {
+        return self.days[section].trips
     }
 }
 

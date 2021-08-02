@@ -96,7 +96,8 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        let indexPath = IndexPath(row: 0, section: sectionFor(date))
+        let (_, section) = components.rowAndSectionFor(date)
+        let indexPath = IndexPath(row: 0, section: section)
         
         self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }
@@ -108,23 +109,30 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        /*
         let next = section == numberOfSections(in: tableView)-1 ? self.trips.count : sectionStarts[section+1]
         return next - sectionStarts[section]
+        */
+        if let trip = self.components.get(section: section) {
+            return trip.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)! as UITableViewCell
         
-        let trip = self.trips[indexPath.row + sectionStarts[indexPath.section]]
+        //let trip = self.trips[indexPath.row + sectionStarts[indexPath.section]]
+        let trip = self.components.get(row: indexPath.row, section: indexPath.section)
         
-        
-        cell.textLabel?.text = trip.startDate.description
+        cell.textLabel?.text = trip!.startDate.description
                 
         return cell
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        self.dateFormatter.string(from: self.trips[sectionStarts[section]].startDate)
+        //self.dateFormatter.string(from: self.trips[sectionStarts[section]].startDate)
+        self.dateFormatter.string(from: self.components.get(row: 0, section: section)!.startDate)
     }
     
 
