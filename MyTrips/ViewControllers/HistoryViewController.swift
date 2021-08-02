@@ -70,6 +70,9 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         // FSCalendar
         self.calendarView.calendarHeaderView.scrollDirection = .vertical
         self.calendarView.register(CalendarCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        self.calendarView.delegate = self
+        self.calendarView.dataSource = self
+        
 
         
         
@@ -100,6 +103,9 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     /* * FSCalendar * */
     
+    func maximumDate(for calendar: FSCalendar) -> Date {
+        calendar.today!
+    }
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         let (_, section) = components.rowAndSectionFor(date)

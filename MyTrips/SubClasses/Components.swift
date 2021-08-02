@@ -174,7 +174,7 @@ class Month {
     func add(_ trip: Trip, components: DateComponents) -> Bool {
         
         self.tripCount += 1
-        let day = components.month!
+        let day = components.day!
         
         
         if let last = self.days.last, last.day == day {
