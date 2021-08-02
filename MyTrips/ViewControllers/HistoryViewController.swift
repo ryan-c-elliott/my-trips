@@ -108,8 +108,11 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        let (_, section) = components.rowAndSectionFor(date)
-        let indexPath = IndexPath(row: 0, section: section)
+        if self.components.sectionCount == 0 {
+            return
+        }
+        let (_, section) = self.components.rowAndSectionFor(date)
+        let indexPath = IndexPath(row: 0, section: min(section, self.components.sectionCount-1))
         
         self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }

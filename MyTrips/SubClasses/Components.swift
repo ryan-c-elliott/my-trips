@@ -7,8 +7,7 @@
 
 import Foundation
 
-class Components {
-    let calendar: Calendar = Calendar(identifier: .gregorian)
+class Components: Codable {
     var years: [Year] = []
     var sectionCount: Int = 0
     var tripCount: Int = 0
@@ -40,7 +39,7 @@ class Components {
     }
     
     func components(_ date: Date) -> DateComponents {
-        self.calendar.dateComponents([.year, .month, .day], from: date)
+        Calendar(identifier: .gregorian).dateComponents([.year, .month, .day], from: date)
     }
     
     func rowAndSectionFor(_ date: Date) -> (Int, Int) {
@@ -64,11 +63,17 @@ class Components {
     }
     
     func get(section: Int) -> [Trip] {
-        /*
-        if section < 0 || section >= self.sectionCount {
-            return nil
+        
+        // If the given section is out of bounds, returns the next closest
+        var section = section
+        if section >= self.sectionCount {
+            section = sectionCount-1
         }
- */
+        if section < 0 {
+            section = 0
+        }
+        
+ 
         var i = 0
         var sectionCount = self.years[i].sectionCount
         while section >= sectionCount {
@@ -91,7 +96,7 @@ class Components {
 }
 
 
-class Year {
+class Year: Codable {
 
     let year: Int
     var months: [Month] = []
@@ -157,7 +162,7 @@ class Year {
     
 }
 
-class Month {
+class Month: Codable {
     
     let month: Int
     var days: [Day] = []
@@ -207,7 +212,7 @@ class Month {
     }
 }
 
-class Day {
+class Day: Codable {
     //let delegate: Components
     let day: Int
     var trips: [Trip] = []
