@@ -43,14 +43,30 @@ class Components {
         self.calendar.dateComponents([.year, .month, .day], from: date)
     }
     
-    func sectionFor(_ date: Date) -> Int {
+    func rowAndSectionFor(_ date: Date) -> (Int, Int) {
+        let components = self.components(date)
+        let year = components.year!
+        var i = 0
+        var sections = 0
+        while i < self.years.count && self.years[i].year < year {
+            sections += self.years[i].sectionCount
+            i += 1
+        }
+        if i == self.years.count {
+            return (0, sections)
+        }
+        
+        let (row, section) = self.years[i].rowAndSectionFor(date, components: components)
+        return (row, section + sections)
+        
+        
         
     }
 }
 
 
 class Year {
-    //let delegate: Components
+
     let year: Int
     var months: [Month] = []
     var sectionCount: Int = 0
@@ -85,10 +101,26 @@ class Year {
         
         return res
     }
+    
+    func rowAndSectionFor(_ date: Date, components: DateComponents) -> (Int, Int) {
+        let month = components.month!
+        var i = 0
+        var sections = 0
+        while i < self.months.count && self.months[i].month < month {
+            sections += self.months[i].days.count
+            i += 1
+        }
+        if i == self.months.count {
+            return (0, sections)
+        }
+        
+        let (row, section) = self.months[i].rowAndSectionFor(date, components: components)
+        return (row, section + sections)
+    }
 }
 
 class Month {
-    //let delegate: Components
+    
     let month: Int
     var days: [Day] = []
     var tripCount: Int = 0
@@ -116,6 +148,21 @@ class Month {
             return true
         }
     }
+    
+    func rowAndSectionFor(_ date: Date, components: DateComponents) -> (Int, Int) {
+        let day = components.day!
+        var i = 0
+        var sections = 0
+        while i < self.days.count && self.days[i].day < day {
+            sections += 1
+            i += 1
+        }
+        if i == self.days.count {
+            return (0, sections)
+        }
+        
+        return (self.days[i].rowFor(date), sections)
+    }
 }
 
 class Day {
@@ -134,6 +181,15 @@ class Day {
         trips.append(trip)
     }
     
+    func rowFor(_ date: Date) -> Int {
+        var i = 0
+        var rows = 0
+        while i < self.trips.count && self.trips[i].startDate < date {
+            rows += 1
+            i += 1
+        }
+        return rows
+    }
     
 }
 

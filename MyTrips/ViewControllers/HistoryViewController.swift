@@ -92,10 +92,6 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.calendar.dateComponents(self.dateComponents, from: date)
     }
     
-    func sectionFor(_ date: Date) -> Int {
-        self.dateStarts[self.components(date)]
-    }
-    
     /* * FSCalendar * */
     
     
