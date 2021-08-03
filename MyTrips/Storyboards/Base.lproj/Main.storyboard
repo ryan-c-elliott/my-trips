@@ -198,6 +198,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v34-7q-rem">
                                         <rect key="frame" x="158.5" y="279.5" width="97" height="30"/>
                                         <state key="normal" title="Export as .csv"/>
+                                        <connections>
+                                            <action selector="exportButtonTapped:" destination="StV-Xq-nhc" eventType="touchUpInside" id="bsC-OZ-D1F"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -215,12 +218,17 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="hjf-9U-M3a" firstAttribute="leading" secondItem="7ay-bA-dh2" secondAttribute="leading" id="3Gj-FF-nv0"/>
+                            <constraint firstItem="7ay-bA-dh2" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hjf-9U-M3a" secondAttribute="bottom" id="JiA-Bf-i6F"/>
                             <constraint firstItem="7ay-bA-dh2" firstAttribute="trailing" secondItem="hjf-9U-M3a" secondAttribute="trailing" id="gzX-VL-Ity"/>
                             <constraint firstItem="hjf-9U-M3a" firstAttribute="top" secondItem="7ay-bA-dh2" secondAttribute="top" constant="25" id="xGv-9X-8oF"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Export" image="square.and.arrow.up" catalog="system" id="Duf-ih-g9x"/>
                     <navigationItem key="navigationItem" id="vcy-sO-m1q"/>
+                    <connections>
+                        <outlet property="fromDatePicker" destination="7Zd-k2-ryH" id="6pE-kG-mrs"/>
+                        <outlet property="toDatePicker" destination="KvE-Zr-PIn" id="Yqd-4w-w2K"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kj8-9n-Z0N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

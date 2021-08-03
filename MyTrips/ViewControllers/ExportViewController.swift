@@ -13,7 +13,6 @@ class ExportViewController: UIViewController {
     
     @IBOutlet weak var fromDatePicker: UIDatePicker!
     @IBOutlet weak var toDatePicker: UIDatePicker!
-    @IBOutlet weak var fileFormatPicker: UIPickerView!
     
     
     
