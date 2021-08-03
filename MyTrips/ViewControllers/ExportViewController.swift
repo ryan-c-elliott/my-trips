@@ -25,6 +25,13 @@ class ExportViewController: UIViewController {
 
     @IBAction func exportButtonTapped(_ sender: UIButton) {
         
+        // set items to the file
+        let items: [Any] = []
+        
+        let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        ac.excludedActivityTypes = [.addToReadingList,.assignToContact,.saveToCameraRoll,.postToFacebook,.postToWeibo,.postToVimeo,.postToFlickr,.postToTwitter,.postToTencentWeibo]
+        
+        present(ac, animated: true)
     }
     /*
     // MARK: - Navigation
