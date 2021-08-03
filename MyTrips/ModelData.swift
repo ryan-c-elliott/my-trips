@@ -86,6 +86,7 @@ class Components: Codable {
         return self.years[i].get(section: section - sectionCount)
     }
     
+    // Check if number of trips is 0 before calling
     func get(row: Int, section: Int) -> Trip {
         /*
         if let trips = get(section: section), row > 0 && row < trips.count {
