@@ -86,6 +86,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         //self.tableView.register(TableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableView.allowsSelection = false
         
     }
     
@@ -115,6 +116,15 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         let indexPath = IndexPath(row: 0, section: min(section, self.components.sectionCount-1))
         
         self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+    }
+    
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        let (_, section) = self.components.rowAndSectionFor(date)
+        let trips = self.components.get(section: section)
+        if self.components(trips[0].startDate) == self.components(date) {
+            return trips.count
+        }
+        return 0
     }
     
     /* * UITableView * */

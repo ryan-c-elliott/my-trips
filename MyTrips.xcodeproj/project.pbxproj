@@ -23,6 +23,7 @@
 		944E062D26B72F5A00A49B81 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944E062C26B72F5A00A49B81 /* TabBarController.swift */; };
 		944E062F26B7379E00A49B81 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944E062E26B7379E00A49B81 /* CalendarCell.swift */; };
 		94FE30F926B8963F00F52F61 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FE30F826B8963F00F52F61 /* TableViewCell.swift */; };
+		94FE30FB26B8D7A000F52F61 /* ExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FE30FA26B8D7A000F52F61 /* ExportViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		944E062C26B72F5A00A49B81 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		944E062E26B7379E00A49B81 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		94FE30F826B8963F00F52F61 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		94FE30FA26B8D7A000F52F61 /* ExportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,7 @@
 				944E062C26B72F5A00A49B81 /* TabBarController.swift */,
 				942E57ED26ACAF6800F96E9D /* TripViewController.swift */,
 				942E57EB26ACAF4B00F96E9D /* HistoryViewController.swift */,
+				94FE30FA26B8D7A000F52F61 /* ExportViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				942E57EE26ACAF6800F96E9D /* TripViewController.swift in Sources */,
 				944E062D26B72F5A00A49B81 /* TabBarController.swift in Sources */,
 				942E57F426ACC08C00F96E9D /* Helpers.swift in Sources */,
+				94FE30FB26B8D7A000F52F61 /* ExportViewController.swift in Sources */,
 				942E57BC26ABBD9000F96E9D /* AppDelegate.swift in Sources */,
 				944E062F26B7379E00A49B81 /* CalendarCell.swift in Sources */,
 				94FE30F926B8963F00F52F61 /* TableViewCell.swift in Sources */,
