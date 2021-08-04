@@ -245,21 +245,20 @@ class Year: Codable {
         self.tripCount += 1
         let month = components.month!
         
-        var res = false
         if let last = self.months.last, last.month == month {
-            res = last.add(trip, components: components)
+            if !last.add(trip, components: components) {
+                return false
+            }
+            
         } else {
             self.months.append(Month(month: month))
-            res = self.months.last!.add(trip, components: components)
+            self.months.last!.add(trip, components: components)
         }
-        
-        // If there does need to be a new section, increment sectionCount
-        if res {
-            self.sectionCount += 1
-        }
+
+        self.sectionCount += 1
         
         
-        return res
+        return true
     }
     
     func rowAndSectionFor(_ date: Date, components: DateComponents) -> (Int, Int) {
