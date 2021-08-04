@@ -33,6 +33,10 @@ class ComponentsIterator: TripIterator {
         }
     }
     
+    convenience init(_ components: Components) {
+        self.init(components, start: .distantPast, end: .distantFuture)
+    }
+    
     private func isOver(_ trip: Trip) -> Bool {
         if trip.startDate <= self.end {
             return false

@@ -28,6 +28,12 @@ class Components: Codable, Iterable {
     
     // Returns the index of the given year. If the year doesn't exist, returns the index of the next highest year
     func getIndex(_ date: DateComponents) -> (Int, Int, Int)? {
+        
+        // Param year is less than any year in components
+        if self.years.count > 0 && self.years[0].year > date.year! {
+            return (0, 0, 0)
+        }
+        
         var i = 0
         while i < self.years.count && self.years[i].year < date.year! {
             i += 1
@@ -138,6 +144,12 @@ class Year: Codable {
     
     // Returns the index of the given month. If the month doesn't exist, returns the index of the next highest month
     func getIndex(_ date: DateComponents) -> (Int, Int)? {
+        
+        // Param month is less than any month in year
+        if self.months.count > 0 && self.months[0].month > date.month! {
+            return (0, 0)
+        }
+        
         var i = 0
         while i < self.months.count && self.months[i].month < date.month! {
             i += 1
