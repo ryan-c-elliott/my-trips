@@ -14,13 +14,18 @@ class ExportViewController: UIViewController {
     @IBOutlet weak var fromDatePicker: UIDatePicker!
     @IBOutlet weak var toDatePicker: UIDatePicker!
     
-    //let calendar: Calendar = Calendar(identifier: .gregorian)
     var components: Components = Components()
+    var dateFormatter: DateFormatter = DateFormatter()
+    var timeFormatter: DateFormatter = DateFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.components = (self.parent as! TabBarController).data.components
+        let parent = self.parent as! TabBarController
+        
+        self.components = parent.data.components
+        self.dateFormatter = parent.dateFormatter
+        self.timeFormatter = parent.timeFormatter
         
         let today = Date()
         var min = today
@@ -53,12 +58,30 @@ class ExportViewController: UIViewController {
     }
     
     func createCSV() {
-        let start = self.fromDatePicker.date
-        let end = self.toDatePicker.date
+        
         let filename = "trips.csv"
+        let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(filename)
         var csvText = "Date,Start Time,End Time,Distance\n"
         
         
+        
+        let iterator = self.components.makeIterator(start: self.fromDatePicker.date, end: self.toDatePicker.date)
+        
+        while let next = iterator.next() {
+            let date = self.dateFormatter.string(from: next.startDate)
+            let startTime = self.timeFormatter.string(from: next.startDate)
+            let endTime = self.timeFormatter.string(from: next.endDate)
+            let distance = next.distance
+            let newline = "\(date),\(startTime),\(endTime),\(distance)\n"
+            csvText.append(newline)
+        }
+        
+        do {
+            try csvText.write(to: path!, atomically: true, encoding: String.Encoding.utf8)
+        } catch {
+            print("Failed to create file")
+            print("\(error)")
+        }
     }
     /*
     // MARK: - Navigation

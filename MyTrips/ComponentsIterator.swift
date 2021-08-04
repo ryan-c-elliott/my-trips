@@ -14,8 +14,8 @@ protocol TripIterator {
 class ComponentsIterator: TripIterator {
     
     private let components: Components
-    private let start: DateComponents
-    private let end: DateComponents
+    private let start: Date
+    private let end: Date
     private var year: Int? = nil
     private var month: Int? = nil
     private var day: Int? = nil
@@ -23,9 +23,9 @@ class ComponentsIterator: TripIterator {
     
     init(_ components: Components, start: Date, end: Date) {
         self.components = components
-        self.start = MyTrips.components(start)
-        self.end = MyTrips.components(end)
-        if let (year, month, day) = self.components.getIndex(self.start) {
+        self.start = start
+        self.end = end
+        if let (year, month, day) = self.components.getIndex(MyTrips.components(start)) {
             self.year = year
             self.month = month
             self.day = day
@@ -33,35 +33,53 @@ class ComponentsIterator: TripIterator {
         }
     }
     
-    private func getYear() -> Year {
-        self.components.years[self.year!]
+    private func isOver(_ trip: Trip) -> Bool {
+        if trip.startDate <= self.end {
+            return false
+            
+        }
+        
+        // Check to make sure it isn't the same day as the end
+        if MyTrips.components(self.end) == MyTrips.components(trip.startDate) {
+            return false
+        }
+        
+        return true
     }
     
-    private func getMonth() -> Month {
-        getYear().months[self.month!]
+    private func get(_ index: (Int, Int, Int, Int)) -> (Year, Month, Day, Trip) {
+        
+        let year = self.components.years[index.0]
+        let month = year.months[index.1]
+        let day = month.days[index.2]
+        let trip = day.trips[index.3]
+        return (year, month, day, trip)
     }
     
-    private func getDay() -> Day {
-        getMonth().days[self.day!]
-    }
     
-    private func getTrip() -> Trip {
-        getDay().trips[self.trip!]
+    private func get() -> (Year, Month, Day, Trip) {
+        get((self.year!, self.month!, self.day!, self.trip!))
     }
     
     private func nextIndex() -> (Int, Int, Int, Int)? {
+        // Components is empty within range
+        if self.year == nil {
+            return nil
+        }
+        
+        // Begin iterating
         if self.trip == nil {
             return (self.year!, self.month!, self.day!, 0)
         }
-        let day: Day = getDay()
+        
+        let (year, month, day, _) = get()
         if self.trip! + 1 < day.trips.count {
+            
             return (self.year!, self.month!, self.day!, self.trip! + 1)
         }
-        let month: Month = getMonth()
         if self.day! + 1 < month.days.count {
             return (self.year!, self.month!, self.day! + 1, 0)
         }
-        let year: Year = getYear()
         if self.month! + 1 < year.months.count {
             return (self.year!, self.month! + 1, 0, 0)
         }
@@ -72,12 +90,9 @@ class ComponentsIterator: TripIterator {
     }
     
     func next() -> Trip? {
-        if let (year, month, day, trip) = nextIndex() {
-            self.year = year
-            self.month = month
-            self.day = day
-            self.trip = trip
-            return getTrip()
+        if let index = nextIndex() {
+            let (_, _, _, trip) = get(index)
+            return isOver(trip) ? nil : trip
         }
         return nil
     }

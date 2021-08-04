@@ -16,56 +16,30 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var todayButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
-    //var trips: [Trip] = []
+
     var components: Components = Components() // Helps tableView react to calendar selection
-    //var sectionStarts: [Int] = [] // Helps organize the tableView
+    var dateFormatter: DateFormatter = DateFormatter()
+    var timeFormatter: DateFormatter = DateFormatter()
     
     let calendar: Calendar = Calendar(identifier: .gregorian)
     let dateComponents: Set<Calendar.Component> = [.day, .month, .year]
-    let sectionDateFormatter: DateFormatter = DateFormatter()
-    let rowDateFormatter: DateFormatter = DateFormatter()
     let cellReuseIdentifier = "cell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.components = (self.parent as! TabBarController).data.components
-        /*
-        for trip in trips {
-            components.add(trip)
-        }
-        */
-        /*
-        // Set up sectionStarts
-        var last: DateComponents = self.components(.distantPast)
-        for i in 0..<self.trips.count {
-            let date = self.trips[i].startDate
-            let curr = self.components(date)
-            if curr != last {
-                self.sectionStarts.append(i)
-                self.dateStarts.append(curr)
-                last = curr
-            }
-        }
- */
+        let parent = self.parent as! TabBarController
+        
+        self.components = parent.data.components
+        self.dateFormatter = parent.dateFormatter
+        self.timeFormatter = parent.timeFormatter
         
         // DateFormatters
-        self.sectionDateFormatter.dateStyle = .medium
-        self.sectionDateFormatter.locale = Locale(identifier: "en_US")
-        self.rowDateFormatter.setLocalizedDateFormatFromTemplate("HH:mm")
-        self.rowDateFormatter.locale = Locale(identifier: "en_US")
-        
-        
-        /*
-        // Print stuff
-        for i in sectionStarts {
-            print(i, terminator: " ")
-        }
-        print()
-        print()
-        print(data)
-        */
-        
+        self.dateFormatter.dateStyle = .medium
+        self.dateFormatter.locale = Locale(identifier: "en_US")
+        self.timeFormatter.setLocalizedDateFormatFromTemplate("HH:mm")
+        self.timeFormatter.locale = Locale(identifier: "en_US")
+
         
         // FSCalendar
         self.calendarView.calendarHeaderView.scrollDirection = .vertical
@@ -83,7 +57,6 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.calendarView.bringSubviewToFront(self.todayButton)
         
         // TableView
-        //self.tableView.register(TableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.allowsSelection = false
@@ -130,31 +103,19 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     /* * UITableView * */
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        //sectionStarts.count
         self.components.sectionCount
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        /*
-        let next = section == numberOfSections(in: tableView)-1 ? self.trips.count : sectionStarts[section+1]
-        return next - sectionStarts[section]
-        */
-        /*
-        if let trip = self.components.get(section: section) {
-            return trip.count
-        }
-        return 0
- */
         self.components.get(section: section).count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: TableViewCell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)! as! TableViewCell
         
-        //let trip = self.trips[indexPath.row + sectionStarts[indexPath.section]]
         let trip = self.components.get(row: indexPath.row, section: indexPath.section)
-        let startTime = self.rowDateFormatter.string(from: trip.startDate)
-        let endTime = self.rowDateFormatter.string(from: trip.endDate)
+        let startTime = self.timeFormatter.string(from: trip.startDate)
+        let endTime = self.timeFormatter.string(from: trip.endDate)
         
         cell.textLabel?.text = "\(startTime) - \(endTime)"
         cell.mileLabel.text = "\(trip.distance) mi"
@@ -162,9 +123,11 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         return cell
     }
     
+    
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        //self.dateFormatter.string(from: self.trips[sectionStarts[section]].startDate)
-        self.sectionDateFormatter.string(from: self.components.get(row: 0, section: section).startDate)
+
+        self.dateFormatter.string(from: self.components.get(row: 0, section: section).startDate)
     }
     
 
