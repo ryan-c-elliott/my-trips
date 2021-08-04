@@ -65,14 +65,14 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="5KW-ca-Ae0" customClass="TableViewCell" customModule="MyTrips" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5KW-ca-Ae0" id="XJ6-cZ-pOl">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_ mi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9pd-fn-0T4">
-                                                    <rect key="frame" x="362" y="11" width="32" height="21.5"/>
+                                                    <rect key="frame" x="362" y="11" width="32" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -122,8 +122,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12.5" translatesAutoresizingMaskIntoConstraints="NO" id="hjf-9U-M3a">
-                                <rect key="frame" x="0.0" y="69" width="414" height="240"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6.25" translatesAutoresizingMaskIntoConstraints="NO" id="hjf-9U-M3a">
+                                <rect key="frame" x="0.0" y="69" width="414" height="314.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Date Range" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jwn-o7-gAM">
                                         <rect key="frame" x="136.5" y="0.0" width="141" height="20.5"/>
@@ -131,8 +131,8 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12.5" translatesAutoresizingMaskIntoConstraints="NO" id="DNa-FK-Qct">
-                                        <rect key="frame" x="83" y="33" width="248" height="164.5"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12.5" translatesAutoresizingMaskIntoConstraints="NO" id="DNa-FK-Qct" userLabel="Dates Stack View">
+                                        <rect key="frame" x="83" y="27" width="248" height="164.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12.5" translatesAutoresizingMaskIntoConstraints="NO" id="4aJ-ip-yx7">
                                                 <rect key="frame" x="0.0" y="0.0" width="39.5" height="164.5"/>
@@ -195,8 +195,40 @@
                                             <constraint firstItem="MO4-d9-eC3" firstAttribute="top" secondItem="DNa-FK-Qct" secondAttribute="top" id="rZB-KE-eGd"/>
                                         </constraints>
                                     </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTm-r7-ist">
+                                        <rect key="frame" x="190.5" y="198" width="33" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="12.5" translatesAutoresizingMaskIntoConstraints="NO" id="y25-vH-C61" userLabel="Filename Stack View">
+                                        <rect key="frame" x="50" y="220.5" width="314" height="34"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filename " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ayr-YM-IIy">
+                                                <rect key="frame" x="0.0" y="0.0" width="73" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gwb-jZ-UYS">
+                                                <rect key="frame" x="85.5" y="0.0" width="228.5" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="Gwb-jZ-UYS" secondAttribute="trailing" id="5Rp-Nc-1eB"/>
+                                            <constraint firstItem="ayr-YM-IIy" firstAttribute="leading" secondItem="y25-vH-C61" secondAttribute="leading" id="mZn-eL-bkM"/>
+                                        </constraints>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jbu-lN-WhZ">
+                                        <rect key="frame" x="189.5" y="261" width="35.5" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v34-7q-rem">
-                                        <rect key="frame" x="158.5" y="210" width="97" height="30"/>
+                                        <rect key="frame" x="158.5" y="284.5" width="97" height="30"/>
                                         <state key="normal" title="Export as .csv"/>
                                         <connections>
                                             <action selector="exportButtonTapped:" destination="StV-Xq-nhc" eventType="touchUpInside" id="bsC-OZ-D1F"/>
@@ -204,13 +236,16 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="v34-7q-rem" firstAttribute="top" secondItem="DNa-FK-Qct" secondAttribute="bottom" constant="12.5" id="BvK-Gz-jKk"/>
+                                    <constraint firstAttribute="trailing" secondItem="y25-vH-C61" secondAttribute="trailing" constant="50" id="Rgy-yz-RtS"/>
                                     <constraint firstItem="jwn-o7-gAM" firstAttribute="top" secondItem="hjf-9U-M3a" secondAttribute="top" id="TjN-Ra-MUp"/>
                                     <constraint firstAttribute="bottom" secondItem="v34-7q-rem" secondAttribute="bottom" id="bCS-Xy-ca0"/>
+                                    <constraint firstItem="y25-vH-C61" firstAttribute="centerX" secondItem="hjf-9U-M3a" secondAttribute="centerX" id="bxb-Ul-KVO"/>
                                     <constraint firstItem="jwn-o7-gAM" firstAttribute="centerX" secondItem="hjf-9U-M3a" secondAttribute="centerX" id="fTg-n9-zn0"/>
+                                    <constraint firstItem="Jbu-lN-WhZ" firstAttribute="centerX" secondItem="hjf-9U-M3a" secondAttribute="centerX" id="hNW-3V-KhN"/>
+                                    <constraint firstItem="sTm-r7-ist" firstAttribute="centerX" secondItem="hjf-9U-M3a" secondAttribute="centerX" id="ho9-Af-7Fe"/>
                                     <constraint firstItem="DNa-FK-Qct" firstAttribute="centerX" secondItem="hjf-9U-M3a" secondAttribute="centerX" id="lWQ-Uy-3cI"/>
                                     <constraint firstItem="v34-7q-rem" firstAttribute="centerX" secondItem="hjf-9U-M3a" secondAttribute="centerX" id="qdj-b9-FRC"/>
-                                    <constraint firstItem="DNa-FK-Qct" firstAttribute="top" secondItem="jwn-o7-gAM" secondAttribute="bottom" constant="12.5" id="tg8-bH-u49"/>
+                                    <constraint firstItem="y25-vH-C61" firstAttribute="leading" secondItem="hjf-9U-M3a" secondAttribute="leading" constant="50" id="yCl-r4-xvl"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -226,6 +261,9 @@
                     <tabBarItem key="tabBarItem" title="Export" image="square.and.arrow.up" catalog="system" id="Duf-ih-g9x"/>
                     <navigationItem key="navigationItem" id="vcy-sO-m1q"/>
                     <connections>
+                        <outlet property="dateLabel" destination="sTm-r7-ist" id="oAs-gA-YKL"/>
+                        <outlet property="fileLabel" destination="Jbu-lN-WhZ" id="2LS-HQ-Bkq"/>
+                        <outlet property="fileTextBox" destination="Gwb-jZ-UYS" id="Ucp-mn-o1Q"/>
                         <outlet property="fromDatePicker" destination="7Zd-k2-ryH" id="6pE-kG-mrs"/>
                         <outlet property="toDatePicker" destination="KvE-Zr-PIn" id="Yqd-4w-w2K"/>
                     </connections>

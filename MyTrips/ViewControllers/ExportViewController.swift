@@ -13,6 +13,9 @@ class ExportViewController: UIViewController {
     
     @IBOutlet weak var fromDatePicker: UIDatePicker!
     @IBOutlet weak var toDatePicker: UIDatePicker!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var fileTextBox: UITextField!
+    @IBOutlet weak var fileLabel: UILabel!
     
     var components: Components = Components()
     var dateFormatter: DateFormatter = DateFormatter()
@@ -28,6 +31,7 @@ class ExportViewController: UIViewController {
         self.dateFormatter.locale = Locale(identifier: "en_US")
         self.timeFormatter = parent.timeFormatter
         
+        // DatePickers
         let today = Date()
         var min = today
         self.fromDatePicker.maximumDate = today
@@ -40,16 +44,30 @@ class ExportViewController: UIViewController {
         self.toDatePicker.minimumDate = min
         self.fromDatePicker.setDate(min, animated: false)
         
+        // Labels
+        self.clearLabels()
         
         
         // Do any additional setup after loading the view.
     }
     
+    func clearLabels() {
+        self.dateLabel.text = ""
+        self.fileLabel.text = ""
+    }
+    
 
     @IBAction func exportButtonTapped(_ sender: UIButton) {
-        
-        // set items to the file
-        
+        if self.fromDatePicker.date > self.toDatePicker.date {
+            self.dateLabel.text = "Choose a valid date range"
+            return
+        }
+        self.clearLabels()
+        if self.fileTextBox.text == nil {
+            self.fileLabel.text = "You need to enter a filename"
+            return
+        }
+        self.clearLabels()
         let items: [Any] = [createCSV()]
         
         let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
