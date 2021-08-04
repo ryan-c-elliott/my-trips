@@ -9,10 +9,22 @@ import Foundation
 import CoreLocation
 import MapKit
 
-class Components: Codable {
+protocol Iterable {
+    func makeIterator(start: Date, end: Date) -> ComponentsIterator
+}
+
+class Components: Codable, Iterable {
+    
+    
     var years: [Year] = []
     var sectionCount: Int = 0
     var tripCount: Int = 0
+    
+    
+    
+    func makeIterator(start: Date, end: Date) -> ComponentsIterator {
+        ComponentsIterator(self, start: start, end: end)
+    }
     
     // Returns the index of the given year. If the year doesn't exist, returns the index of the next highest year
     func getIndex(_ date: DateComponents) -> (Int, Int, Int)? {
