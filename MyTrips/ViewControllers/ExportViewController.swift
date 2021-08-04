@@ -23,15 +23,16 @@ class ExportViewController: UIViewController {
         self.components = (self.parent as! TabBarController).data.components
         
         let today = Date()
+        var min = today
         self.fromDatePicker.maximumDate = today
         self.toDatePicker.maximumDate = today
-        self.fromDatePicker.minimumDate = today
-        self.toDatePicker.minimumDate = today
         if self.components.tripCount > 0 {
-            let min = components.get(row: 0, section: 0).startDate
-            self.fromDatePicker.minimumDate = min
-            self.toDatePicker.minimumDate = min
+            min = components.get(row: 0, section: 0).startDate
+            
         }
+        self.fromDatePicker.minimumDate = min
+        self.toDatePicker.minimumDate = min
+        self.fromDatePicker.setDate(min, animated: false)
         
         
         
@@ -52,6 +53,11 @@ class ExportViewController: UIViewController {
     }
     
     func createCSV() {
+        let start = self.fromDatePicker.date
+        let end = self.toDatePicker.date
+        let filename = "trips.csv"
+        var csvText = "Date,Start Time,End Time,Distance\n"
+        
         
     }
     /*

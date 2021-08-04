@@ -14,6 +14,25 @@ class Components: Codable {
     var sectionCount: Int = 0
     var tripCount: Int = 0
     
+    // Returns the index of the given year. If the year doesn't exist, returns the index of the next highest year
+    func getIndex(_ date: DateComponents) -> (Int, Int, Int)? {
+        var i = 0
+        while i < self.years.count && self.years[i].year < date.year! {
+            i += 1
+        }
+        if i == self.years.count {
+            return nil
+        }
+        if let (month, day) = self.years[i].getIndex(date) {
+            return (i, month, day)
+        }
+        i += 1
+        if i == self.years.count {
+            return nil
+        }
+        return (i, 0, 0)
+    }
+    
     /*
      * Adds a trip to the data structure
      * Returns true if a new day was added, false otherwise
@@ -21,7 +40,7 @@ class Components: Codable {
     func add(_ trip: Trip) {
         
         self.tripCount += 1
-        let components = self.components(trip.startDate)
+        let components = components(trip.startDate)
         let year = components.year!
         
         // Determine if a there needs to be a new section
@@ -40,12 +59,10 @@ class Components: Codable {
         
     }
     
-    func components(_ date: Date) -> DateComponents {
-        Calendar(identifier: .gregorian).dateComponents([.year, .month, .day], from: date)
-    }
+    
     
     func rowAndSectionFor(_ date: Date) -> (Int, Int) {
-        let components = self.components(date)
+        let components = components(date)
         let year = components.year!
         var i = 0
         var sections = 0
@@ -88,14 +105,10 @@ class Components: Codable {
     
     // Check if number of trips is 0 before calling
     func get(row: Int, section: Int) -> Trip {
-        /*
-        if let trips = get(section: section), row > 0 && row < trips.count {
-            return trips[row]
-        }
-        return nil
- */
+      
         return get(section: section)[row]
     }
+    
 }
 
 
@@ -108,6 +121,29 @@ class Year: Codable {
     
     init(year: Int) {
         self.year = year
+    }
+    
+    
+    // Returns the index of the given month. If the month doesn't exist, returns the index of the next highest month
+    func getIndex(_ date: DateComponents) -> (Int, Int)? {
+        var i = 0
+        while i < self.months.count && self.months[i].month < date.month! {
+            i += 1
+        }
+        if i == self.months.count {
+            return nil
+        }
+        if let day = self.months[i].getIndex(date) {
+            return (i, day)
+        }
+        i += 1
+        if i == self.months.count {
+            return nil
+        }
+        return (i, 0)
+        
+        
+        
     }
     
     /*
@@ -175,6 +211,19 @@ class Month: Codable {
         self.month = month
     }
     
+    // Returns the index of the given day. If the day doesn't exist, returns the index of the next highest day
+    func getIndex(_ date: DateComponents) -> Int? {
+        var i = 0
+        while i < self.days.count && self.days[i].day < date.day! {
+            i += 1
+        }
+        if i == self.days.count {
+            return nil
+        }
+        return i
+        
+    }
+    
     /*
      * Adds a trip to the data structure
      * Returns true if a new day was added, false otherwise
@@ -223,6 +272,8 @@ class Day: Codable {
     init(day: Int) {
         self.day = day
     }
+    
+    
     
     /*
      * Adds a trip to the data structure
