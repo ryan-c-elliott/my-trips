@@ -123,7 +123,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6.25" translatesAutoresizingMaskIntoConstraints="NO" id="hjf-9U-M3a">
-                                <rect key="frame" x="0.0" y="69" width="414" height="314.5"/>
+                                <rect key="frame" x="0.0" y="69" width="414" height="306.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Date Range" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jwn-o7-gAM">
                                         <rect key="frame" x="136.5" y="0.0" width="141" height="20.5"/>
@@ -196,13 +196,16 @@
                                         </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTm-r7-ist">
-                                        <rect key="frame" x="190.5" y="198" width="33" height="16"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <rect key="frame" x="191.5" y="198" width="31" height="12.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="12.5" id="xMx-s1-AbJ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="12.5" translatesAutoresizingMaskIntoConstraints="NO" id="y25-vH-C61" userLabel="Filename Stack View">
-                                        <rect key="frame" x="50" y="220.5" width="314" height="34"/>
+                                        <rect key="frame" x="50" y="217" width="314" height="34"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filename " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ayr-YM-IIy">
                                                 <rect key="frame" x="0.0" y="0.0" width="73" height="34"/>
@@ -222,13 +225,16 @@
                                         </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jbu-lN-WhZ">
-                                        <rect key="frame" x="189.5" y="261" width="35.5" height="17"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <rect key="frame" x="191.5" y="257.5" width="31" height="12.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="12.5" id="MVp-hB-GaB"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v34-7q-rem">
-                                        <rect key="frame" x="158.5" y="284.5" width="97" height="30"/>
+                                        <rect key="frame" x="158.5" y="276.5" width="97" height="30"/>
                                         <state key="normal" title="Export as .csv"/>
                                         <connections>
                                             <action selector="exportButtonTapped:" destination="StV-Xq-nhc" eventType="touchUpInside" id="bsC-OZ-D1F"/>

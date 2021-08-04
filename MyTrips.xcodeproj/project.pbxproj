@@ -24,7 +24,6 @@
 		944E062F26B7379E00A49B81 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944E062E26B7379E00A49B81 /* CalendarCell.swift */; };
 		94FE30F926B8963F00F52F61 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FE30F826B8963F00F52F61 /* TableViewCell.swift */; };
 		94FE30FB26B8D7A000F52F61 /* ExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FE30FA26B8D7A000F52F61 /* ExportViewController.swift */; };
-		94FE310026B9E34100F52F61 /* SwiftCSVExport in Frameworks */ = {isa = PBXBuildFile; productRef = 94FE30FF26B9E34100F52F61 /* SwiftCSVExport */; };
 		94FE310226B9F53D00F52F61 /* ComponentsIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FE310126B9F53D00F52F61 /* ComponentsIterator.swift */; };
 /* End PBXBuildFile section */
 
@@ -77,7 +76,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				944E062B26B476EF00A49B81 /* FSCalendar in Frameworks */,
-				94FE310026B9E34100F52F61 /* SwiftCSVExport in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,7 +207,6 @@
 			name = MyTrips;
 			packageProductDependencies = (
 				944E062A26B476EF00A49B81 /* FSCalendar */,
-				94FE30FF26B9E34100F52F61 /* SwiftCSVExport */,
 			);
 			productName = MyTrips;
 			productReference = 942E57B826ABBD9000F96E9D /* MyTrips.app */;
@@ -284,7 +281,6 @@
 			mainGroup = 942E57AF26ABBD9000F96E9D;
 			packageReferences = (
 				944E062926B476EF00A49B81 /* XCRemoteSwiftPackageReference "FSCalendar" */,
-				94FE30FE26B9E34100F52F61 /* XCRemoteSwiftPackageReference "SwiftCSVExport" */,
 			);
 			productRefGroup = 942E57B926ABBD9000F96E9D /* Products */;
 			projectDirPath = "";
@@ -683,14 +679,6 @@
 				minimumVersion = 2.8.2;
 			};
 		};
-		94FE30FE26B9E34100F52F61 /* XCRemoteSwiftPackageReference "SwiftCSVExport" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/vigneshuvi/SwiftCSVExport";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.6.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -698,11 +686,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 944E062926B476EF00A49B81 /* XCRemoteSwiftPackageReference "FSCalendar" */;
 			productName = FSCalendar;
-		};
-		94FE30FF26B9E34100F52F61 /* SwiftCSVExport */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 94FE30FE26B9E34100F52F61 /* XCRemoteSwiftPackageReference "SwiftCSVExport" */;
-			productName = SwiftCSVExport;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
