@@ -24,7 +24,8 @@ class ExportViewController: UIViewController {
         let parent = self.parent as! TabBarController
         
         self.components = parent.data.components
-        self.dateFormatter = parent.dateFormatter
+        self.dateFormatter.dateStyle = .short
+        self.dateFormatter.locale = Locale(identifier: "en_US")
         self.timeFormatter = parent.timeFormatter
         
         let today = Date()
@@ -49,7 +50,7 @@ class ExportViewController: UIViewController {
         
         // set items to the file
         
-        let items: [Any] = []
+        let items: [Any] = [createCSV()]
         
         let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
         ac.excludedActivityTypes = [.addToReadingList,.assignToContact,.saveToCameraRoll,.postToFacebook,.postToWeibo,.postToVimeo,.postToFlickr,.postToTwitter,.postToTencentWeibo]
@@ -57,10 +58,10 @@ class ExportViewController: UIViewController {
         present(ac, animated: true)
     }
     
-    func createCSV() {
+    func createCSV() -> URL {
         
         let filename = "trips.csv"
-        let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(filename)
+        let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(filename)!
         var csvText = "Date,Start Time,End Time,Distance\n"
         
         
@@ -76,12 +77,16 @@ class ExportViewController: UIViewController {
             csvText.append(newline)
         }
         
+        
         do {
-            try csvText.write(to: path!, atomically: true, encoding: String.Encoding.utf8)
+            try csvText.write(to: path, atomically: true, encoding: String.Encoding.utf8)
         } catch {
             print("Failed to create file")
             print("\(error)")
         }
+        
+        return path
+ 
     }
     /*
     // MARK: - Navigation
