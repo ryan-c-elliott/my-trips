@@ -91,6 +91,10 @@ class ComponentsIterator: TripIterator {
     
     func next() -> Trip? {
         if let index = nextIndex() {
+            self.year = index.0
+            self.month = index.1
+            self.day = index.2
+            self.trip = index.3
             let (_, _, _, trip) = get(index)
             return isOver(trip) ? nil : trip
         }
