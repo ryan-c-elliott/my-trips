@@ -53,6 +53,38 @@ class Components: Codable, Iterable {
     
     /*
      * Adds a trip to the data structure
+     * Similar to add function except instead of adding to the end it can be inserted anywhere
+     * Returns true if a new day was added, false otherwise
+     */
+    func insert(_ trip: Trip) {
+        
+        self.tripCount += 1
+        let components = components(trip.startDate)
+        let year = components.year!
+        
+        
+        var i = 0
+        while i < self.years.count && year < self.years[i].year {
+            i += 1
+        }
+        
+        if i < self.years.count && self.years[i].year == year {
+            // Add to existing year
+            if !self.years[i].insert(trip, components: components) {
+                return
+            }
+        } else {
+            // Need to add a new year, month, and day (section)
+            self.years.insert(Year(year: year), at: i)
+            self.years[i].add(trip, components: components)
+        }
+        
+        self.sectionCount += 1
+       
+    }
+    
+    /*
+     * Adds a trip to the data structure
      * Returns true if a new day was added, false otherwise
      */
     func add(_ trip: Trip) {
@@ -62,18 +94,19 @@ class Components: Codable, Iterable {
         let year = components.year!
         
         // Determine if a there needs to be a new section
-        var res = false
         if let last = self.years.last, last.year == year {
-            res = last.add(trip, components: components)
+            // Add to current year
+            if !last.add(trip, components: components) {
+                return
+            }
         } else {
+            // Need to add a new year, month, and day (section)
             self.years.append(Year(year: year))
-            res = self.years.last!.add(trip, components: components)
+            self.years.last!.add(trip, components: components)
         }
         
-        // If there does need to be a new section, increment sectionCount
-        if res {
-            self.sectionCount += 1
-        }
+        // New section was created
+        self.sectionCount += 1
         
     }
     
@@ -172,9 +205,42 @@ class Year: Codable {
     
     /*
      * Adds a trip to the data structure
+     * Similar to add function except instead of adding to the end it can be inserted anywhere
      * Returns true if a new day was added, false otherwise
      */
-    func add(_ trip: Trip, components: DateComponents) -> Bool {
+    @discardableResult func insert(_ trip: Trip, components: DateComponents) -> Bool {
+        
+        self.tripCount += 1
+        let month = components.month!
+        
+        var i = 0
+        while i < self.months.count && month < self.months[i].month {
+            i += 1
+        }
+        
+        if i < self.months.count && self.months[i].month == month {
+            // Add to existing year
+            if !self.months[i].insert(trip, components: components) {
+                return false
+                
+            }
+        } else {
+            // Need to add a new year, month, and day (section)
+            self.months.insert(Month(month: month), at: i)
+            self.months[i].add(trip, components: components)
+        }
+        
+        self.sectionCount += 1
+        
+        return true
+       
+    }
+    
+    /*
+     * Adds a trip to the data structure
+     * Returns true if a new day was added, false otherwise
+     */
+    @discardableResult func add(_ trip: Trip, components: DateComponents) -> Bool {
         
         self.tripCount += 1
         let month = components.month!
@@ -248,11 +314,41 @@ class Month: Codable {
         
     }
     
+    
+    /*
+     * Adds a trip to the data structure
+     * Similar to add function except instead of adding to the end it can be inserted anywhere
+     * Returns true if a new day was added, false otherwise
+     */
+    @discardableResult func insert(_ trip: Trip, components: DateComponents) -> Bool {
+        
+        self.tripCount += 1
+        let day = components.day!
+        
+        var i = 0
+        while i < self.days.count && day < self.days[i].day {
+            i += 1
+        }
+        
+        if i < self.days.count && self.days[i].day == day {
+            // Add to existing year
+            self.days[i].insert(trip)
+            return false
+        } else {
+            // Need to add a new year, month, and day (section)
+            self.days.insert(Day(day: day), at: i)
+            self.days[i].add(trip)
+            return true
+        }
+        
+       
+    }
+    
     /*
      * Adds a trip to the data structure
      * Returns true if a new day was added, false otherwise
      */
-    func add(_ trip: Trip, components: DateComponents) -> Bool {
+    @discardableResult func add(_ trip: Trip, components: DateComponents) -> Bool {
         
         self.tripCount += 1
         let day = components.day!
@@ -289,7 +385,7 @@ class Month: Codable {
 }
 
 class Day: Codable {
-    //let delegate: Components
+   
     let day: Int
     var trips: [Trip] = []
     
@@ -297,7 +393,21 @@ class Day: Codable {
         self.day = day
     }
     
-    
+    /*
+     * Adds a trip to the data structure
+     * Similar to add function except instead of adding to the end it can be inserted anywhere
+     */
+    func insert(_ trip: Trip) {
+        
+        
+        var i = 0
+        while i < self.trips.count && trip.startDate < self.trips[i].startDate {
+            i += 1
+        }
+        
+        self.trips.insert(trip, at: i)
+       
+    }
     
     /*
      * Adds a trip to the data structure

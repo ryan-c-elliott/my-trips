@@ -47,6 +47,9 @@ class ExportViewController: UIViewController {
         // Labels
         self.clearLabels()
         
+        // TextBox
+        self.fileTextBox.autocorrectionType = .no
+        
         
         // Do any additional setup after loading the view.
     }
@@ -63,12 +66,14 @@ class ExportViewController: UIViewController {
             return
         }
         self.clearLabels()
-        if self.fileTextBox.text == "" {
+        let text = self.fileTextBox.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        if text == "" {
             self.fileLabel.text = "You need to enter a filename"
             return
         }
         self.clearLabels()
-        let items: [Any] = [createCSV(filename: self.fileTextBox.text!)]
+        let items: [Any] = [createCSV(filename: text)]
+        
         
         let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
         ac.excludedActivityTypes = [.addToReadingList,.assignToContact,.saveToCameraRoll,.postToFacebook,.postToWeibo,.postToVimeo,.postToFlickr,.postToTwitter,.postToTencentWeibo]
@@ -78,7 +83,7 @@ class ExportViewController: UIViewController {
     
     func createCSV(filename: String) -> URL {
         
-        let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(filename)!
+        let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("\(filename).csv")!
         var csvText = "Date,Start Time,End Time,Distance\n"
         
         
