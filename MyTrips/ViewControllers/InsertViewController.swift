@@ -9,6 +9,12 @@ import UIKit
 
 class InsertViewController: UIViewController {
 
+    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var startTimePicker: UIDatePicker!
+    @IBOutlet weak var endTimePicker: UIDatePicker!
+    @IBOutlet weak var startSearchBar: UISearchBar!
+    @IBOutlet weak var endSearchBar: UISearchBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
