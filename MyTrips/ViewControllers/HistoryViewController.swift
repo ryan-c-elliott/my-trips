@@ -73,12 +73,23 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBAction func todayButtonTapped(_ sender: UIButton) {
         self.calendarView.select(self.calendarView.today)
+        self.scrollToDate(self.calendarView.today!)
     }
     
     /* * Helpers * */
     
     func components(_ date: Date) -> DateComponents {
         self.calendar.dateComponents(self.dateComponents, from: date)
+    }
+    
+    func scrollToDate(_ date: Date) {
+        if self.components.sectionCount == 0 {
+            return
+        }
+        let (_, section) = self.components.rowAndSectionFor(date)
+        let indexPath = IndexPath(row: 0, section: min(section, self.components.sectionCount-1))
+        
+        self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }
     
     /* * FSCalendar * */
@@ -88,13 +99,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        if self.components.sectionCount == 0 {
-            return
-        }
-        let (_, section) = self.components.rowAndSectionFor(date)
-        let indexPath = IndexPath(row: 0, section: min(section, self.components.sectionCount-1))
-        
-        self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        self.scrollToDate(date)
     }
     
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
