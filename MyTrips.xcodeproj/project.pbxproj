@@ -22,6 +22,7 @@
 		944E062B26B476EF00A49B81 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 944E062A26B476EF00A49B81 /* FSCalendar */; };
 		944E062D26B72F5A00A49B81 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944E062C26B72F5A00A49B81 /* TabBarController.swift */; };
 		944E062F26B7379E00A49B81 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944E062E26B7379E00A49B81 /* CalendarCell.swift */; };
+		9489295B26BB611E00A3F5AF /* InsertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9489295A26BB611E00A3F5AF /* InsertViewController.swift */; };
 		94FE30F926B8963F00F52F61 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FE30F826B8963F00F52F61 /* TableViewCell.swift */; };
 		94FE30FB26B8D7A000F52F61 /* ExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FE30FA26B8D7A000F52F61 /* ExportViewController.swift */; };
 		94FE310226B9F53D00F52F61 /* ComponentsIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FE310126B9F53D00F52F61 /* ComponentsIterator.swift */; };
@@ -65,6 +66,7 @@
 		942E57F526ACC4CB00F96E9D /* TripButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TripButton.swift; path = MyTrips/SubClasses/TripButton.swift; sourceTree = SOURCE_ROOT; };
 		944E062C26B72F5A00A49B81 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		944E062E26B7379E00A49B81 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
+		9489295A26BB611E00A3F5AF /* InsertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertViewController.swift; sourceTree = "<group>"; };
 		94FE30F826B8963F00F52F61 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		94FE30FA26B8D7A000F52F61 /* ExportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportViewController.swift; sourceTree = "<group>"; };
 		94FE310126B9F53D00F52F61 /* ComponentsIterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentsIterator.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				944E062C26B72F5A00A49B81 /* TabBarController.swift */,
 				942E57ED26ACAF6800F96E9D /* TripViewController.swift */,
 				942E57EB26ACAF4B00F96E9D /* HistoryViewController.swift */,
+				9489295A26BB611E00A3F5AF /* InsertViewController.swift */,
 				94FE30FA26B8D7A000F52F61 /* ExportViewController.swift */,
 			);
 			path = ViewControllers;
@@ -329,6 +332,7 @@
 				944E062D26B72F5A00A49B81 /* TabBarController.swift in Sources */,
 				942E57F426ACC08C00F96E9D /* Helpers.swift in Sources */,
 				94FE310226B9F53D00F52F61 /* ComponentsIterator.swift in Sources */,
+				9489295B26BB611E00A3F5AF /* InsertViewController.swift in Sources */,
 				94FE30FB26B8D7A000F52F61 /* ExportViewController.swift in Sources */,
 				942E57BC26ABBD9000F96E9D /* AppDelegate.swift in Sources */,
 				944E062F26B7379E00A49B81 /* CalendarCell.swift in Sources */,

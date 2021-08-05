@@ -13,6 +13,7 @@ import FSCalendar
 class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDelegate, FSCalendarDataSource {
 
     @IBOutlet weak var calendarView: FSCalendar!
+    @IBOutlet weak var insertButton: UIButton!
     @IBOutlet weak var todayButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
@@ -55,6 +56,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         // Header Buttons
         self.calendarView.bringSubviewToFront(self.todayButton)
+        self.calendarView.bringSubviewToFront(self.insertButton)
         
         // TableView
         self.tableView.delegate = self
@@ -64,6 +66,10 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     /* * Actions * */
+    
+    @IBAction func insertButtonTapped(_ sender: UIButton) {
+        
+    }
     
     @IBAction func todayButtonTapped(_ sender: UIButton) {
         self.calendarView.select(self.calendarView.today)

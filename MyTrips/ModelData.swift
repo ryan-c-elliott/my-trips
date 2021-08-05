@@ -121,8 +121,15 @@ class Components: Codable, Iterable {
             sections += self.years[i].sectionCount
             i += 1
         }
+        
+        // Greater than existing years
         if i == self.years.count {
             return (0, sections)
+        }
+        
+        // Less than existing years
+        if i == 0 && self.years[i].year != year {
+            return (0, 0)
         }
         
         let (row, section) = self.years[i].rowAndSectionFor(date, components: components)
@@ -269,8 +276,16 @@ class Year: Codable {
             sections += self.months[i].days.count
             i += 1
         }
+        
+        
+        // Greater than existing months
         if i == self.months.count {
             return (0, sections)
+        }
+        
+        // Less than existing months
+        if i == 0 && self.months[i].month != month {
+            return (0, 0)
         }
         
         let (row, section) = self.months[i].rowAndSectionFor(date, components: components)
@@ -371,8 +386,15 @@ class Month: Codable {
             sections += 1
             i += 1
         }
+        
+        // Greater than existing days
         if i == self.days.count {
             return (0, sections)
+        }
+        
+        // Less than existing days
+        if i == 0 && self.days[i].day != day {
+            return (0, 0)
         }
         
         return (self.days[i].rowFor(date), sections)

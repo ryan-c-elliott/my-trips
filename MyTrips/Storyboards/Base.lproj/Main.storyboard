@@ -29,9 +29,21 @@
                                             <action selector="todayButtonTapped:" destination="0im-ib-Vq4" eventType="touchUpInside" id="nON-uX-Rjm"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KDk-kL-2aY">
+                                        <rect key="frame" x="12.5" y="0.0" width="40" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="b4X-eq-dAn"/>
+                                        </constraints>
+                                        <state key="normal" title="Insert"/>
+                                        <connections>
+                                            <action selector="insertButtonTapped:" destination="0im-ib-Vq4" eventType="touchUpInside" id="kyV-5L-b3j"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="KDk-kL-2aY" firstAttribute="top" secondItem="e6h-BP-dQp" secondAttribute="top" id="KtX-Tv-GOn"/>
+                                    <constraint firstItem="KDk-kL-2aY" firstAttribute="leading" secondItem="e6h-BP-dQp" secondAttribute="leading" constant="12.5" id="fb8-SY-xq3"/>
                                     <constraint firstAttribute="trailing" secondItem="9LC-Ve-XaK" secondAttribute="trailing" constant="12.5" id="fvh-FB-FPn"/>
                                     <constraint firstItem="9LC-Ve-XaK" firstAttribute="top" secondItem="e6h-BP-dQp" secondAttribute="top" id="hRL-aH-pE8"/>
                                     <constraint firstAttribute="height" constant="300" id="mva-RN-muw"/>
@@ -106,6 +118,7 @@
                     <tabBarItem key="tabBarItem" title="History" image="list.bullet.rectangle" catalog="system" id="nUN-Ud-Zep"/>
                     <connections>
                         <outlet property="calendarView" destination="e6h-BP-dQp" id="anf-ob-79D"/>
+                        <outlet property="insertButton" destination="KDk-kL-2aY" id="6cX-6l-igP"/>
                         <outlet property="tableView" destination="vOL-z0-JWN" id="TdL-Vc-Yma"/>
                         <outlet property="todayButton" destination="9LC-Ve-XaK" id="27k-Kg-VGK"/>
                     </connections>
@@ -113,6 +126,101 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gbl-pz-JyP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1065" y="846"/>
+        </scene>
+        <!--Insert View Controller-->
+        <scene sceneID="Bd3-S5-Yqh">
+            <objects>
+                <viewController storyboardIdentifier="Insert" id="uMG-SN-dQn" customClass="InsertViewController" customModule="MyTrips" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UTa-JP-elz">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" alignment="bottom" spacing="31" translatesAutoresizingMaskIntoConstraints="NO" id="Wnz-uE-GPd">
+                                <rect key="frame" x="99" y="188" width="173.5" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OAX-dv-dl6">
+                                        <rect key="frame" x="0.0" y="29.5" width="41.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <datePicker contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" style="compact" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yu6-Md-SW2">
+                                        <rect key="frame" x="72.5" y="0.0" width="101" height="50"/>
+                                        <date key="date" timeIntervalSinceReferenceDate="631213200.52933395">
+                                            <!--2021-01-01 17:00:00 +0000-->
+                                        </date>
+                                    </datePicker>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" alignment="bottom" spacing="31" translatesAutoresizingMaskIntoConstraints="NO" id="sBE-iX-WR2">
+                                <rect key="frame" x="99" y="258" width="173.5" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8gR-MG-nhd">
+                                        <rect key="frame" x="0.0" y="29.5" width="41.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <datePicker contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" style="compact" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wnq-qO-pO4">
+                                        <rect key="frame" x="72.5" y="0.0" width="101" height="50"/>
+                                        <date key="date" timeIntervalSinceReferenceDate="631213200.52933395">
+                                            <!--2021-01-01 17:00:00 +0000-->
+                                        </date>
+                                    </datePicker>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" alignment="bottom" spacing="31" translatesAutoresizingMaskIntoConstraints="NO" id="Rn3-7C-2M0">
+                                <rect key="frame" x="99" y="101" width="173.5" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zIR-q2-jyN">
+                                        <rect key="frame" x="0.0" y="29.5" width="41.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <datePicker contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="vva-u7-HIB">
+                                        <rect key="frame" x="72.5" y="0.0" width="101" height="50"/>
+                                    </datePicker>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="AKh-R3-JFJ">
+                                <rect key="frame" x="56" y="358" width="239.5" height="51"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rsa-1S-ycc">
+                                        <rect key="frame" x="0.0" y="0.0" width="41.5" height="51"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <searchBar contentMode="redraw" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9fu-9K-wzY">
+                                        <rect key="frame" x="64" y="0.0" width="134" height="51"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </searchBar>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="JKg-ig-hOb">
+                                <rect key="frame" x="56" y="441" width="281.5" height="51"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vge-E9-8tx">
+                                        <rect key="frame" x="0.0" y="0.0" width="41.5" height="51"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <searchBar contentMode="redraw" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GJQ-oQ-vNt">
+                                        <rect key="frame" x="63.5" y="0.0" width="218" height="51"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </searchBar>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="1HN-8r-bPW"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mr7-Td-j0U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1065.217391304348" y="1513.3928571428571"/>
         </scene>
         <!--Export-->
         <scene sceneID="JTT-fC-KCQ">
