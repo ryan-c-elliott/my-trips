@@ -17,6 +17,7 @@ class InsertViewController: UIViewController {
     @IBOutlet weak var startTableView: UITableView!
     @IBOutlet weak var endSearchBar: UISearchBar!
     @IBOutlet weak var endTableView: UITableView!
+    @IBOutlet weak var insertButton: UIButton!
     
     @IBOutlet weak var startTableHeight: NSLayoutConstraint!
     @IBOutlet weak var endTableHeight: NSLayoutConstraint!
@@ -26,9 +27,13 @@ class InsertViewController: UIViewController {
     var startSearchResults = [MKLocalSearchCompletion]()
     var endSearchResults = [MKLocalSearchCompletion]()
     
+    //var tableHeight: CGFloat = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        //self.tableHeight = self.view.frame.height - 325
+        
         // TableView
         self.startTableView.delegate = self
         self.startTableView.dataSource = self
@@ -46,6 +51,20 @@ class InsertViewController: UIViewController {
     }
     
 
+    func tableHeight() -> CGFloat {
+        self.view.frame.height - 312.5
+    }
+    /*
+    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
+        if self.startTableHeight.constant != 0 {
+            self.startTableHeight.constant = tableHeight()
+            
+        }
+        if self.endTableHeight.constant != 0 {
+            self.endTableHeight.constant = tableHeight()
+        }
+    }
+ */
     /*
     // MARK: - Navigation
 
@@ -104,6 +123,7 @@ extension InsertViewController: UITableViewDelegate {
                  return
             }
 
+            
             let lat = coordinate.latitude
             let lon = coordinate.longitude
 
@@ -127,10 +147,10 @@ extension InsertViewController: UISearchBarDelegate {
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         if searchBar == self.startSearchBar {
-            self.startTableHeight.constant = 200
+            self.startTableHeight.constant = tableHeight()
             
         } else {
-            self.endTableHeight.constant = 200
+            self.endTableHeight.constant = tableHeight()
         }
     }
     
