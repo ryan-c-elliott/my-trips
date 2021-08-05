@@ -259,18 +259,31 @@
                                     <constraint firstItem="FQ7-08-P4o" firstAttribute="leading" secondItem="8ar-b4-3hq" secondAttribute="leading" id="re0-hn-bSt"/>
                                 </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wRc-tV-0K9">
+                                <rect key="frame" x="0.0" y="812" width="414" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="HmN-qh-GX0"/>
+                                </constraints>
+                                <state key="normal" title="Insert">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="1HN-8r-bPW"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="flm-Eb-26d" firstAttribute="top" secondItem="8ar-b4-3hq" secondAttribute="bottom" constant="12.5" id="31b-og-f04"/>
+                            <constraint firstItem="wRc-tV-0K9" firstAttribute="top" relation="greaterThanOrEqual" secondItem="flm-Eb-26d" secondAttribute="bottom" constant="25" id="3Ug-Ia-zAv"/>
+                            <constraint firstItem="1HN-8r-bPW" firstAttribute="trailing" secondItem="wRc-tV-0K9" secondAttribute="trailing" id="8t9-GA-f9h"/>
                             <constraint firstItem="8ar-b4-3hq" firstAttribute="top" secondItem="QZy-of-P7D" secondAttribute="bottom" constant="12.5" id="EZD-RX-e1D"/>
                             <constraint firstItem="QZy-of-P7D" firstAttribute="centerX" secondItem="UTa-JP-elz" secondAttribute="centerX" id="Fjj-f3-4ZV"/>
                             <constraint firstItem="8ar-b4-3hq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1HN-8r-bPW" secondAttribute="leading" constant="25" id="Hs9-aw-v7Y"/>
-                            <constraint firstItem="1HN-8r-bPW" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="flm-Eb-26d" secondAttribute="bottom" constant="25" id="W0d-Gh-ULz"/>
+                            <constraint firstItem="wRc-tV-0K9" firstAttribute="bottom" secondItem="1HN-8r-bPW" secondAttribute="bottom" id="as5-zM-gGE"/>
                             <constraint firstItem="1HN-8r-bPW" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8ar-b4-3hq" secondAttribute="trailing" constant="25" id="d0D-tp-mCB"/>
                             <constraint firstItem="QZy-of-P7D" firstAttribute="top" secondItem="1HN-8r-bPW" secondAttribute="top" constant="25" id="eGz-oa-pi5"/>
                             <constraint firstItem="8ar-b4-3hq" firstAttribute="centerX" secondItem="UTa-JP-elz" secondAttribute="centerX" id="hX0-4O-Okt"/>
+                            <constraint firstItem="wRc-tV-0K9" firstAttribute="leading" secondItem="1HN-8r-bPW" secondAttribute="leading" id="hfE-Pp-hxT"/>
                             <constraint firstItem="flm-Eb-26d" firstAttribute="leading" secondItem="1HN-8r-bPW" secondAttribute="leading" constant="25" id="lKD-Yi-72p"/>
                             <constraint firstItem="1HN-8r-bPW" firstAttribute="trailing" secondItem="flm-Eb-26d" secondAttribute="trailing" constant="25" id="paP-BD-V36"/>
                         </constraints>
@@ -278,8 +291,12 @@
                     <connections>
                         <outlet property="datePicker" destination="7d9-fg-ZQa" id="tXN-uF-CxU"/>
                         <outlet property="endSearchBar" destination="9fu-9K-wzY" id="fum-ye-p5A"/>
+                        <outlet property="endTableHeight" destination="JjW-wu-lKb" id="5Wd-Rk-Vja"/>
+                        <outlet property="endTableView" destination="yP4-OC-qqS" id="zXQ-AI-zme"/>
                         <outlet property="endTimePicker" destination="7HL-G2-sQz" id="7vw-Ie-mrH"/>
                         <outlet property="startSearchBar" destination="SLA-Gy-9D4" id="dXX-1j-CU1"/>
+                        <outlet property="startTableHeight" destination="8vG-sj-VIK" id="UF5-Gt-erR"/>
+                        <outlet property="startTableView" destination="FiY-7e-XU0" id="ITK-uV-lTW"/>
                         <outlet property="startTimePicker" destination="TIW-ZO-Iaz" id="wIu-xC-0YD"/>
                     </connections>
                 </viewController>
