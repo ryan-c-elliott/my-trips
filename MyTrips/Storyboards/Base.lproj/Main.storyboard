@@ -265,6 +265,12 @@
                                     <constraint firstItem="ic1-hK-zza" firstAttribute="top" secondItem="flm-Eb-26d" secondAttribute="top" id="oJy-Xx-C6w"/>
                                 </constraints>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Z0-Tc-UZZ">
+                                <rect key="frame" x="191.5" y="791.5" width="31" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wRc-tV-0K9">
                                 <rect key="frame" x="0.0" y="812" width="414" height="50"/>
                                 <color key="backgroundColor" systemColor="systemBlueColor"/>
@@ -274,6 +280,9 @@
                                 <state key="normal" title="Insert">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="insertButtonTapped:" destination="uMG-SN-dQn" eventType="touchUpInside" id="TL5-xu-3PY"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="1HN-8r-bPW"/>
@@ -284,8 +293,10 @@
                             <constraint firstItem="8ar-b4-3hq" firstAttribute="top" secondItem="QZy-of-P7D" secondAttribute="bottom" constant="12.5" id="EZD-RX-e1D"/>
                             <constraint firstItem="QZy-of-P7D" firstAttribute="centerX" secondItem="UTa-JP-elz" secondAttribute="centerX" id="Fjj-f3-4ZV"/>
                             <constraint firstItem="8ar-b4-3hq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1HN-8r-bPW" secondAttribute="leading" constant="25" id="Hs9-aw-v7Y"/>
+                            <constraint firstItem="wRc-tV-0K9" firstAttribute="top" secondItem="3Z0-Tc-UZZ" secondAttribute="bottom" constant="6.25" id="SFY-Kf-fvK"/>
                             <constraint firstItem="wRc-tV-0K9" firstAttribute="bottom" secondItem="1HN-8r-bPW" secondAttribute="bottom" id="as5-zM-gGE"/>
                             <constraint firstItem="1HN-8r-bPW" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8ar-b4-3hq" secondAttribute="trailing" constant="25" id="d0D-tp-mCB"/>
+                            <constraint firstItem="3Z0-Tc-UZZ" firstAttribute="centerX" secondItem="UTa-JP-elz" secondAttribute="centerX" id="d53-6q-KiY"/>
                             <constraint firstItem="QZy-of-P7D" firstAttribute="top" secondItem="1HN-8r-bPW" secondAttribute="top" constant="25" id="eGz-oa-pi5"/>
                             <constraint firstItem="8ar-b4-3hq" firstAttribute="centerX" secondItem="UTa-JP-elz" secondAttribute="centerX" id="hX0-4O-Okt"/>
                             <constraint firstItem="wRc-tV-0K9" firstAttribute="leading" secondItem="1HN-8r-bPW" secondAttribute="leading" id="hfE-Pp-hxT"/>
@@ -300,6 +311,7 @@
                         <outlet property="endTableView" destination="yP4-OC-qqS" id="zXQ-AI-zme"/>
                         <outlet property="endTimePicker" destination="7HL-G2-sQz" id="7vw-Ie-mrH"/>
                         <outlet property="insertButton" destination="wRc-tV-0K9" id="g7H-92-uCV"/>
+                        <outlet property="locLabel" destination="3Z0-Tc-UZZ" id="2Ye-JJ-OAN"/>
                         <outlet property="startSearchBar" destination="SLA-Gy-9D4" id="dXX-1j-CU1"/>
                         <outlet property="startTableHeight" destination="8vG-sj-VIK" id="UF5-Gt-erR"/>
                         <outlet property="startTableView" destination="FiY-7e-XU0" id="ITK-uV-lTW"/>

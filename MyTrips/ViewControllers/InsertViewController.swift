@@ -17,6 +17,7 @@ class InsertViewController: UIViewController {
     @IBOutlet weak var startTableView: UITableView!
     @IBOutlet weak var endSearchBar: UISearchBar!
     @IBOutlet weak var endTableView: UITableView!
+    @IBOutlet weak var locLabel: UILabel!
     @IBOutlet weak var insertButton: UIButton!
     
     @IBOutlet weak var startTableHeight: NSLayoutConstraint!
@@ -34,6 +35,9 @@ class InsertViewController: UIViewController {
         
         //self.tableHeight = self.view.frame.height - 325
         
+        // LocLabel
+        self.locLabel.text = ""
+        
         // TableView
         self.startTableView.delegate = self
         self.startTableView.dataSource = self
@@ -48,6 +52,13 @@ class InsertViewController: UIViewController {
         
         
         // Do any additional setup after loading the view.
+    }
+    
+    
+    
+    
+    @IBAction func insertButtonTapped(_ sender: UIButton) {
+        
     }
     
 
@@ -123,6 +134,11 @@ extension InsertViewController: UITableViewDelegate {
                  return
             }
 
+            if tableView == self.startTableView {
+                self.startSearchBar.text = name
+            } else {
+                self.endSearchBar.text = name
+            }
             
             let lat = coordinate.latitude
             let lon = coordinate.longitude
