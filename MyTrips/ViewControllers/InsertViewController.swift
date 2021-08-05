@@ -21,8 +21,10 @@ class InsertViewController: UIViewController {
     @IBOutlet weak var startTableHeight: NSLayoutConstraint!
     @IBOutlet weak var endTableHeight: NSLayoutConstraint!
     
-    var searchCompleter = MKLocalSearchCompleter()
-    var searchResults = [MKLocalSearchCompletion]()
+    var startSearchCompleter = MKLocalSearchCompleter()
+    var endSearchCompleter = MKLocalSearchCompleter()
+    var startSearchResults = [MKLocalSearchCompletion]()
+    var endSearchResults = [MKLocalSearchCompletion]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +36,8 @@ class InsertViewController: UIViewController {
         self.endTableView.dataSource = self
         
         // Search
-        self.searchCompleter.delegate = self
+        self.startSearchCompleter.delegate = self
+        self.endSearchCompleter.delegate = self
         self.startSearchBar.delegate = self
         self.endSearchBar.delegate = self
         
@@ -62,12 +65,12 @@ extension InsertViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.searchResults.count
+        tableView == self.startTableView ? self.startSearchResults.count : self.endSearchResults.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Get the specific searchResult at the particular index
-        let searchResult = self.searchResults[indexPath.row]
+        let searchResult = tableView == self.startTableView ? self.startSearchResults[indexPath.row] : self.endSearchResults[indexPath.row]
         
         //Create a new UITableViewCell object
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
@@ -88,7 +91,7 @@ extension InsertViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        let result = self.searchResults[indexPath.row]
+        let result = tableView == self.startTableView ? self.startSearchResults[indexPath.row] : self.endSearchResults[indexPath.row]
         let searchRequest = MKLocalSearch.Request(completion: result)
 
         let search = MKLocalSearch(request: searchRequest)
@@ -114,30 +117,44 @@ extension InsertViewController: UITableViewDelegate {
 
 extension InsertViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.searchCompleter.queryFragment = searchText
+        if searchBar == self.startSearchBar {
+            self.startSearchCompleter.queryFragment = searchText
+        } else {
+            self.endSearchCompleter.queryFragment = searchText
+        }
     }
     
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         if searchBar == self.startSearchBar {
-            self.endTableView.
-        } else {
+            self.startTableHeight.constant = 200
             
+        } else {
+            self.endTableHeight.constant = 200
         }
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        <#code#>
+        if searchBar == self.startSearchBar {
+            self.startTableHeight.constant = 0
+            
+        } else {
+            self.endTableHeight.constant = 0
+        }
     }
 }
 
 extension InsertViewController: MKLocalSearchCompleterDelegate {
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
         // Setting our searchResults variable to the results that the searchCompleter returned
-        self.searchResults = completer.results
-
-        // Reload the tableview with our new searchResults
-        self.startTableView.reloadData()
+        if completer == self.startSearchCompleter {
+            self.startSearchResults = completer.results
+            self.startTableView.reloadData()
+        } else {
+            self.endSearchResults = completer.results
+            self.endTableView.reloadData()
+        }
+        
     }
 
     // This method is called when there was an error with the searchCompleter
