@@ -13,7 +13,10 @@ class InsertViewController: UIViewController {
     @IBOutlet weak var startTimePicker: UIDatePicker!
     @IBOutlet weak var endTimePicker: UIDatePicker!
     @IBOutlet weak var startSearchBar: UISearchBar!
+    @IBOutlet weak var startTableView: UITableView!
     @IBOutlet weak var endSearchBar: UISearchBar!
+    @IBOutlet weak var endTableView: UITableView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
