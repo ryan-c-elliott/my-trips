@@ -19,6 +19,8 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //write(url: getURL(filename: "data")!, data: ResponseData(components: Components()))
+        
         self.dateFormatter.dateStyle = .medium
         self.dateFormatter.locale = Locale(identifier: "en_US")
         self.timeFormatter.setLocalizedDateFormatFromTemplate("HH:mm")

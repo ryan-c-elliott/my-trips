@@ -74,6 +74,8 @@ class Components: Codable, Iterable {
                 return
             }
         } else {
+            i = i == 0 || (i == self.years.count && self.years[i-1].year < year) ? i : i-1
+            
             // Need to add a new year, month, and day (section)
             self.years.insert(Year(year: year), at: i)
             self.years[i].add(trip, components: components)
@@ -234,13 +236,16 @@ class Year: Codable {
         }
         
         if i < self.months.count && self.months[i].month == month {
-            // Add to existing year
+            // Add to existing month
             if !self.months[i].insert(trip, components: components) {
                 return false
                 
             }
         } else {
-            // Need to add a new year, month, and day (section)
+            
+            i = i == 0 || (i == self.months.count && self.months[i-1].month < month) ? i : i-1
+            
+            // Need to add a new month and day (section)
             self.months.insert(Month(month: month), at: i)
             self.months[i].add(trip, components: components)
         }
@@ -353,11 +358,14 @@ class Month: Codable {
         }
         
         if i < self.days.count && self.days[i].day == day {
-            // Add to existing year
-            self.days[i].insert(trip)
+            // Add to existing day
+            self.days[i-1].insert(trip)
             return false
         } else {
-            // Need to add a new year, month, and day (section)
+            
+            i = i == 0 || (i == self.days.count && self.days[i-1].day < day) ? i : i-1
+            
+            // Need to add a new day (section)
             self.days.insert(Day(day: day), at: i)
             self.days[i].add(trip)
             return true
@@ -433,6 +441,8 @@ class Day: Codable {
         while i < self.trips.count && trip.startDate < self.trips[i].startDate {
             i += 1
         }
+        
+        i = i == 0 || (i == self.trips.count && self.trips[i-1].startDate < trip.startDate) ? i : i-1
         
         self.trips.insert(trip, at: i)
        

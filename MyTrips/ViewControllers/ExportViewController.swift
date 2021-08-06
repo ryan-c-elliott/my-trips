@@ -13,7 +13,6 @@ class ExportViewController: UIViewController {
     
     @IBOutlet weak var fromDatePicker: UIDatePicker!
     @IBOutlet weak var toDatePicker: UIDatePicker!
-    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var fileTextBox: UITextField!
     @IBOutlet weak var fileLabel: UILabel!
     
@@ -51,17 +50,30 @@ class ExportViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func dateValueDoneEditing(_ sender: UIDatePicker) {
+        print("value changed")
+        // If dates aren't messed up then return
+        if self.fromDatePicker.date < self.toDatePicker.date {
+            return
+        }
+        
+        // Set dates to be the same as sender
+        if sender == self.fromDatePicker {
+            self.toDatePicker.date = self.fromDatePicker.date
+        } else {
+            self.fromDatePicker.date = self.toDatePicker.date
+        }
+        
+        
+        
+    }
+    
     func clearLabels() {
-        self.dateLabel.text = ""
         self.fileLabel.text = ""
     }
     
 
     @IBAction func exportButtonTapped(_ sender: UIButton) {
-        if self.fromDatePicker.date > self.toDatePicker.date {
-            self.dateLabel.text = "Choose a valid date range"
-            return
-        }
         self.clearLabels()
         let text = self.fileTextBox.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         if text == "" {
