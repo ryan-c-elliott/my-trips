@@ -51,7 +51,7 @@ class ExportViewController: UIViewController {
     }
     
     @IBAction func dateValueDoneEditing(_ sender: UIDatePicker) {
-        print("value changed")
+  
         // If dates aren't messed up then return
         if self.fromDatePicker.date < self.toDatePicker.date {
             return

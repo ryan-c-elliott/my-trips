@@ -359,7 +359,7 @@ class Month: Codable {
         
         if i < self.days.count && self.days[i].day == day {
             // Add to existing day
-            self.days[i-1].insert(trip)
+            self.days[i].insert(trip)
             return false
         } else {
             

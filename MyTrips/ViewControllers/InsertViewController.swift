@@ -70,12 +70,19 @@ class InsertViewController: UIViewController {
         let startTimeComponents = MyTrips.components(self.startTimePicker.date, components: [.hour, .minute])
         let endTimeComponents = MyTrips.components(self.endTimePicker.date, components: [.hour, .minute])
         
-        var startComponents = DateComponents()
-        startComponents.year = dateComponents.year
-        startComponents.month = dateComponents.month
-        startComponents.day = dateComponents.day
-        startComponents.hour = startTimeComponents.hour
-        startComponents.minute = startTimeComponents.minute
+        let calendar: Calendar = Calendar(identifier: .gregorian)
+        
+        // If app gets popular, add something to allow change in calendar and timeZone
+        var startComponents = DateComponents(
+            calendar: calendar,
+            timeZone: nil, era: nil,
+            year: dateComponents.year,
+            month: dateComponents.month,
+            day: dateComponents.day,
+            hour: startTimeComponents.hour,
+            minute: startTimeComponents.minute,
+            second: nil, nanosecond: nil, weekday: nil, weekdayOrdinal: nil, quarter: nil, weekOfMonth: nil, weekOfYear: nil, yearForWeekOfYear: nil
+        )
         
         var endComponents = startComponents
         endComponents.hour = endTimeComponents.hour
@@ -88,7 +95,7 @@ class InsertViewController: UIViewController {
             endComponents.day! += 1
         }
         
-        let calendar: Calendar = Calendar(identifier: .gregorian)
+        
         
         let startDate = calendar.date(from: startComponents)!
         let endDate = calendar.date(from: endComponents)!
