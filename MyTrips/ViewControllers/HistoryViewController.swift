@@ -69,10 +69,11 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBAction func insertButtonTapped(_ sender: UIButton) {
         
-        let vc = self.storyboard!.instantiateViewController(withIdentifier: "Insert")
-        vc.title = "YOur mom"
+        let vc = self.storyboard!.instantiateViewController(withIdentifier: "Insert") as! InsertViewController
+        vc.delegate = self.parent as? TabBarController
+        vc.title = "Create Trip"
         let navController = UINavigationController(rootViewController: vc)
-        self.present(navController, animated:true, completion: nil)
+        self.present(navController, animated: true, completion: nil)
     }
     
     @IBAction func todayButtonTapped(_ sender: UIButton) {
@@ -81,10 +82,6 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     /* * Helpers * */
-    
-    func components(_ date: Date) -> DateComponents {
-        self.calendar.dateComponents(self.dateComponents, from: date)
-    }
     
     func scrollToDate(_ date: Date) {
         if self.components.sectionCount == 0 {
@@ -108,11 +105,10 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
         let (_, section) = self.components.rowAndSectionFor(date)
-        let trips = self.components.get(section: section)
-        if self.components(trips[0].startDate) == self.components(date) {
-            return trips.count
+        guard let trips = self.components.get(section: section), MyTrips.components(trips[0].startDate) == MyTrips.components(date) else {
+            return 0
         }
-        return 0
+        return trips.count
     }
     
     /* * UITableView * */
@@ -122,13 +118,13 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.components.get(section: section).count
+        self.components.get(section: section)?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: TableViewCell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)! as! TableViewCell
         
-        let trip = self.components.get(row: indexPath.row, section: indexPath.section)
+        let trip = self.components.get(row: indexPath.row, section: indexPath.section)!
         let startTime = self.timeFormatter.string(from: trip.startDate)
         let endTime = self.timeFormatter.string(from: trip.endDate)
         
@@ -142,7 +138,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 
-        self.dateFormatter.string(from: self.components.get(row: 0, section: section).startDate)
+        self.dateFormatter.string(from: self.components.get(row: 0, section: section)!.startDate)
     }
     
 

@@ -86,5 +86,9 @@ func print(_ data: ResponseData) {
  */
 
 func components(_ date: Date) -> DateComponents {
-    Calendar(identifier: .gregorian).dateComponents([.year, .month, .day], from: date)
+    components(date, components: [.year, .month, .day])
+}
+
+func components(_ date: Date, components: Set<Calendar.Component>) -> DateComponents {
+    Calendar(identifier: .gregorian).dateComponents(components, from: date)
 }

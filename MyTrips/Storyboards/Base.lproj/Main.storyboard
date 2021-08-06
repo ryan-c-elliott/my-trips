@@ -207,8 +207,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z84-SQ-S77">
                                 <rect key="frame" x="25" y="181.5" width="364" height="53.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uD6-x5-N6R">
-                                        <rect key="frame" x="46.5" y="0.0" width="41.5" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="No location selected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uD6-x5-N6R">
+                                        <rect key="frame" x="46.5" y="0.0" width="156" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -227,8 +227,8 @@
                                             <action selector="locPicker:" destination="uMG-SN-dQn" eventType="touchUpInside" id="W6j-Uv-INo"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cKM-6n-LBk" userLabel="End Label">
-                                        <rect key="frame" x="46.5" y="33" width="41.5" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="No location selected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cKM-6n-LBk" userLabel="End Label">
+                                        <rect key="frame" x="46.5" y="33" width="156" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -240,11 +240,13 @@
                                     <constraint firstItem="uD6-x5-N6R" firstAttribute="leading" secondItem="nzM-zr-6HK" secondAttribute="trailing" constant="12.5" id="AYk-VD-6fb"/>
                                     <constraint firstItem="nzM-zr-6HK" firstAttribute="leading" secondItem="Z84-SQ-S77" secondAttribute="leading" id="DiZ-VC-37e"/>
                                     <constraint firstItem="a5Q-d2-7zK" firstAttribute="leading" secondItem="nzM-zr-6HK" secondAttribute="leading" id="J9K-Mh-9pc"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="uD6-x5-N6R" secondAttribute="trailing" id="OIR-NR-tVW"/>
                                     <constraint firstItem="cKM-6n-LBk" firstAttribute="centerY" secondItem="a5Q-d2-7zK" secondAttribute="centerY" id="RKg-Xo-779"/>
                                     <constraint firstItem="uD6-x5-N6R" firstAttribute="top" secondItem="Z84-SQ-S77" secondAttribute="top" id="Rkk-so-JJ6"/>
                                     <constraint firstItem="cKM-6n-LBk" firstAttribute="top" secondItem="uD6-x5-N6R" secondAttribute="bottom" constant="12.5" id="SdY-RR-LM2"/>
                                     <constraint firstAttribute="bottom" secondItem="cKM-6n-LBk" secondAttribute="bottom" id="eaP-hx-j7l"/>
                                     <constraint firstItem="uD6-x5-N6R" firstAttribute="centerY" secondItem="nzM-zr-6HK" secondAttribute="centerY" id="n12-Uc-G1i"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cKM-6n-LBk" secondAttribute="trailing" id="snE-TD-b5T"/>
                                 </constraints>
                             </view>
                         </subviews>

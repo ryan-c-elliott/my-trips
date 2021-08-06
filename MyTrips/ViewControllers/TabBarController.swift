@@ -18,7 +18,6 @@ class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
         self.dateFormatter.dateStyle = .medium
         self.dateFormatter.locale = Locale(identifier: "en_US")

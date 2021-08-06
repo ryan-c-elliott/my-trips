@@ -139,7 +139,11 @@ class Components: Codable, Iterable {
         
     }
     
-    func get(section: Int) -> [Trip] {
+    func get(section: Int) -> [Trip]? {
+        
+        if tripCount == 0 {
+            return nil
+        }
         
         // If the given section is out of bounds, returns the next closest
         var section = section
@@ -149,6 +153,7 @@ class Components: Codable, Iterable {
         if section < 0 {
             section = 0
         }
+        
         
  
         var i = 0
@@ -162,9 +167,12 @@ class Components: Codable, Iterable {
     }
     
     // Check if number of trips is 0 before calling
-    func get(row: Int, section: Int) -> Trip {
+    func get(row: Int, section: Int) -> Trip? {
       
-        return get(section: section)[row]
+        guard let trips = get(section: section) else {
+            return nil
+        }
+        return trips[row]
     }
     
 }

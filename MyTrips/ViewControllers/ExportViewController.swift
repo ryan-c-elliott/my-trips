@@ -33,13 +33,10 @@ class ExportViewController: UIViewController {
         
         // DatePickers
         let today = Date()
-        var min = today
+        let min = components.get(row: 0, section: 0)?.startDate ?? today
+        
         self.fromDatePicker.maximumDate = today
         self.toDatePicker.maximumDate = today
-        if self.components.tripCount > 0 {
-            min = components.get(row: 0, section: 0).startDate
-            
-        }
         self.fromDatePicker.minimumDate = min
         self.toDatePicker.minimumDate = min
         self.fromDatePicker.setDate(min, animated: false)

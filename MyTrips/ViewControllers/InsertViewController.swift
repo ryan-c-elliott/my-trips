@@ -21,6 +21,11 @@ class InsertViewController: UIViewController {
     @IBOutlet weak var locLabel: UILabel!
     @IBOutlet weak var insertButton: UIButton!
     
+    var startLoc: CLLocationCoordinate2D? = nil
+    var endLoc: CLLocationCoordinate2D? = nil
+    
+    var delegate: TabBarController? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,12 +41,15 @@ class InsertViewController: UIViewController {
     
     
     @IBAction func locPicker(_ sender: UIButton) {
+        self.locLabel.text = ""
         let lp = LocationPickerViewController()
         lp.completion = { location in
             if sender == self.startButton {
-                self.startLabel.text = location?.address
+                self.startLabel.text = location?.name
+                self.startLoc = location?.coordinate
             } else {
-                self.endLabel.text = location?.address
+                self.endLabel.text = location?.name
+                self.endLoc = location?.coordinate
             }
         }
         navigationController!.pushViewController(lp, animated: true)
@@ -50,6 +58,71 @@ class InsertViewController: UIViewController {
     
     
     @IBAction func insertButtonTapped(_ sender: UIButton) {
+        if startLoc == nil || endLoc == nil {
+            
+            self.locLabel.text = "Pick a start and end location"
+            
+            return
+        }
+        
+        // Figure out dates
+        let dateComponents = components(self.datePicker.date)
+        let startTimeComponents = MyTrips.components(self.startTimePicker.date, components: [.hour, .minute])
+        let endTimeComponents = MyTrips.components(self.endTimePicker.date, components: [.hour, .minute])
+        
+        var startComponents = DateComponents()
+        startComponents.year = dateComponents.year
+        startComponents.month = dateComponents.month
+        startComponents.day = dateComponents.day
+        startComponents.hour = startTimeComponents.hour
+        startComponents.minute = startTimeComponents.minute
+        
+        var endComponents = startComponents
+        endComponents.hour = endTimeComponents.hour
+        endComponents.minute = endTimeComponents.minute
+        
+        // If start time is > end time then the trip lasted through midnight
+        if startTimeComponents.hour! > endTimeComponents.hour! ||
+           (startTimeComponents.hour! == endTimeComponents.hour! &&
+           startTimeComponents.minute! > endTimeComponents.minute!) {
+            endComponents.day! += 1
+        }
+        
+        let calendar: Calendar = Calendar(identifier: .gregorian)
+        
+        let startDate = calendar.date(from: startComponents)!
+        let endDate = calendar.date(from: endComponents)!
+        
+        // Convert to MKPlacemark
+        let request = MKDirections.Request()
+        let source = MKPlacemark(coordinate: startLoc!)
+        let dest = MKPlacemark(coordinate: endLoc!)
+        request.source = MKMapItem(placemark: source)
+        request.destination = MKMapItem(placemark: dest)
+        request.transportType = MKDirectionsTransportType.automobile
+        request.requestsAlternateRoutes = false
+        
+        // Find directions
+        let directions = MKDirections(request: request)
+        directions.calculate { (response, error) in
+            if let response = response, let route = response.routes.first {
+    
+                let data = self.delegate!.data
+                data.components.insert(Trip(
+                    startDate: startDate,
+                    endDate: endDate,
+                    route: route
+                ))
+                tripsWrite(data: data)
+                self.delegate!.reloadData()
+                self.dismiss(animated: true, completion: nil)
+ 
+            } else {
+                self.locLabel.text = "Couldn't calculate route"
+            }
+        }
+        
+        
         
         
     }
