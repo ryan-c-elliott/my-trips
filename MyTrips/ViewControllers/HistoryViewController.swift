@@ -68,8 +68,11 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     /* * Actions * */
     
     @IBAction func insertButtonTapped(_ sender: UIButton) {
-        let vc = self.storyboard?.instantiateViewController(identifier: "Insert")
-        self.present(vc!, animated: true, completion: nil)
+        
+        let vc = self.storyboard!.instantiateViewController(withIdentifier: "Insert")
+        vc.title = "YOur mom"
+        let navController = UINavigationController(rootViewController: vc)
+        self.present(navController, animated:true, completion: nil)
     }
     
     @IBAction func todayButtonTapped(_ sender: UIButton) {

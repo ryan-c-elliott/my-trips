@@ -23,6 +23,7 @@
 		944E062D26B72F5A00A49B81 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944E062C26B72F5A00A49B81 /* TabBarController.swift */; };
 		944E062F26B7379E00A49B81 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944E062E26B7379E00A49B81 /* CalendarCell.swift */; };
 		9489295B26BB611E00A3F5AF /* InsertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9489295A26BB611E00A3F5AF /* InsertViewController.swift */; };
+		9489295E26BD76C200A3F5AF /* LocationPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 9489295D26BD76C200A3F5AF /* LocationPicker */; };
 		94FE30F926B8963F00F52F61 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FE30F826B8963F00F52F61 /* TableViewCell.swift */; };
 		94FE30FB26B8D7A000F52F61 /* ExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FE30FA26B8D7A000F52F61 /* ExportViewController.swift */; };
 		94FE310226B9F53D00F52F61 /* ComponentsIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FE310126B9F53D00F52F61 /* ComponentsIterator.swift */; };
@@ -78,6 +79,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				944E062B26B476EF00A49B81 /* FSCalendar in Frameworks */,
+				9489295E26BD76C200A3F5AF /* LocationPicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +212,7 @@
 			name = MyTrips;
 			packageProductDependencies = (
 				944E062A26B476EF00A49B81 /* FSCalendar */,
+				9489295D26BD76C200A3F5AF /* LocationPicker */,
 			);
 			productName = MyTrips;
 			productReference = 942E57B826ABBD9000F96E9D /* MyTrips.app */;
@@ -284,6 +287,7 @@
 			mainGroup = 942E57AF26ABBD9000F96E9D;
 			packageReferences = (
 				944E062926B476EF00A49B81 /* XCRemoteSwiftPackageReference "FSCalendar" */,
+				9489295C26BD76C200A3F5AF /* XCRemoteSwiftPackageReference "LocationPicker" */,
 			);
 			productRefGroup = 942E57B926ABBD9000F96E9D /* Products */;
 			projectDirPath = "";
@@ -683,6 +687,14 @@
 				minimumVersion = 2.8.2;
 			};
 		};
+		9489295C26BD76C200A3F5AF /* XCRemoteSwiftPackageReference "LocationPicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/almassapargali/LocationPicker";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -690,6 +702,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 944E062926B476EF00A49B81 /* XCRemoteSwiftPackageReference "FSCalendar" */;
 			productName = FSCalendar;
+		};
+		9489295D26BD76C200A3F5AF /* LocationPicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9489295C26BD76C200A3F5AF /* XCRemoteSwiftPackageReference "LocationPicker" */;
+			productName = LocationPicker;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
