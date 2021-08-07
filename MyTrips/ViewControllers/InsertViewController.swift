@@ -73,7 +73,7 @@ class InsertViewController: UIViewController {
         let calendar: Calendar = Calendar(identifier: .gregorian)
         
         // If app gets popular, add something to allow change in calendar and timeZone
-        var startComponents = DateComponents(
+        let startComponents = DateComponents(
             calendar: calendar,
             timeZone: nil, era: nil,
             year: dateComponents.year,

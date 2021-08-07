@@ -6,11 +6,9 @@
 //
 
 import UIKit
-import JTAppleCalendar
-import KDCalendar
 import FSCalendar
 
-class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDelegate, FSCalendarDataSource {
+class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
 
     @IBOutlet weak var calendarView: FSCalendar!
     @IBOutlet weak var insertButton: UIButton!
@@ -44,7 +42,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         // FSCalendar
         self.calendarView.calendarHeaderView.scrollDirection = .vertical
-        self.calendarView.register(CalendarCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        self.calendarView.register(FSCalendarCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         self.calendarView.delegate = self
         self.calendarView.dataSource = self
         
@@ -109,6 +107,26 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
             return 0
         }
         return trips.count
+    }
+    
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
+            
+        let defaultColor = appearance.titleDefaultColor
+        
+        if #available(iOS 12.0, *) {
+            if self.traitCollection.userInterfaceStyle == .dark {
+                return .white
+            } else {
+                return defaultColor
+            }
+        } else {
+            return defaultColor
+        }
+            
+    }
+    
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        self.calendarView?.reloadData()
     }
     
     /* * UITableView * */
