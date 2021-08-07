@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,81 +17,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e6h-BP-dQp" customClass="FSCalendar">
-                                <rect key="frame" x="0.0" y="44" width="414" height="300"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9LC-Ve-XaK">
-                                        <rect key="frame" x="359.5" y="0.0" width="42" height="25"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="25" id="feW-Po-v8R"/>
-                                        </constraints>
-                                        <state key="normal" title="Today"/>
-                                        <connections>
-                                            <action selector="todayButtonTapped:" destination="0im-ib-Vq4" eventType="touchUpInside" id="nON-uX-Rjm"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KDk-kL-2aY">
-                                        <rect key="frame" x="12.5" y="0.0" width="40" height="25"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="25" id="b4X-eq-dAn"/>
-                                        </constraints>
-                                        <state key="normal" title="Insert"/>
-                                        <connections>
-                                            <action selector="insertButtonTapped:" destination="0im-ib-Vq4" eventType="touchUpInside" id="kyV-5L-b3j"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstItem="KDk-kL-2aY" firstAttribute="top" secondItem="e6h-BP-dQp" secondAttribute="top" id="KtX-Tv-GOn"/>
-                                    <constraint firstItem="KDk-kL-2aY" firstAttribute="leading" secondItem="e6h-BP-dQp" secondAttribute="leading" constant="12.5" id="fb8-SY-xq3"/>
-                                    <constraint firstAttribute="trailing" secondItem="9LC-Ve-XaK" secondAttribute="trailing" constant="12.5" id="fvh-FB-FPn"/>
-                                    <constraint firstItem="9LC-Ve-XaK" firstAttribute="top" secondItem="e6h-BP-dQp" secondAttribute="top" id="hRL-aH-pE8"/>
-                                    <constraint firstAttribute="height" constant="300" id="mva-RN-muw"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="headerHeight">
-                                        <real key="value" value="25"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="selectionColor">
-                                        <color key="value" systemColor="systemRedColor"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="todaySelectionColor">
-                                        <color key="value" systemColor="systemBlueColor"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="headerTitleColor">
-                                        <color key="value" systemColor="systemIndigoColor"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="weekdayTextColor">
-                                        <color key="value" systemColor="systemIndigoColor"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="headerMinimumDissolvedAlpha">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="todayColor">
-                                        <color key="value" systemColor="systemBlueColor"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="subtitlePlaceholderColor">
-                                        <color key="value" systemColor="systemGrayColor"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="subtitleWeekendColor">
-                                        <color key="value" name="systemBrownColor" catalog="System" colorSpace="catalog"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vOL-z0-JWN">
-                                <rect key="frame" x="0.0" y="344" width="414" height="469"/>
+                                <rect key="frame" x="0.0" y="508" width="414" height="305"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="5KW-ca-Ae0" customClass="TableViewCell" customModule="MyTrips" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5KW-ca-Ae0" id="XJ6-cZ-pOl">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_ mi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9pd-fn-0T4">
-                                                    <rect key="frame" x="362" y="11" width="32" height="21.5"/>
+                                                    <rect key="frame" x="362" y="11" width="32" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -108,30 +47,68 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" datePickerMode="date" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="fjH-P1-ing">
+                                <rect key="frame" x="0.0" y="44" width="414" height="414"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="fjH-P1-ing" secondAttribute="height" multiplier="1:1" id="ghm-fv-a1c"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="dateChanged:" destination="0im-ib-Vq4" eventType="valueChanged" id="yVn-M2-D0j"/>
+                                </connections>
+                            </datePicker>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="dsO-ob-68P">
+                                <rect key="frame" x="25" y="458" width="364" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5fV-x8-770">
+                                        <rect key="frame" x="0.0" y="10" width="40" height="30"/>
+                                        <state key="normal" title="Insert"/>
+                                        <connections>
+                                            <action selector="insertButtonTapped:" destination="0im-ib-Vq4" eventType="touchUpInside" id="zyc-Yt-XTh"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trips" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CvT-DY-EVo">
+                                        <rect key="frame" x="162.5" y="15" width="37.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hzD-cs-1ec">
+                                        <rect key="frame" x="322" y="10" width="42" height="30"/>
+                                        <state key="normal" title="Today"/>
+                                        <connections>
+                                            <action selector="todayButtonTapped:" destination="0im-ib-Vq4" eventType="touchUpInside" id="aOH-y1-XZV"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="aAs-t7-znM"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="UiC-24-5oG"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="e6h-BP-dQp" firstAttribute="leading" secondItem="UiC-24-5oG" secondAttribute="leading" id="IB1-mG-yKs"/>
-                            <constraint firstItem="UiC-24-5oG" firstAttribute="trailing" secondItem="e6h-BP-dQp" secondAttribute="trailing" id="Z69-9f-8fK"/>
+                            <constraint firstItem="dsO-ob-68P" firstAttribute="leading" secondItem="UiC-24-5oG" secondAttribute="leading" constant="25" id="05k-SP-7XZ"/>
+                            <constraint firstItem="vOL-z0-JWN" firstAttribute="top" secondItem="dsO-ob-68P" secondAttribute="bottom" id="4pd-or-xWp"/>
+                            <constraint firstItem="UiC-24-5oG" firstAttribute="trailing" secondItem="dsO-ob-68P" secondAttribute="trailing" constant="25" id="WCT-VZ-PIk"/>
                             <constraint firstItem="UiC-24-5oG" firstAttribute="bottom" secondItem="vOL-z0-JWN" secondAttribute="bottom" id="dG8-Kf-FVd"/>
-                            <constraint firstItem="e6h-BP-dQp" firstAttribute="top" secondItem="UiC-24-5oG" secondAttribute="top" id="hGX-1f-esO"/>
-                            <constraint firstItem="vOL-z0-JWN" firstAttribute="top" secondItem="e6h-BP-dQp" secondAttribute="bottom" id="lNb-Yc-bV8"/>
+                            <constraint firstItem="fjH-P1-ing" firstAttribute="leading" secondItem="UiC-24-5oG" secondAttribute="leading" id="mcH-R6-rHj"/>
+                            <constraint firstItem="fjH-P1-ing" firstAttribute="trailing" secondItem="UiC-24-5oG" secondAttribute="trailing" id="n2p-gu-MWJ"/>
+                            <constraint firstItem="dsO-ob-68P" firstAttribute="top" secondItem="fjH-P1-ing" secondAttribute="bottom" id="oQN-gv-s7P"/>
                             <constraint firstItem="vOL-z0-JWN" firstAttribute="leading" secondItem="UiC-24-5oG" secondAttribute="leading" id="rdj-VH-ao6"/>
                             <constraint firstItem="UiC-24-5oG" firstAttribute="trailing" secondItem="vOL-z0-JWN" secondAttribute="trailing" id="sxY-fD-bbe"/>
+                            <constraint firstItem="fjH-P1-ing" firstAttribute="top" secondItem="UiC-24-5oG" secondAttribute="top" id="yX0-Zy-GjL"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="History" image="list.bullet.rectangle" catalog="system" id="nUN-Ud-Zep"/>
                     <connections>
-                        <outlet property="calendarView" destination="e6h-BP-dQp" id="anf-ob-79D"/>
-                        <outlet property="insertButton" destination="KDk-kL-2aY" id="6cX-6l-igP"/>
+                        <outlet property="calendarView" destination="fjH-P1-ing" id="LfB-ef-Tbo"/>
                         <outlet property="tableView" destination="vOL-z0-JWN" id="TdL-Vc-Yma"/>
-                        <outlet property="todayButton" destination="9LC-Ve-XaK" id="27k-Kg-VGK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gbl-pz-JyP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1065" y="846"/>
+            <point key="canvasLocation" x="-1065.217391304348" y="845.75892857142856"/>
         </scene>
         <!--Insert View Controller-->
         <scene sceneID="Bd3-S5-Yqh">
@@ -527,15 +504,6 @@
         </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemIndigoColor">
-            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

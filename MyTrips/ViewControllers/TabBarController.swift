@@ -31,7 +31,7 @@ class TabBarController: UITabBarController {
     func reloadData() {
         let history = self.children[1] as! HistoryViewController
         if history.isViewLoaded {
-            history.calendarView.reloadData()
+            //history.calendarView.reloadData()
             history.tableView.reloadData()
         }
         

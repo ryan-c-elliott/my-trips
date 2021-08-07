@@ -6,13 +6,10 @@
 //
 
 import UIKit
-import FSCalendar
 
-class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
+class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    @IBOutlet weak var calendarView: FSCalendar!
-    @IBOutlet weak var insertButton: UIButton!
-    @IBOutlet weak var todayButton: UIButton!
+    @IBOutlet weak var calendarView: UIDatePicker!
     @IBOutlet weak var tableView: UITableView!
     
 
@@ -39,7 +36,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.timeFormatter.setLocalizedDateFormatFromTemplate("HH:mm")
         self.timeFormatter.locale = Locale(identifier: "en_US")
 
-        
+        /*
         // FSCalendar
         self.calendarView.calendarHeaderView.scrollDirection = .vertical
         self.calendarView.register(FSCalendarCell.self, forCellReuseIdentifier: cellReuseIdentifier)
@@ -55,6 +52,11 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         // Header Buttons
         self.calendarView.bringSubviewToFront(self.todayButton)
         self.calendarView.bringSubviewToFront(self.insertButton)
+        */
+        
+        // CalendarView
+        self.calendarView.maximumDate = self.calendar.date(byAdding: .day, value: 1, to: Date())
+        
         
         // TableView
         self.tableView.delegate = self
@@ -75,9 +77,41 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     @IBAction func todayButtonTapped(_ sender: UIButton) {
-        self.calendarView.select(self.calendarView.today)
-        self.scrollToDate(self.calendarView.today!)
+        // get "today" date
+        let today = Date()
+        
+        // get selected date
+        let pickerDate = self.calendarView.date
+        
+        // are the dates the same day?
+        let todayIsSelected = Calendar.current.isDate(today, inSameDayAs:pickerDate)
+
+        if todayIsSelected {
+            // picker has today selected, but may have scrolled months...
+
+            // should never fail, but this unwraps the optional
+            guard let nextDay = Calendar.current.date(byAdding: .day, value: 1, to: today) else {
+                return
+            }
+
+            // animate to "tomorrow"
+            self.calendarView.setDate(nextDay, animated: true)
+
+            // async call to animate to "today" - delay for 0.1 seconds
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                self.calendarView.setDate(today, animated: true)
+            })
+        } else {
+            // picker has a different date selected
+            //  so just animate to "today"
+            self.calendarView.setDate(today, animated: true)
+        }
     }
+    
+    @IBAction func dateChanged(_ sender: UIDatePicker) {
+        self.scrollToDate(self.calendarView.date)
+    }
+    
     
     /* * Helpers * */
     
@@ -90,7 +124,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }
-    
+    /*
     /* * FSCalendar * */
     
     func maximumDate(for calendar: FSCalendar) -> Date {
@@ -128,7 +162,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         self.calendarView?.reloadData()
     }
-    
+    */
     /* * UITableView * */
     
     func numberOfSections(in tableView: UITableView) -> Int {

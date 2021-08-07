@@ -20,8 +20,6 @@
 		942E57F426ACC08C00F96E9D /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E57F326ACC08C00F96E9D /* Helpers.swift */; };
 		942E57F626ACC4CB00F96E9D /* TripButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E57F526ACC4CB00F96E9D /* TripButton.swift */; };
 		944E062D26B72F5A00A49B81 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944E062C26B72F5A00A49B81 /* TabBarController.swift */; };
-		944E062F26B7379E00A49B81 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944E062E26B7379E00A49B81 /* CalendarCell.swift */; };
-		9469A3DD26BF0F3C00DC6996 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 9469A3DC26BF0F3C00DC6996 /* FSCalendar */; };
 		9469A3E026BF0F5B00DC6996 /* LocationPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 9469A3DF26BF0F5B00DC6996 /* LocationPicker */; };
 		9489295B26BB611E00A3F5AF /* InsertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9489295A26BB611E00A3F5AF /* InsertViewController.swift */; };
 		94FE30F926B8963F00F52F61 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FE30F826B8963F00F52F61 /* TableViewCell.swift */; };
@@ -66,7 +64,6 @@
 		942E57F326ACC08C00F96E9D /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		942E57F526ACC4CB00F96E9D /* TripButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TripButton.swift; path = MyTrips/SubClasses/TripButton.swift; sourceTree = SOURCE_ROOT; };
 		944E062C26B72F5A00A49B81 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		944E062E26B7379E00A49B81 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		9489295A26BB611E00A3F5AF /* InsertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertViewController.swift; sourceTree = "<group>"; };
 		94FE30F826B8963F00F52F61 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		94FE30FA26B8D7A000F52F61 /* ExportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportViewController.swift; sourceTree = "<group>"; };
@@ -78,7 +75,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9469A3DD26BF0F3C00DC6996 /* FSCalendar in Frameworks */,
 				9469A3E026BF0F5B00DC6996 /* LocationPicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -179,7 +175,6 @@
 			isa = PBXGroup;
 			children = (
 				942E57F526ACC4CB00F96E9D /* TripButton.swift */,
-				944E062E26B7379E00A49B81 /* CalendarCell.swift */,
 				94FE30F826B8963F00F52F61 /* TableViewCell.swift */,
 			);
 			path = SubClasses;
@@ -211,7 +206,6 @@
 			);
 			name = MyTrips;
 			packageProductDependencies = (
-				9469A3DC26BF0F3C00DC6996 /* FSCalendar */,
 				9469A3DF26BF0F5B00DC6996 /* LocationPicker */,
 			);
 			productName = MyTrips;
@@ -286,7 +280,6 @@
 			);
 			mainGroup = 942E57AF26ABBD9000F96E9D;
 			packageReferences = (
-				9469A3DB26BF0F3C00DC6996 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 				9469A3DE26BF0F5B00DC6996 /* XCRemoteSwiftPackageReference "LocationPicker" */,
 			);
 			productRefGroup = 942E57B926ABBD9000F96E9D /* Products */;
@@ -339,7 +332,6 @@
 				9489295B26BB611E00A3F5AF /* InsertViewController.swift in Sources */,
 				94FE30FB26B8D7A000F52F61 /* ExportViewController.swift in Sources */,
 				942E57BC26ABBD9000F96E9D /* AppDelegate.swift in Sources */,
-				944E062F26B7379E00A49B81 /* CalendarCell.swift in Sources */,
 				94FE30F926B8963F00F52F61 /* TableViewCell.swift in Sources */,
 				942E57F126ACB10A00F96E9D /* ModelData.swift in Sources */,
 				942E57BE26ABBD9000F96E9D /* SceneDelegate.swift in Sources */,
@@ -679,14 +671,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		9469A3DB26BF0F3C00DC6996 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/WenchaoD/FSCalendar";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.8.2;
-			};
-		};
 		9469A3DE26BF0F5B00DC6996 /* XCRemoteSwiftPackageReference "LocationPicker" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/almassapargali/LocationPicker";
@@ -698,11 +682,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		9469A3DC26BF0F3C00DC6996 /* FSCalendar */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9469A3DB26BF0F3C00DC6996 /* XCRemoteSwiftPackageReference "FSCalendar" */;
-			productName = FSCalendar;
-		};
 		9469A3DF26BF0F5B00DC6996 /* LocationPicker */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9469A3DE26BF0F5B00DC6996 /* XCRemoteSwiftPackageReference "LocationPicker" */;
