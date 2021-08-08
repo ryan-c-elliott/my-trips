@@ -45,6 +45,7 @@ class ExportViewController: UIViewController {
         
         // TextBox
         self.fileTextBox.autocorrectionType = .no
+        self.fileTextBox.returnKeyType = .done
         
         
         // Do any additional setup after loading the view.
@@ -129,4 +130,8 @@ class ExportViewController: UIViewController {
     }
     */
 
+    @IBAction func doneWithKeyboard(_ sender: UITextField) {
+        sender.resignFirstResponder()
+    }
+    
 }

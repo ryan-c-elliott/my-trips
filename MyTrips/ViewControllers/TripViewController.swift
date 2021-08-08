@@ -38,7 +38,7 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
         self.map.isScrollEnabled = false
         self.map.isPitchEnabled = false
         self.map.isRotateEnabled = false
-        self.setRegion()
+        
         
         // Arrange subviews
         self.view.bringSubviewToFront(self.tripButton)
@@ -65,6 +65,9 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
         } else {
             self.start = nil
         }
+        
+        // Set Region
+        self.setRegion()
         
         // TripButton
         let tripStarted = self.start != nil
@@ -106,7 +109,7 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager,
                          didUpdateLocations locations: [CLLocation]) {
         let loc = manager.location!
-        var parent = self.parent as! TabBarController
+        let parent = self.parent as! TabBarController
         
         if let start = self.start {   // Trip was just ended
             
