@@ -13,19 +13,25 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var tripButton: TripButton!
     @IBOutlet weak var map: MKMapView!
+    @IBOutlet weak var activityIndicatorView: UIView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var manager: CLLocationManager = CLLocationManager()
-    var start: CLLocation = CLLocation()
+    var start: CLLocation?
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let parent = self.parent as! TabBarController
+        
+        
         
         // Manager
         self.manager.delegate = self
         self.manager.requestWhenInUseAuthorization()
-        // Maybe set desiredAccuracy later?
-        // Remember you can use manager.location to get the most recently retrieved location
+        //self.manager.desiredAccuracy = 25
         
         // Map
         self.map.isZoomEnabled = false
@@ -34,11 +40,37 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
         self.map.isRotateEnabled = false
         self.setRegion()
         
-        // Trip Button
+        // Arrange subviews
         self.view.bringSubviewToFront(self.tripButton)
+        self.view.bringSubviewToFront(self.activityIndicatorView)
             
+        // ActivityIndicator
+        self.activityIndicator.stopAnimating()
+        self.activityIndicatorView.alpha = 0
         
+        // Start
+        if let start = parent.data.start {
+
+            self.start = CLLocation(
+                coordinate: CLLocationCoordinate2D(
+                    latitude: start.loc.latitude,
+                    longitude: start.loc.longitude
+                
+                ),
+                altitude: 0,
+                horizontalAccuracy: self.manager.desiredAccuracy,
+                verticalAccuracy: self.manager.desiredAccuracy,
+                timestamp: start.date
+            )
+        } else {
+            self.start = nil
+        }
         
+        // TripButton
+        let tripStarted = self.start != nil
+        if tripStarted != self.tripButton.trip {
+            self.tripButton.toggle()
+        }
         
         // Do any additional setup after loading the view.
     }
@@ -55,6 +87,18 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    func toggleActivityIndicator() {
+        if self.activityIndicator.isAnimating { // Stop animating
+            self.activityIndicator.stopAnimating()
+            self.tripButton.isUserInteractionEnabled = true
+            self.activityIndicatorView.alpha = 0
+        } else {                                // Start animating
+            self.activityIndicator.startAnimating()
+            self.tripButton.isUserInteractionEnabled = false
+            self.activityIndicatorView.alpha = 0.9
+        }
+    }
+    
     
     /* * CLLocationManagerDelegate * */
     
@@ -62,17 +106,16 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager,
                          didUpdateLocations locations: [CLLocation]) {
         let loc = manager.location!
-        if self.tripButton.trip {   // Trip was just started
-            self.start = loc
-            self.setRegion()
-        } else {    // Trip was just ended
+        var parent = self.parent as! TabBarController
+        
+        if let start = self.start {   // Trip was just ended
             
             let endCoords = loc.coordinate
             self.setRegion(end: endCoords)
             
             // Convert to MKPlacemark
             let request = MKDirections.Request()
-            let source = MKPlacemark(coordinate: self.start.coordinate)
+            let source = MKPlacemark(coordinate: start.coordinate)
             let dest = MKPlacemark(coordinate: endCoords)
             request.source = MKMapItem(placemark: source)
             request.destination = MKMapItem(placemark: dest)
@@ -83,21 +126,45 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
             let directions = MKDirections(request: request)
             directions.calculate { (response, error) in
                 if let response = response, let route = response.routes.first {
-                    let parent = self.parent as! TabBarController
-                    let data = parent.data
-                    data.components.add(Trip(
-                        startDate: self.start.timestamp,
+                    
+                    // Add trip
+                    parent.data.components.add(Trip(
+                        startDate: start.timestamp,
                         endDate: loc.timestamp,
                         route: route
                     ))
-                    tripsWrite(data: data)
+                    
+                    // Change start
+                    self.start = nil
+                    parent.data.start = nil
+                    tripsWrite(data: parent.data)
+                    
+                    // Reload
                     parent.reloadData()
+                    
+                    // Show route on map
                     self.map.addOverlay(route.polyline, level: MKOverlayLevel.aboveRoads)
                 } else {
                     print("couldn't calculate route")
                 }
             }
+            
+            
+        } else { // Trip was just started
+        
+        
+            // Change start
+            self.start = loc
+            parent.data.start = Start(
+                loc: Location(loc),
+                date: loc.timestamp
+            )
+            write(url: getURL(filename: "data")!, data: parent.data)
+            
+            // Show location
+            self.setRegion()
         }
+        self.toggleActivityIndicator()
         
     }
 
@@ -105,7 +172,7 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
 
     // When the authorization status of the app is changed
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        self.tripButton.location = enabled(manager)
+        self.tripButton.locationIsOn = self.enabled(manager)
     }
     
     // When manager fails
@@ -114,15 +181,6 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
         print(error)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     func requestLocationServices() {
         // present an alert indicating location authorization required
@@ -148,12 +206,15 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
     }
 
     @IBAction func tripButtonTapped(_ sender: TripButton) {
-        if !sender.location {
+        
+        
+        if !sender.locationIsOn {
 
-            requestLocationServices()
+            self.requestLocationServices()
             return
         }
 
+        self.toggleActivityIndicator()
         sender.toggle()
         self.manager.requestLocation()
         
@@ -162,7 +223,12 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
+    
+    
     func setRegion() {
+        guard let start = self.start else {
+            return
+        }
         self.map.setRegion(
             MKCoordinateRegion(
                 center: start.coordinate,
@@ -175,8 +241,11 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func setRegion(end: CLLocationCoordinate2D) {
-        let slat = self.start.coordinate.latitude
-        let slong = self.start.coordinate.longitude
+        guard let start = self.start else {
+            return
+        }
+        let slat = start.coordinate.latitude
+        let slong = start.coordinate.longitude
         let lat = mid(slat, end.latitude)
         let long = mid(slong,  end.longitude)
         self.map.setRegion(

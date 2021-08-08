@@ -485,7 +485,7 @@ class Trip: Codable  {
         self.startDate = startDate
         self.end = Location(route.steps.last!.polyline.points()[0])
         self.endDate = endDate
-        self.distance = route.distance
+        self.distance = metersToMiles(route.distance)
     }
     
     
@@ -524,9 +524,14 @@ class Trip: Codable  {
 
 
 struct ResponseData: Codable {
+    var start: Start?
     var components: Components
 }
 
+struct Start: Codable {
+    var loc: Location
+    var date: Date
+}
 
 struct Location: Codable {
     let latitude: Double

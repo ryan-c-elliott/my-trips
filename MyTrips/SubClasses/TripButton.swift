@@ -10,12 +10,12 @@ import UIKit
 class TripButton: UIButton {
 
     var trip: Bool = false
-    var location: Bool = false
+    var locationIsOn: Bool = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.bringSubviewToFront(self)
+        //self.bringSubviewToFront(self)
         self.layer.cornerRadius = 12.5
     }
     

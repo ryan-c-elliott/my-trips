@@ -22,7 +22,7 @@ func toCLLocation(_ loc: Location) -> CLLocation {
 }
 
 func loadJson(url: URL) -> ResponseData? {
-    
+    print("loading data")
     do {
 
         let data = try Data(contentsOf: url)
@@ -30,7 +30,7 @@ func loadJson(url: URL) -> ResponseData? {
         let responseData = try JSONDecoder().decode(ResponseData.self, from: data)
         return responseData
     } catch {
-        print("either the data didn't load or groups couldn't be retrieved")
+        print("either the data didn't load or trips couldn't be retrieved")
     }
     
     return nil
@@ -38,6 +38,7 @@ func loadJson(url: URL) -> ResponseData? {
 
 // URL for data in Application Storage
 func getURL(filename: String) -> URL? {
+    print("getting url")
     do {
         let url = try FileManager.default
             .url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
@@ -50,6 +51,8 @@ func getURL(filename: String) -> URL? {
 }
 
 func write<T: Encodable>(url: URL, data: T) {
+    
+    print("writing")
     do {
 
         try JSONEncoder().encode(data)
@@ -91,4 +94,9 @@ func components(_ date: Date) -> DateComponents {
 
 func components(_ date: Date, components: Set<Calendar.Component>) -> DateComponents {
     Calendar(identifier: .gregorian).dateComponents(components, from: date)
+}
+
+
+func metersToMiles(_ distance: Double) -> Double {
+    distance * 0.000621
 }
