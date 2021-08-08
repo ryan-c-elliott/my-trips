@@ -23,8 +23,10 @@ class TabBarController: UITabBarController {
         
         self.dateFormatter.dateStyle = .medium
         self.dateFormatter.locale = Locale(identifier: "en_US")
-        self.timeFormatter.setLocalizedDateFormatFromTemplate("HH:mm")
-        self.timeFormatter.locale = Locale(identifier: "en_US")
+        self.timeFormatter.setLocalizedDateFormatFromTemplate("h:mm a")
+        self.timeFormatter.amSymbol = "am"
+        self.timeFormatter.pmSymbol = "pm"
+        self.timeFormatter.locale = Locale(identifier: "en_US_POSIX")
         // Do any additional setup after loading the view.
     }
     

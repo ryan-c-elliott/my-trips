@@ -31,10 +31,10 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.timeFormatter = parent.timeFormatter
         
         // DateFormatters
-        self.dateFormatter.dateStyle = .medium
-        self.dateFormatter.locale = Locale(identifier: "en_US")
-        self.timeFormatter.setLocalizedDateFormatFromTemplate("HH:mm")
-        self.timeFormatter.locale = Locale(identifier: "en_US")
+        //self.dateFormatter.dateStyle = .medium
+        //self.dateFormatter.locale = Locale(identifier: "en_US")
+        //self.timeFormatter.setLocalizedDateFormatFromTemplate("HH:mm")
+        //self.timeFormatter.locale = Locale(identifier: "en_US")
 
         /*
         // FSCalendar
