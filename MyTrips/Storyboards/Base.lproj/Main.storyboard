@@ -354,7 +354,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="12.5" translatesAutoresizingMaskIntoConstraints="NO" id="y25-vH-C61" userLabel="Filename Stack View">
-                                        <rect key="frame" x="50" y="210" width="314" height="34"/>
+                                        <rect key="frame" x="57" y="210" width="300" height="34"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filename " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ayr-YM-IIy">
                                                 <rect key="frame" x="0.0" y="0.0" width="73" height="34"/>
@@ -363,7 +363,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gwb-jZ-UYS">
-                                                <rect key="frame" x="85.5" y="0.0" width="228.5" height="34"/>
+                                                <rect key="frame" x="85.5" y="0.0" width="214.5" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <connections>
@@ -373,6 +373,7 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="Gwb-jZ-UYS" secondAttribute="trailing" id="5Rp-Nc-1eB"/>
+                                            <constraint firstAttribute="width" constant="300" id="cLV-fn-TTY"/>
                                             <constraint firstItem="ayr-YM-IIy" firstAttribute="leading" secondItem="y25-vH-C61" secondAttribute="leading" id="mZn-eL-bkM"/>
                                         </constraints>
                                     </stackView>
@@ -394,7 +395,6 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="y25-vH-C61" secondAttribute="trailing" constant="50" id="Rgy-yz-RtS"/>
                                     <constraint firstItem="jwn-o7-gAM" firstAttribute="top" secondItem="hjf-9U-M3a" secondAttribute="top" id="TjN-Ra-MUp"/>
                                     <constraint firstAttribute="bottom" secondItem="v34-7q-rem" secondAttribute="bottom" id="bCS-Xy-ca0"/>
                                     <constraint firstItem="y25-vH-C61" firstAttribute="centerX" secondItem="hjf-9U-M3a" secondAttribute="centerX" id="bxb-Ul-KVO"/>
@@ -402,7 +402,6 @@
                                     <constraint firstItem="Jbu-lN-WhZ" firstAttribute="centerX" secondItem="hjf-9U-M3a" secondAttribute="centerX" id="hNW-3V-KhN"/>
                                     <constraint firstItem="DNa-FK-Qct" firstAttribute="centerX" secondItem="hjf-9U-M3a" secondAttribute="centerX" id="lWQ-Uy-3cI"/>
                                     <constraint firstItem="v34-7q-rem" firstAttribute="centerX" secondItem="hjf-9U-M3a" secondAttribute="centerX" id="qdj-b9-FRC"/>
-                                    <constraint firstItem="y25-vH-C61" firstAttribute="leading" secondItem="hjf-9U-M3a" secondAttribute="leading" constant="50" id="yCl-r4-xvl"/>
                                 </constraints>
                             </stackView>
                         </subviews>

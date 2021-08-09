@@ -76,15 +76,26 @@ class ExportViewController: UIViewController {
 
     @IBAction func exportButtonTapped(_ sender: UIButton) {
         self.clearLabels()
+        
+        // Trim whitespace
         let text = self.fileTextBox.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        // If no text is entered
         if text == "" {
             self.fileLabel.text = "You need to enter a filename"
             return
         }
+        
         self.clearLabels()
+        
+        // Get rid of keyboard
+        self.fileTextBox.resignFirstResponder()
+        
+        // Create file
         let items: [Any] = [createCSV(filename: text)]
         
         
+        // Present view that allows user to choose where to send the file
         let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
         ac.excludedActivityTypes = [.addToReadingList,.assignToContact,.saveToCameraRoll,.postToFacebook,.postToWeibo,.postToVimeo,.postToFlickr,.postToTwitter,.postToTencentWeibo]
         

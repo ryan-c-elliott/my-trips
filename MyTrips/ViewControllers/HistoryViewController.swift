@@ -181,7 +181,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         let endTime = self.timeFormatter.string(from: trip.endDate)
         
         cell.textLabel?.text = "\(startTime) - \(endTime)"
-        cell.mileLabel.text = "\(trip.distance) mi"
+        cell.mileLabel.text = "\((trip.distance * 10).rounded() / 10) mi"
                 
         return cell
     }
