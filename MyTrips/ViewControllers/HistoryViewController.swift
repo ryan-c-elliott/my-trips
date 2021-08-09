@@ -199,15 +199,40 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         if editingStyle == .delete {
             
             // Remove from data structure
-            self.components.remove(row: indexPath.row, section: indexPath.section)
-            
-            write(url: getURL(filename: "data")!, data: self.parentController.data)
-            
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            deleteTrip(tableView, forRowAt: indexPath)
             
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
         }
     }
 
+    func deleteTrip(_ tableView: UITableView, forRowAt indexPath: IndexPath){
+        // present an alert asking the user if they really want to delete the trip
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Delete Trip", message: "Are you sure you want to remove this trip?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Delete", style: .default, handler: { (alert: UIAlertAction!) in
+                print("")
+                
+                // Remove from data structure
+                self.components.remove(row: indexPath.row, section: indexPath.section)
+                
+                // Write
+                write(url: getURL(filename: "data")!, data: self.parentController.data)
+                
+                // Remove from table
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                
+                
+                self.dismiss(animated: true, completion: nil)
+                
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (alert: UIAlertAction!) in
+                print("")
+
+                self.dismiss(animated: true, completion: nil)
+            }))
+            self.present(alert, animated: true, completion: nil)
+            
+        }
+    }
 }
