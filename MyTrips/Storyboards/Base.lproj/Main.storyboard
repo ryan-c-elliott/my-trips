@@ -136,32 +136,39 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="12.5" translatesAutoresizingMaskIntoConstraints="NO" id="8ar-b4-3hq">
-                                <rect key="frame" x="25" y="131.5" width="364" height="50"/>
+                                <rect key="frame" x="25" y="131.5" width="287.5" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQ7-08-P4o">
-                                        <rect key="frame" x="0.0" y="0.0" width="38" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="aro-ah-MHd"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <datePicker contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="TIW-ZO-Iaz">
-                                        <rect key="frame" x="50.5" y="0.0" width="100" height="50"/>
+                                        <rect key="frame" x="52.5" y="0.0" width="100" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="JXu-Bb-YnG"/>
                                         </constraints>
                                     </datePicker>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WwC-Z6-7yw">
-                                        <rect key="frame" x="163" y="0.0" width="8" height="50"/>
+                                        <rect key="frame" x="165" y="0.0" width="10" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="10" id="AMq-ra-l9C"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <datePicker contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="7HL-G2-sQz">
-                                        <rect key="frame" x="183.5" y="0.0" width="180.5" height="50"/>
+                                        <rect key="frame" x="187.5" y="0.0" width="100" height="50"/>
                                     </datePicker>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="FQ7-08-P4o" firstAttribute="leading" secondItem="8ar-b4-3hq" secondAttribute="leading" id="Xab-aX-SNJ"/>
+                                    <constraint firstItem="7HL-G2-sQz" firstAttribute="width" secondItem="TIW-ZO-Iaz" secondAttribute="width" id="duQ-JV-JFK"/>
                                 </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Z0-Tc-UZZ">
@@ -234,7 +241,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="1HN-8r-bPW" firstAttribute="trailing" secondItem="Z84-SQ-S77" secondAttribute="trailing" constant="25" id="9nU-az-ADP"/>
-                            <constraint firstItem="1HN-8r-bPW" firstAttribute="trailing" secondItem="8ar-b4-3hq" secondAttribute="trailing" constant="25" id="CDt-Ci-v7M"/>
+                            <constraint firstItem="1HN-8r-bPW" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8ar-b4-3hq" secondAttribute="trailing" constant="25" id="CDt-Ci-v7M"/>
                             <constraint firstItem="wRc-tV-0K9" firstAttribute="bottom" secondItem="1HN-8r-bPW" secondAttribute="bottom" id="IP0-k5-dql"/>
                             <constraint firstItem="8ar-b4-3hq" firstAttribute="top" secondItem="QZy-of-P7D" secondAttribute="bottom" constant="12.5" id="Iur-xV-eQk"/>
                             <constraint firstItem="Z84-SQ-S77" firstAttribute="leading" secondItem="1HN-8r-bPW" secondAttribute="leading" constant="25" id="Jh4-Cr-m8y"/>
@@ -373,7 +380,7 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="Gwb-jZ-UYS" secondAttribute="trailing" id="5Rp-Nc-1eB"/>
-                                            <constraint firstAttribute="width" constant="300" id="cLV-fn-TTY"/>
+                                            <constraint firstAttribute="width" priority="999" constant="300" id="cLV-fn-TTY"/>
                                             <constraint firstItem="ayr-YM-IIy" firstAttribute="leading" secondItem="y25-vH-C61" secondAttribute="leading" id="mZn-eL-bkM"/>
                                         </constraints>
                                     </stackView>
@@ -395,7 +402,9 @@
                                     </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="y25-vH-C61" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hjf-9U-M3a" secondAttribute="leading" constant="25" id="Sfp-59-R0G"/>
                                     <constraint firstItem="jwn-o7-gAM" firstAttribute="top" secondItem="hjf-9U-M3a" secondAttribute="top" id="TjN-Ra-MUp"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="y25-vH-C61" secondAttribute="trailing" constant="25" id="Tzf-Dh-Eya"/>
                                     <constraint firstAttribute="bottom" secondItem="v34-7q-rem" secondAttribute="bottom" id="bCS-Xy-ca0"/>
                                     <constraint firstItem="y25-vH-C61" firstAttribute="centerX" secondItem="hjf-9U-M3a" secondAttribute="centerX" id="bxb-Ul-KVO"/>
                                     <constraint firstItem="jwn-o7-gAM" firstAttribute="centerX" secondItem="hjf-9U-M3a" secondAttribute="centerX" id="fTg-n9-zn0"/>

@@ -26,6 +26,19 @@ class Components: Codable, Iterable {
         ComponentsIterator(self, start: start, end: end)
     }
     
+    func remove(row: Int, section: Int) {
+        
+        // indexPath is guaranteed to exist, so no need to check for out of bounds
+        var sections = self.years[0].sectionCount
+        var i = 0
+        while sections <= section {
+            i += 1
+            sections += self.years[i].sectionCount
+        }
+        
+        self.years[i].remove(row: row, section: sections - self.years[i].sectionCount)
+    }
+    
     // Returns the index of the given year. If the year doesn't exist, returns the index of the next highest year
     func getIndex(_ date: DateComponents) -> (Int, Int, Int)? {
         
@@ -191,6 +204,18 @@ class Year: Codable {
         self.year = year
     }
     
+    func remove(row: Int, section: Int) {
+        
+        // indexPath is guaranteed to exist, so no need to check for out of bounds
+        var sections = self.months[0].days.count
+        var i = 0
+        while sections <= section {
+            i += 1
+            sections += self.months[i].days.count
+        }
+        
+        self.months[i].remove(row: row, section: sections - self.months[i].days.count)
+    }
     
     // Returns the index of the given month. If the month doesn't exist, returns the index of the next highest month
     func getIndex(_ date: DateComponents) -> (Int, Int)? {
@@ -328,6 +353,14 @@ class Month: Codable {
         self.month = month
     }
     
+    func remove(row: Int, section: Int) {
+        
+        // indexPath is guaranteed to exist, so no need to check for out of bounds
+        self.days[section].remove(row: row)
+    }
+
+    
+    
     // Returns the index of the given day. If the day doesn't exist, returns the index of the next highest day
     func getIndex(_ date: DateComponents) -> Int? {
         var i = 0
@@ -429,6 +462,12 @@ class Day: Codable {
     init(day: Int) {
         self.day = day
     }
+    
+    func remove(row: Int) {
+        
+        self.trips.remove(at: row)
+    }
+
     
     /*
      * Adds a trip to the data structure

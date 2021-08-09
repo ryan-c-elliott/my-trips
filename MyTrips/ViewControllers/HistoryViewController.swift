@@ -13,6 +13,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var tableView: UITableView!
     
 
+    var parentController: TabBarController = TabBarController()
     var components: Components = Components() // Helps tableView react to calendar selection
     var dateFormatter: DateFormatter = DateFormatter()
     var timeFormatter: DateFormatter = DateFormatter()
@@ -21,14 +22,15 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     let dateComponents: Set<Calendar.Component> = [.day, .month, .year]
     let cellReuseIdentifier = "cell"
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let parent = self.parent as! TabBarController
+        self.parentController = self.parent as! TabBarController
         
-        self.components = parent.data.components
-        self.dateFormatter = parent.dateFormatter
-        self.timeFormatter = parent.timeFormatter
+        self.components = parentController.data.components
+        self.dateFormatter = parentController.dateFormatter
+        self.timeFormatter = parentController.timeFormatter
         
         // DateFormatters
         //self.dateFormatter.dateStyle = .medium
@@ -193,6 +195,19 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.dateFormatter.string(from: self.components.get(row: 0, section: section)!.startDate)
     }
     
-
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            // Remove from data structure
+            self.components.remove(row: indexPath.row, section: indexPath.section)
+            
+            write(url: getURL(filename: "data")!, data: self.parentController.data)
+            
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+        }
+    }
 
 }
