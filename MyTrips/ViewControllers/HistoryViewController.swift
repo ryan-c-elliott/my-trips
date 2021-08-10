@@ -108,45 +108,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }
-    /*
-    /* * FSCalendar * */
-    
-    func maximumDate(for calendar: FSCalendar) -> Date {
-        calendar.today!
-    }
-    
-    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        self.scrollToDate(date)
-    }
-    
-    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        let (_, section) = self.components.rowAndSectionFor(date)
-        guard let trips = self.components.get(section: section), MyTrips.components(trips[0].startDate) == MyTrips.components(date) else {
-            return 0
-        }
-        return trips.count
-    }
-    
-    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
-            
-        let defaultColor = appearance.titleDefaultColor
-        
-        if #available(iOS 12.0, *) {
-            if self.traitCollection.userInterfaceStyle == .dark {
-                return .white
-            } else {
-                return defaultColor
-            }
-        } else {
-            return defaultColor
-        }
-            
-    }
-    
-    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-        self.calendarView?.reloadData()
-    }
-    */
+
     /* * UITableView * */
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -170,8 +132,6 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         return cell
     }
     
-    
-    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 
         self.dateFormatter.string(from: self.tripData.get(row: 0, section: section)!.getStartDate())
@@ -180,19 +140,15 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             
-            // Remove from data structure
             deleteTrip(tableView, forRowAt: indexPath)
-            
-            
-            
-            
-            
             
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
         }
     }
 
+    /* * Alerts * */
+    
     func deleteTrip(_ tableView: UITableView, forRowAt indexPath: IndexPath){
         // present an alert asking the user if they really want to delete the trip
         DispatchQueue.main.async {
@@ -200,19 +156,8 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
             alert.addAction(UIAlertAction(title: "Delete", style: .default, handler: { (alert: UIAlertAction!) in
                 print("")
                 
-                let n = self.tripData.days.count
-                
                 // Remove from data structure
                 let _ = self.tripData.remove(row: indexPath.row, section: indexPath.section)
-                
-                /*
-                // Remove from table
-                if n == self.tripData.days.count {  // Section still exists
-                    tableView.deleteRows(at: [indexPath], with: .fade)
-                } else {                            // Section was deleted
-                    tableView.deleteSections(IndexSet(indexPath), with: .fade)
-                }
-                */
                 
                 // Write
                 tripsWrite(data: self.parentController.data)

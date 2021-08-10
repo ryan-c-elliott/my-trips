@@ -35,7 +35,6 @@ class ExportViewController: UIViewController {
         self.clearLabels()
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,6 +55,8 @@ class ExportViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    /* * Actions * */
+    
     @IBAction func dateValueDoneEditing(_ sender: UIDatePicker) {
   
         // If dates aren't messed up then return
@@ -73,11 +74,6 @@ class ExportViewController: UIViewController {
         
         
     }
-    
-    func clearLabels() {
-        self.fileLabel.text = ""
-    }
-    
 
     @IBAction func exportButtonTapped(_ sender: UIButton) {
         self.clearLabels()
@@ -105,6 +101,16 @@ class ExportViewController: UIViewController {
         ac.excludedActivityTypes = [.addToReadingList,.assignToContact,.saveToCameraRoll,.postToFacebook,.postToWeibo,.postToVimeo,.postToFlickr,.postToTwitter,.postToTencentWeibo]
         
         present(ac, animated: true)
+    }
+
+    @IBAction func doneWithKeyboard(_ sender: UITextField) {
+        sender.resignFirstResponder()
+    }
+    
+    /* * Helpers * */
+    
+    func clearLabels() {
+        self.fileLabel.text = ""
     }
     
     func createCSV(filename: String) -> URL {
@@ -135,19 +141,6 @@ class ExportViewController: UIViewController {
         
         return path
  
-    }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    @IBAction func doneWithKeyboard(_ sender: UITextField) {
-        sender.resignFirstResponder()
     }
     
 }
