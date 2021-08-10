@@ -7,6 +7,10 @@
 
 import Foundation
 
+protocol Iterable {
+    func makeIterator(start: Date, end: Date) -> TripDataIterator
+}
+
 protocol TripIterator {
     func next() -> Trip?
 }
