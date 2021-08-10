@@ -9,7 +9,7 @@ import UIKit
 
 class TabBarController: UITabBarController {
 
-    var data: ResponseData = loadJson(url: getURL(filename: "data")!) ?? ResponseData(components: Components())
+    var data: ResponseData = loadJson(url: getURL(filename: "data")!) ?? ResponseData()
     
     let dateFormatter: DateFormatter = DateFormatter()
     let timeFormatter: DateFormatter = DateFormatter()
@@ -19,7 +19,7 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //write(url: getURL(filename: "data")!, data: ResponseData(components: Components()))
+        //write(url: getURL(filename: "data")!, data: ResponseData())
         
         self.dateFormatter.dateStyle = .medium
         self.dateFormatter.locale = Locale(identifier: "en_US")
@@ -31,9 +31,15 @@ class TabBarController: UITabBarController {
     }
     
     func reloadData() {
+        
         let history = self.children[1] as! HistoryViewController
         if history.isViewLoaded {
-            history.tableView.reloadData()
+            history.reloadData()
+        }
+        
+        let export = self.children[2] as! ExportViewController
+        if export.isViewLoaded {
+            export.reloadData()
         }
         
     }

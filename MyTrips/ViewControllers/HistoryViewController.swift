@@ -14,7 +14,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     
 
     var parentController: TabBarController = TabBarController()
-    var components: Components = Components() // Helps tableView react to calendar selection
+    var tripData: TripData = TripData()
     var dateFormatter: DateFormatter = DateFormatter()
     var timeFormatter: DateFormatter = DateFormatter()
     
@@ -22,48 +22,29 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     let dateComponents: Set<Calendar.Component> = [.day, .month, .year]
     let cellReuseIdentifier = "cell"
     
+    func reloadData() {
+        self.tableView.reloadData()
+        
+        // CalendarView
+        self.calendarView.maximumDate = self.calendar.date(byAdding: .day, value: 1, to: Date())
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.parentController = self.parent as! TabBarController
         
-        self.components = parentController.data.components
+        self.tripData = parentController.data.tripData
         self.dateFormatter = parentController.dateFormatter
         self.timeFormatter = parentController.timeFormatter
-        
-        // DateFormatters
-        //self.dateFormatter.dateStyle = .medium
-        //self.dateFormatter.locale = Locale(identifier: "en_US")
-        //self.timeFormatter.setLocalizedDateFormatFromTemplate("HH:mm")
-        //self.timeFormatter.locale = Locale(identifier: "en_US")
-
-        /*
-        // FSCalendar
-        self.calendarView.calendarHeaderView.scrollDirection = .vertical
-        self.calendarView.register(FSCalendarCell.self, forCellReuseIdentifier: cellReuseIdentifier)
-        self.calendarView.delegate = self
-        self.calendarView.dataSource = self
-        
-
-        
-        
-        
-        
-        
-        // Header Buttons
-        self.calendarView.bringSubviewToFront(self.todayButton)
-        self.calendarView.bringSubviewToFront(self.insertButton)
-        */
-        
-        // CalendarView
-        self.calendarView.maximumDate = self.calendar.date(byAdding: .day, value: 1, to: Date())
-        
         
         // TableView
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.allowsSelection = false
+        
+        // Reload
+        self.reloadData()
         
     }
     
@@ -118,11 +99,12 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     /* * Helpers * */
     
     func scrollToDate(_ date: Date) {
-        if self.components.sectionCount == 0 {
+        let n = self.tripData.days.count
+        if n == 0 {
             return
         }
-        let (_, section) = self.components.rowAndSectionFor(date)
-        let indexPath = IndexPath(row: 0, section: min(section, self.components.sectionCount-1))
+        let (_, section) = self.tripData.rowAndSectionFor(date)
+        let indexPath = IndexPath(row: 0, section: min(section, n-1))
         
         self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }
@@ -168,19 +150,19 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     /* * UITableView * */
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        self.components.sectionCount
+        self.tripData.days.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.components.get(section: section)?.count ?? 0
+        self.tripData.get(section: section)?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: TableViewCell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)! as! TableViewCell
         
-        let trip = self.components.get(row: indexPath.row, section: indexPath.section)!
-        let startTime = self.timeFormatter.string(from: trip.startDate)
-        let endTime = self.timeFormatter.string(from: trip.endDate)
+        let trip = self.tripData.get(row: indexPath.row, section: indexPath.section)!
+        let startTime = self.timeFormatter.string(from: trip.getStartDate())
+        let endTime = self.timeFormatter.string(from: trip.getEndDate())
         
         cell.textLabel?.text = "\(startTime) - \(endTime)"
         cell.mileLabel.text = "\((trip.distance * 10).rounded() / 10) mi"
@@ -192,7 +174,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 
-        self.dateFormatter.string(from: self.components.get(row: 0, section: section)!.startDate)
+        self.dateFormatter.string(from: self.tripData.get(row: 0, section: section)!.getStartDate())
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -200,6 +182,11 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
             
             // Remove from data structure
             deleteTrip(tableView, forRowAt: indexPath)
+            
+            
+            
+            
+            
             
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
@@ -213,15 +200,25 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
             alert.addAction(UIAlertAction(title: "Delete", style: .default, handler: { (alert: UIAlertAction!) in
                 print("")
                 
+                let n = self.tripData.days.count
+                
                 // Remove from data structure
-                self.components.remove(row: indexPath.row, section: indexPath.section)
+                let _ = self.tripData.remove(row: indexPath.row, section: indexPath.section)
+                
+                /*
+                // Remove from table
+                if n == self.tripData.days.count {  // Section still exists
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                } else {                            // Section was deleted
+                    tableView.deleteSections(IndexSet(indexPath), with: .fade)
+                }
+                */
                 
                 // Write
-                write(url: getURL(filename: "data")!, data: self.parentController.data)
+                tripsWrite(data: self.parentController.data)
                 
-                // Remove from table
-                tableView.deleteRows(at: [indexPath], with: .fade)
-                
+                // Reload
+                self.parentController.reloadData()
                 
                 self.dismiss(animated: true, completion: nil)
                 

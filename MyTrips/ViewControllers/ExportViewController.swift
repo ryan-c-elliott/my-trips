@@ -16,23 +16,14 @@ class ExportViewController: UIViewController {
     @IBOutlet weak var fileTextBox: UITextField!
     @IBOutlet weak var fileLabel: UILabel!
     
-    var components: Components = Components()
+    var tripData: TripData = TripData()
     var dateFormatter: DateFormatter = DateFormatter()
     var timeFormatter: DateFormatter = DateFormatter()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        let parent = self.parent as! TabBarController
-        
-        self.components = parent.data.components
-        self.dateFormatter.dateStyle = .short
-        self.dateFormatter.locale = Locale(identifier: "en_US")
-        self.timeFormatter = parent.timeFormatter
-        
+    func reloadData() {
         // DatePickers
         let today = Date()
-        let min = components.get(row: 0, section: 0)?.startDate ?? today
+        let min = self.tripData.get(row: 0, section: 0)?.getStartDate() ?? today
         
         self.fromDatePicker.maximumDate = today
         self.toDatePicker.maximumDate = today
@@ -42,11 +33,25 @@ class ExportViewController: UIViewController {
         
         // Labels
         self.clearLabels()
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let parent = self.parent as! TabBarController
+        
+        self.tripData = parent.data.tripData
+        self.dateFormatter.dateStyle = .short
+        self.dateFormatter.locale = Locale(identifier: "en_US")
+        self.timeFormatter = parent.timeFormatter
         
         // TextBox
         self.fileTextBox.autocorrectionType = .no
         self.fileTextBox.returnKeyType = .done
         
+        // Reload
+        self.reloadData()
         
         // Do any additional setup after loading the view.
     }
@@ -109,12 +114,12 @@ class ExportViewController: UIViewController {
         
         
         
-        let iterator = self.components.makeIterator(start: self.fromDatePicker.date, end: self.toDatePicker.date)
+        let iterator = self.tripData.makeIterator(start: self.fromDatePicker.date, end: self.toDatePicker.date)
         
         while let next = iterator.next() {
-            let date = self.dateFormatter.string(from: next.startDate)
-            let startTime = self.timeFormatter.string(from: next.startDate)
-            let endTime = self.timeFormatter.string(from: next.endDate)
+            let date = self.dateFormatter.string(from: next.getStartDate())
+            let startTime = self.timeFormatter.string(from: next.getStartDate())
+            let endTime = self.timeFormatter.string(from: next.getEndDate())
             let distance = next.distance
             let newline = "\(date),\(startTime),\(endTime),\(distance)\n"
             csvText.append(newline)

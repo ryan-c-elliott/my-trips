@@ -10,7 +10,7 @@ import CoreLocation
 
 func toLocation(_ loc: CLLocation) -> Location {
     let coords = loc.coordinate
-    return Location(latitude: coords.latitude, longitude: coords.longitude)
+    return Location(latitude: coords.latitude, longitude: coords.longitude, date: Date())
 }
 
 func mid(_ v1: Double, _ v2: Double) -> Double {
@@ -99,4 +99,40 @@ func components(_ date: Date, components: Set<Calendar.Component>) -> DateCompon
 
 func metersToMiles(_ distance: Double) -> Double {
     distance * 0.000621
+}
+
+/*
+ * Returns index of where the item should be inserted
+ * If the item doesn't already exist in the array, index of next highest is returned
+ */
+func binarySearch<T: Comparable>(arr: [T], item: T) -> Int {
+    let n = arr.count
+    
+    // If empty or less than first
+    if n == 0 || item < arr.first! {
+        return 0
+    }
+    
+    // If greater than last
+    if arr.last! < item {
+        return n
+    }
+    
+    // Search
+    var l: Int = 0
+    var r: Int = n
+    while l < r {
+        let mid: Int = (l + r) / 2
+        if arr[mid] == item {
+            return mid
+        }
+        if arr[mid] < item {
+            l = mid + 1
+        } else {
+            r = mid
+        }
+        
+    }
+    
+    return l
 }

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+/*
 protocol TripIterator {
     func next() -> Trip?
 }
@@ -107,3 +107,4 @@ class ComponentsIterator: TripIterator {
     
     
 }
+*/

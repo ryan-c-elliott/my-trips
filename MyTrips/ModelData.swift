@@ -9,6 +9,7 @@ import Foundation
 import CoreLocation
 import MapKit
 
+/*
 protocol Iterable {
     func makeIterator(start: Date, end: Date) -> ComponentsIterator
 }
@@ -36,7 +37,11 @@ class Components: Codable, Iterable {
             sections += self.years[i].sectionCount
         }
         
-        self.years[i].remove(row: row, section: sections - self.years[i].sectionCount)
+        tripCount -= 1
+        if self.years[i].remove(row: row, section: section - sections + self.years[i].sectionCount) {
+            sectionCount -= 1
+            self.years.remove(at: i)
+        }
     }
     
     // Returns the index of the given year. If the year doesn't exist, returns the index of the next highest year
@@ -204,7 +209,7 @@ class Year: Codable {
         self.year = year
     }
     
-    func remove(row: Int, section: Int) {
+    func remove(row: Int, section: Int) -> Bool {
         
         // indexPath is guaranteed to exist, so no need to check for out of bounds
         var sections = self.months[0].days.count
@@ -214,7 +219,13 @@ class Year: Codable {
             sections += self.months[i].days.count
         }
         
-        self.months[i].remove(row: row, section: sections - self.months[i].days.count)
+        tripCount -= 1
+        if self.months[i].remove(row: row, section: section - sections + self.months[i].days.count) {
+            self.months.remove(at: i)
+            sectionCount -= 1
+            return self.months.count == 0
+        }
+        return false
     }
     
     // Returns the index of the given month. If the month doesn't exist, returns the index of the next highest month
@@ -353,10 +364,16 @@ class Month: Codable {
         self.month = month
     }
     
-    func remove(row: Int, section: Int) {
+    func remove(row: Int, section: Int) -> Bool {
         
+        self.tripCount -= 1
         // indexPath is guaranteed to exist, so no need to check for out of bounds
-        self.days[section].remove(row: row)
+        if self.days[section].remove(row: row) {
+            self.days.remove(at: section)
+            
+            return self.days.count == 0
+        }
+        return false
     }
 
     
@@ -463,9 +480,10 @@ class Day: Codable {
         self.day = day
     }
     
-    func remove(row: Int) {
+    func remove(row: Int) -> Bool {
         
         self.trips.remove(at: row)
+        return trips.count == 0
     }
 
     
@@ -527,6 +545,15 @@ class Trip: Codable  {
         self.distance = metersToMiles(route.distance)
     }
     
+    // Dummy initializer
+    init(_ date: Date) {
+        self.start = Location()
+        self.startDate = date
+        self.end = Location()
+        self.endDate = .distantFuture
+        self.distance = 0
+    }
+    
     
     /* * Codable * */
     
@@ -559,6 +586,18 @@ class Trip: Codable  {
     
 }
 
+extension Trip: Comparable {
+    static func < (lhs: Trip, rhs: Trip) -> Bool {
+        lhs.startDate < rhs.startDate
+    }
+    
+    static func == (lhs: Trip, rhs: Trip) -> Bool {
+        lhs.startDate == rhs.startDate
+    }
+    
+    
+}
+
 
 
 
@@ -575,6 +614,12 @@ struct Start: Codable {
 struct Location: Codable {
     let latitude: Double
     let longitude: Double
+    
+    // Dummy initializer
+    init() {
+        self.latitude = 0
+        self.longitude = 0
+    }
     
     init(_ point: MKMapPoint) {
         self.init(point.coordinate)
@@ -594,3 +639,4 @@ struct Location: Codable {
         self.longitude = longitude
     }
 }
+ */

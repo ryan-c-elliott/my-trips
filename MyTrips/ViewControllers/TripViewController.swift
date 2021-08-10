@@ -53,8 +53,8 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
 
             self.start = CLLocation(
                 coordinate: CLLocationCoordinate2D(
-                    latitude: start.loc.latitude,
-                    longitude: start.loc.longitude
+                    latitude: start.latitude,
+                    longitude: start.longitude
                 
                 ),
                 altitude: 0,
@@ -131,7 +131,7 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
                 if let response = response, let route = response.routes.first {
                     
                     // Add trip
-                    parent.data.components.add(Trip(
+                    parent.data.tripData.add(Trip(
                         startDate: start.timestamp,
                         endDate: loc.timestamp,
                         route: route
@@ -158,10 +158,7 @@ class TripViewController: UIViewController, CLLocationManagerDelegate {
         
             // Change start
             self.start = loc
-            parent.data.start = Start(
-                loc: Location(loc),
-                date: loc.timestamp
-            )
+            parent.data.start = Location(location: loc)
             write(url: getURL(filename: "data")!, data: parent.data)
             
             // Show location

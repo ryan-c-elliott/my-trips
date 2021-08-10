@@ -114,14 +114,21 @@ class InsertViewController: UIViewController {
         directions.calculate { (response, error) in
             if let response = response, let route = response.routes.first {
     
+                // Add to data structure
                 let data = self.delegate!.data
-                data.components.insert(Trip(
+                data.tripData.insert(Trip(
                     startDate: startDate,
                     endDate: endDate,
                     route: route
                 ))
+                
+                // Write
                 tripsWrite(data: data)
+                
+                // Reload
                 self.delegate!.reloadData()
+                
+                // Dismiss
                 self.dismiss(animated: true, completion: nil)
  
             } else {
