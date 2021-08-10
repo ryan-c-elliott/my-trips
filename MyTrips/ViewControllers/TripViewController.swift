@@ -101,28 +101,6 @@ class TripViewController: UIViewController {
         }
     }
     
-    func requestLocationServices() {
-        // present an alert indicating location authorization required
-        // and offer to take the user to Settings for the app via
-        // UIApplication -openUrl: and UIApplicationOpenSettingsURLString
-        DispatchQueue.main.async {
-            let alert = UIAlertController(title: "Error!", message: "Location services needs to be enabled to start a trip.", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "Settings", style: UIAlertAction.Style.default, handler: { (alert: UIAlertAction!) in
-                print("")
-                UIApplication.shared.open(NSURL(string: UIApplication.openSettingsURLString)! as URL)
-                
-                }
-            ))
-            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: { (alert: UIAlertAction!) in
-                print("")
-
-                self.dismiss(animated: true, completion: nil)
-                }
-            ))
-            self.present(alert, animated: true, completion: nil)
-            
-        }
-    }
     
     func setRegion() {
         guard let start = self.start else {
@@ -157,13 +135,36 @@ class TripViewController: UIViewController {
         )
     }
     
+    /* * Alerts * */
+    
+    func requestLocationServices() {
+        // present an alert indicating location authorization required
+        // and offer to take the user to Settings for the app via
+        // UIApplication -openUrl: and UIApplicationOpenSettingsURLString
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Error!", message: "Location services needs to be enabled to start a trip.", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Settings", style: UIAlertAction.Style.default, handler: { (alert: UIAlertAction!) in
+                print("")
+                UIApplication.shared.open(NSURL(string: UIApplication.openSettingsURLString)! as URL)
+                
+                }
+            ))
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: { (alert: UIAlertAction!) in
+                print("")
+
+                self.dismiss(animated: true, completion: nil)
+                }
+            ))
+            self.present(alert, animated: true, completion: nil)
+            
+        }
+    }
+    
     /* * Actions * */
 
     @IBAction func tripButtonTapped(_ sender: TripButton) {
         
-        
         if !sender.locationIsOn {
-
             self.requestLocationServices()
             return
         }
