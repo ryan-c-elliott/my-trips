@@ -8,7 +8,7 @@
 import Foundation
 import MapKit
 
-class Trip: Codable  {
+class Trip  {
     
     var start: Location
     var end: Location
@@ -30,6 +30,15 @@ class Trip: Codable  {
         self.distance = 0
     }
     
+    // Decodable
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        
+        self.start = try values.decode(Location.self, forKey: .start)
+        self.end = try values.decode(Location.self, forKey: .end)
+        self.distance = try values.decode(Double.self, forKey: .distance)
+    }
+    
     /* * Getters * */
     
     func getStartDate() -> Date {
@@ -40,8 +49,9 @@ class Trip: Codable  {
         self.end.date
     }
     
-    /* * Codable * */
-    
+}
+
+extension Trip: Codable {
     enum CodingKeys: String, CodingKey {
         case start
         case startDate
@@ -56,14 +66,6 @@ class Trip: Codable  {
 
         try container.encode(end, forKey: .end)
         try container.encode(distance, forKey: .distance)
-    }
-    
-    required init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        
-        self.start = try values.decode(Location.self, forKey: .start)
-        self.end = try values.decode(Location.self, forKey: .end)
-        self.distance = try values.decode(Double.self, forKey: .distance)
     }
     
 }

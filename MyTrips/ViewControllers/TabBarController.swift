@@ -14,22 +14,6 @@ class TabBarController: UITabBarController {
     let dateFormatter: DateFormatter = DateFormatter()
     let timeFormatter: DateFormatter = DateFormatter()
     
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        //write(url: getURL(filename: "data")!, data: ResponseData())
-        
-        self.dateFormatter.dateStyle = .medium
-        self.dateFormatter.locale = Locale(identifier: "en_US")
-        self.timeFormatter.setLocalizedDateFormatFromTemplate("h:mm a")
-        self.timeFormatter.amSymbol = "am"
-        self.timeFormatter.pmSymbol = "pm"
-        self.timeFormatter.locale = Locale(identifier: "en_US_POSIX")
-        // Do any additional setup after loading the view.
-    }
-    
     func reloadData() {
         
         let history = self.children[1] as! HistoryViewController
@@ -44,15 +28,17 @@ class TabBarController: UITabBarController {
         
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        //write(url: getURL(filename: "data")!, data: ResponseData())
+        
+        self.dateFormatter.dateStyle = .medium
+        self.dateFormatter.locale = Locale(identifier: "en_US")
+        self.timeFormatter.setLocalizedDateFormatFromTemplate("h:mm a")
+        self.timeFormatter.amSymbol = "am"
+        self.timeFormatter.pmSymbol = "pm"
+        self.timeFormatter.locale = Locale(identifier: "en_US_POSIX")
+        // Do any additional setup after loading the view.
     }
-    */
-
 }

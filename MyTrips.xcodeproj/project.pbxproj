@@ -107,7 +107,6 @@
 		942E57AF26ABBD9000F96E9D = {
 			isa = PBXGroup;
 			children = (
-				9469A45426C312A300DC6996 /* ResponseData.swift */,
 				942E57BA26ABBD9000F96E9D /* MyTrips */,
 				942E57D126ABBD9100F96E9D /* MyTripsTests */,
 				942E57DC26ABBD9100F96E9D /* MyTripsUITests */,
@@ -200,6 +199,7 @@
 		9469A45326C311ED00DC6996 /* ModelData */ = {
 			isa = PBXGroup;
 			children = (
+				9469A45426C312A300DC6996 /* ResponseData.swift */,
 				9469A45126C3117400DC6996 /* Location.swift */,
 				9469A44F26C3115C00DC6996 /* Trip.swift */,
 				9469A44D26C3112E00DC6996 /* Day.swift */,

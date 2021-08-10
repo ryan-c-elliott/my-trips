@@ -13,6 +13,8 @@ struct Location: Codable {
     let longitude: Double
     let date: Date
     
+    /* * Initializers * */
+    
     // Dummy initializer
     init() {
         self.latitude = 0

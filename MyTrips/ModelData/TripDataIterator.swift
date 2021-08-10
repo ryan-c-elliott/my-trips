@@ -23,6 +23,8 @@ class TripDataIterator: TripIterator {
     private var day: Int?
     private var trip: Int?
     
+    /* * Initializers * */
+    
     init(_ data: TripData, start: Date, end: Date) {
         self.tripData = data
         self.start = start
@@ -35,6 +37,8 @@ class TripDataIterator: TripIterator {
     convenience init(_ data: TripData) {
         self.init(data, start: .distantPast, end: .distantFuture)
     }
+    
+    /* * Helpers * */
     
     private func isOver(_ trip: Trip) -> Bool {
         if trip.getStartDate() <= self.end {
@@ -56,6 +60,8 @@ class TripDataIterator: TripIterator {
     private func get() -> (Day, Trip) {
         get((self.day!, self.trip!))
     }
+    
+    /* * Iterator Functions * */
     
     private func nextIndex() -> (Int, Int)? {
         // Components is empty within range

@@ -12,6 +12,8 @@ class TripButton: UIButton {
     var trip: Bool = false
     var locationIsOn: Bool = false
     
+    /* * Initialization * */
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -22,6 +24,8 @@ class TripButton: UIButton {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+    
+    /* * Helpers * */
     
     func toggle() {
         if trip {   // Stop the trip

@@ -13,6 +13,7 @@ class TripData: Codable {
     var days: [Day] = []
     var tripCount: Int = 0
     
+    /* * Helpers * */
     
     /*
      * Returs false if row or section are out of range, true otherwise

@@ -12,6 +12,8 @@ class ResponseData: Codable {
     var start: Location?
     var tripData: TripData
     
+    /* * Initializers * */
+    
     init() {
         self.tripData = TripData()
     }

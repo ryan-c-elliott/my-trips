@@ -15,6 +15,7 @@ class Day: Codable {
     let day: Int
     var trips: [Trip]
     
+    /* * Initializers * */
     
     init(_ trip: Trip) {
         let date: DateComponents = components(trip.getStartDate())
@@ -32,6 +33,8 @@ class Day: Codable {
         self.day = date.day!
         self.trips = []
     }
+    
+    /* * Helpers * */
     
     /*
      * Returns false if row given is out of bounds, true if operation is successful
