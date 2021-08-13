@@ -36,6 +36,7 @@ class TripViewController: UIViewController {
         self.map.isScrollEnabled = false
         self.map.isPitchEnabled = false
         self.map.isRotateEnabled = false
+        self.map.delegate = self
         
         
         // Arrange subviews
@@ -67,6 +68,17 @@ class TripViewController: UIViewController {
         // Set Region
         self.setRegion()
         
+        
+        
+        // Test stuff
+        /*
+        // Some park 38.3268693 -109.8782592
+        // Some airport 45.305557 -96.424721
+        self.start = CLLocation(latitude: 38.3268693, longitude: -109.8782592)
+        let endCoords = CLLocationCoordinate2D(latitude: 45.305557, longitude: -96.424721)
+        
+        self.showRouteOnMap(pickupCoordinate: self.start!.coordinate, destinationCoordinate: endCoords)
+        */
         // TripButton
         let tripStarted = self.start != nil
         if tripStarted != self.tripButton.trip {
@@ -117,23 +129,9 @@ class TripViewController: UIViewController {
         
     }
     
-    func setRegion(end: CLLocationCoordinate2D) {
-        guard let start = self.start else {
-            return
-        }
-        let slat = start.coordinate.latitude
-        let slong = start.coordinate.longitude
-        let lat = mid(slat, end.latitude)
-        let long = mid(slong,  end.longitude)
-        self.map.setRegion(
-            MKCoordinateRegion(
-                center: CLLocationCoordinate2D(latitude: lat, longitude: long),
-                latitudinalMeters: abs(slat - end.latitude) + 500,
-                longitudinalMeters: abs(slong - end.longitude) + 500
-            ),
-            animated: true
-        )
-    }
+
+    
+    
     
     /* * Alerts * */
     
@@ -190,13 +188,13 @@ extension TripViewController: CLLocationManagerDelegate {
         
         if let start = self.start {   // Trip was just ended
             
-            let endCoords = loc.coordinate
-            self.setRegion(end: endCoords)
+            //let endCoords = loc.coordinate
+            //self.setRegion(end: endCoords)
             
             // Convert to MKPlacemark
             let request = MKDirections.Request()
             let source = MKPlacemark(coordinate: start.coordinate)
-            let dest = MKPlacemark(coordinate: endCoords)
+            let dest = MKPlacemark(coordinate: loc.coordinate)
             request.source = MKMapItem(placemark: source)
             request.destination = MKMapItem(placemark: dest)
             request.transportType = MKDirectionsTransportType.automobile
@@ -204,8 +202,13 @@ extension TripViewController: CLLocationManagerDelegate {
             
             // Find directions
             let directions = MKDirections(request: request)
+      
             directions.calculate { (response, error) in
                 if let response = response, let route = response.routes.first {
+                    //show on map
+                    self.map.addOverlay(route.polyline)
+                    //set the map area to show the route
+                    self.map.setVisibleMapRect(route.polyline.boundingMapRect, edgePadding: UIEdgeInsets.init(top: 80.0, left: 20.0, bottom: 100.0, right: 20.0), animated: true)
                     
                     // Add trip
                     parent.data.tripData.add(Trip(
@@ -221,14 +224,10 @@ extension TripViewController: CLLocationManagerDelegate {
                     
                     // Reload
                     parent.reloadData()
-                    
-                    // Show route on map
-                    self.map.addOverlay(route.polyline, level: MKOverlayLevel.aboveRoads)
                 } else {
                     print("couldn't calculate route")
                 }
             }
-            
             
         } else { // Trip was just started
         
@@ -254,5 +253,16 @@ extension TripViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager,
                          didFailWithError error: Error) {
         print(error)
+    }
+}
+
+extension TripViewController: MKMapViewDelegate {
+    //this delegate function is for displaying the route overlay and styling it
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        
+        let renderer = MKPolylineRenderer(overlay: overlay)
+        renderer.strokeColor = UIColor.red
+        renderer.lineWidth = 5.0
+        return renderer
     }
 }
