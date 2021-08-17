@@ -122,14 +122,17 @@ class ExportViewController: UIViewController {
         
         let iterator = self.tripData.makeIterator(start: self.fromDatePicker.date, end: self.toDatePicker.date)
         
+        var totalDistance = 0.0
         while let next = iterator.next() {
             let date = self.dateFormatter.string(from: next.getStartDate())
             let startTime = self.timeFormatter.string(from: next.getStartDate())
             let endTime = self.timeFormatter.string(from: next.getEndDate())
             let distance = next.distance
             let newline = "\(date),\(startTime),\(endTime),\(distance)\n"
+            totalDistance += distance
             csvText.append(newline)
         }
+        csvText.append(",,Total,\(totalDistance)")
         
         
         do {

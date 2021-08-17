@@ -18,6 +18,7 @@ class TripViewController: UIViewController {
     
     var manager: CLLocationManager = CLLocationManager()
     var start: CLLocation?
+    var overlay: MKOverlay?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -205,8 +206,13 @@ extension TripViewController: CLLocationManagerDelegate {
       
             directions.calculate { (response, error) in
                 if let response = response, let route = response.routes.first {
+                    
+                    
+                    
                     //show on map
-                    self.map.addOverlay(route.polyline)
+                    self.overlay = route.polyline
+                    self.map.addOverlay(self.overlay!)
+                    
                     //set the map area to show the route
                     self.map.setVisibleMapRect(route.polyline.boundingMapRect, edgePadding: UIEdgeInsets.init(top: 80.0, left: 20.0, bottom: 100.0, right: 20.0), animated: true)
                     
@@ -230,7 +236,11 @@ extension TripViewController: CLLocationManagerDelegate {
             }
             
         } else { // Trip was just started
-        
+            
+            // Remove last route from map
+            if let overlay = self.overlay {
+                self.map.removeOverlay(overlay)
+            }
         
             // Change start
             self.start = loc
@@ -252,6 +262,7 @@ extension TripViewController: CLLocationManagerDelegate {
     // When manager fails
     func locationManager(_ manager: CLLocationManager,
                          didFailWithError error: Error) {
+        self.toggleActivityIndicator()
         print(error)
     }
 }
