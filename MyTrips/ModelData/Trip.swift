@@ -17,7 +17,7 @@ class Trip  {
     
     /* * Initializers * */
     
-    convenience init(description: String, startDate: Date, endDate: Date, route: MKRoute) {
+    convenience init(description: String?, startDate: Date, endDate: Date, route: MKRoute) {
         self.init(startDate: startDate, endDate: endDate, route: route)
         self.description = description
     }
@@ -54,6 +54,15 @@ class Trip  {
     
     func getEndDate() -> Date {
         self.end.date
+    }
+    
+    /* * Setters * */
+    
+    func setDescription(_ description: String?) {
+        guard let description = description else {
+            return
+        }
+        self.description = description.trimmingCharacters(in: .whitespaces) == "" ? nil : description
     }
     
 }

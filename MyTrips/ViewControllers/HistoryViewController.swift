@@ -123,10 +123,19 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         let cell: TableViewCell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)! as! TableViewCell
         
         let trip = self.tripData.get(row: indexPath.row, section: indexPath.section)!
-        let startTime = self.timeFormatter.string(from: trip.getStartDate())
-        let endTime = self.timeFormatter.string(from: trip.getEndDate())
         
-        cell.textLabel?.text = "\(startTime) - \(endTime)"
+        cell.textLabel?.text = { () -> String in
+            if let description = trip.description {
+                return description
+            } else {
+                let startTime = self.timeFormatter.string(from: trip.getStartDate())
+                let endTime = self.timeFormatter.string(from: trip.getEndDate())
+                return "\(startTime) - \(endTime)"
+            }
+        }()
+        
+        
+        
         cell.mileLabel.text = "\((trip.distance * 10).rounded() / 10) mi"
                 
         return cell

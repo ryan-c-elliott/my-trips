@@ -104,10 +104,12 @@ class TripViewController: UIViewController {
     
     func toggleActivityIndicator() {
         if self.activityIndicator.isAnimating { // Stop animating
+            print("stopping animation")
             self.activityIndicator.stopAnimating()
             self.tripButton.isUserInteractionEnabled = true
             self.activityIndicatorView.alpha = 0
         } else {                                // Start animating
+            print("starting animation")
             self.activityIndicator.startAnimating()
             self.tripButton.isUserInteractionEnabled = false
             self.activityIndicatorView.alpha = 0.9
@@ -137,26 +139,69 @@ class TripViewController: UIViewController {
     /* * Alerts * */
     
     func requestLocationServices() {
-        // present an alert indicating location authorization required
-        // and offer to take the user to Settings for the app via
-        // UIApplication -openUrl: and UIApplicationOpenSettingsURLString
+  
         DispatchQueue.main.async {
-            let alert = UIAlertController(title: "Error!", message: "Location services needs to be enabled to start a trip.", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "Settings", style: UIAlertAction.Style.default, handler: { (alert: UIAlertAction!) in
-                print("")
-                UIApplication.shared.open(NSURL(string: UIApplication.openSettingsURLString)! as URL)
+            let alert = UIAlertController(title: "Error!", message: "Location services needs to be enabled to start a trip.", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(
+                title: "Settings",
+                style: .default,
+                handler: { _ in
+            
+                    UIApplication.shared.open(NSURL(string: UIApplication.openSettingsURLString)! as URL)
                 
                 }
             ))
-            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: { (alert: UIAlertAction!) in
-                print("")
-
-                self.dismiss(animated: true, completion: nil)
-                }
+            
+            alert.addAction(UIAlertAction(
+                title: "Cancel",
+                style: .cancel,
+                handler: { _ in } // dismiss view
             ))
+            
             self.present(alert, animated: true, completion: nil)
             
         }
+    }
+    
+    func promptDescription(_ trip: Trip) {
+        
+        let parent = self.parent as! TabBarController
+        
+        let alert = UIAlertController(title: "Trip Description", message: nil, preferredStyle: .alert)
+        
+        alert.addTextField(configurationHandler: { _ in })
+        
+        alert.addAction(UIAlertAction(
+            title: "Done",
+            style: .default,
+            handler: { [unowned alert] _ in
+        
+                
+                
+
+             
+                trip.setDescription(alert.textFields![0].text)
+                
+                // Add trip
+                parent.data.tripData.add(trip)
+                
+                // Change start
+                self.start = nil
+                parent.data.start = nil
+                tripsWrite(data: parent.data)
+                
+                // Reload
+                parent.reloadData()
+               
+            }
+        
+        ))
+        
+        
+        
+        self.present(alert, animated: true, completion: nil)
+
     }
     
     /* * Actions * */
@@ -168,11 +213,12 @@ class TripViewController: UIViewController {
             return
         }
 
-        self.toggleActivityIndicator()
+
+        
         sender.toggle()
         self.manager.requestLocation()
         
-        // Most work will be done in the locationManagerDidUpdateLocations function
+        // Most work will be done in the locationManager didUpdateLocations function
         
         
     }
@@ -184,13 +230,12 @@ extension TripViewController: CLLocationManagerDelegate {
     // When new location is retrieved
     func locationManager(_ manager: CLLocationManager,
                          didUpdateLocations locations: [CLLocation]) {
+        print("location retrieved")
+        self.toggleActivityIndicator()
         let loc = manager.location!
-        let parent = self.parent as! TabBarController
+        
         
         if let start = self.start {   // Trip was just ended
-            
-            //let endCoords = loc.coordinate
-            //self.setRegion(end: endCoords)
             
             // Convert to MKPlacemark
             let request = MKDirections.Request()
@@ -216,26 +261,21 @@ extension TripViewController: CLLocationManagerDelegate {
                     //set the map area to show the route
                     self.map.setVisibleMapRect(route.polyline.boundingMapRect, edgePadding: UIEdgeInsets.init(top: 80.0, left: 20.0, bottom: 100.0, right: 20.0), animated: true)
                     
-                    // Add trip
-                    parent.data.tripData.add(Trip(
+                    //prompt description for trip, add trip on close
+                    self.promptDescription(Trip(
                         startDate: start.timestamp,
                         endDate: loc.timestamp,
                         route: route
                     ))
                     
-                    // Change start
-                    self.start = nil
-                    parent.data.start = nil
-                    tripsWrite(data: parent.data)
-                    
-                    // Reload
-                    parent.reloadData()
                 } else {
                     print("couldn't calculate route")
                 }
             }
             
         } else { // Trip was just started
+            
+            let parent = self.parent as! TabBarController
             
             // Remove last route from map
             if let overlay = self.overlay {
@@ -250,6 +290,8 @@ extension TripViewController: CLLocationManagerDelegate {
             // Show location
             self.setRegion()
         }
+        
+        
         self.toggleActivityIndicator()
         
     }

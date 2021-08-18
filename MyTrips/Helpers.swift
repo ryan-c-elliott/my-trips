@@ -22,7 +22,6 @@ func toCLLocation(_ loc: Location) -> CLLocation {
 }
 
 func loadJson(url: URL) -> ResponseData? {
-    print("loading data")
     do {
 
         let data = try Data(contentsOf: url)
@@ -38,7 +37,7 @@ func loadJson(url: URL) -> ResponseData? {
 
 // URL for data in Application Storage
 func getURL(filename: String) -> URL? {
-    print("getting url")
+
     do {
         let url = try FileManager.default
             .url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
@@ -52,7 +51,6 @@ func getURL(filename: String) -> URL? {
 
 func write<T: Encodable>(url: URL, data: T) {
     
-    print("writing")
     do {
 
         try JSONEncoder().encode(data)
