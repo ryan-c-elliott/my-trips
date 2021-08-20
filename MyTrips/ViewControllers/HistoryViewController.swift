@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HistoryViewController: UIViewController {
 
     @IBOutlet weak var calendarView: UIDatePicker!
     @IBOutlet weak var tableView: UITableView!
@@ -109,7 +109,42 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }
 
-    /* * UITableView * */
+    /* * Alerts * */
+    
+    func deleteTrip(_ tableView: UITableView, forRowAt indexPath: IndexPath){
+        // present an alert asking the user if they really want to delete the trip
+        let alert = UIAlertController(title: "Delete Trip", message: "Are you sure you want to remove this trip?", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(
+            title: "Delete",
+            style: .default,
+            handler: { _ in
+            
+                // Remove from data structure
+                let _ = self.tripData.remove(row: indexPath.row, section: indexPath.section)
+                
+                // Write
+                tripsWrite(data: self.parentController.data)
+                
+                // Reload
+                self.parentController.reloadData()
+            }
+        ))
+        
+        alert.addAction(UIAlertAction(
+            title: "Cancel",
+            style: .cancel,
+            handler: nil
+        ))
+        
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+}
+
+extension HistoryViewController: UITableViewDelegate { }
+
+extension HistoryViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         self.tripData.days.count
@@ -117,6 +152,16 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         self.tripData.get(section: section)?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            deleteTrip(tableView, forRowAt: indexPath)
+            
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -144,47 +189,5 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 
         self.dateFormatter.string(from: self.tripData.get(row: 0, section: section)!.getStartDate())
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            
-            deleteTrip(tableView, forRowAt: indexPath)
-            
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-        }
-    }
-
-    /* * Alerts * */
-    
-    func deleteTrip(_ tableView: UITableView, forRowAt indexPath: IndexPath){
-        // present an alert asking the user if they really want to delete the trip
-        let alert = UIAlertController(title: "Delete Trip", message: "Are you sure you want to remove this trip?", preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(
-            title: "Delete",
-            style: .default,
-            handler: { _ in
-            
-                // Remove from data structure
-                let _ = self.tripData.remove(row: indexPath.row, section: indexPath.section)
-                
-                // Write
-                tripsWrite(data: self.parentController.data)
-                
-                // Reload
-                self.parentController.reloadData()
-            }
-        ))
-        
-        alert.addAction(UIAlertAction(
-            title: "Cancel",
-            style: .cancel,
-            handler: { _ in }
-        ))
-        
-        self.present(alert, animated: true, completion: nil)
-        
     }
 }

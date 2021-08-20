@@ -79,7 +79,7 @@ class ExportViewController: UIViewController {
         self.clearLabels()
         
         // Trim whitespace
-        let text = self.fileTextBox.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let text = self.fileTextBox.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         
         // If no text is entered
         if text == "" {
@@ -90,7 +90,7 @@ class ExportViewController: UIViewController {
         self.clearLabels()
         
         // Get rid of keyboard
-        self.fileTextBox.resignFirstResponder()
+        self.doneWithKeyboard(fileTextBox)
         
         // Create file
         let items: [Any] = [createCSV(filename: text)]
@@ -118,9 +118,9 @@ class ExportViewController: UIViewController {
         let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("\(filename).csv")!
         var csvText = "Date,Start Time,End Time,Distance\n"
         
+        let end = Calendar(identifier: .gregorian).date(byAdding: .day, value: 1, to: self.toDatePicker.date)!
         
-        
-        let iterator = self.tripData.makeIterator(start: self.fromDatePicker.date, end: self.toDatePicker.date)
+        let iterator = self.tripData.makeIterator(start: self.fromDatePicker.date, end: end)
         
         var totalDistance = 0.0
         while let next = iterator.next() {
@@ -156,7 +156,7 @@ class ExportViewController: UIViewController {
         alert.addAction(UIAlertAction(
             title: "Ok",
             style: .default,
-            handler: { _ in }
+            handler: nil
         
         ))
         

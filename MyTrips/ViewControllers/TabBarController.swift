@@ -13,9 +13,9 @@ class TabBarController: UITabBarController {
     
     let dateFormatter: DateFormatter = DateFormatter()
     let timeFormatter: DateFormatter = DateFormatter()
+    let calendar: Calendar = Calendar(identifier: .gregorian)
     
     func reloadData() {
-        
         let history = self.children[1] as! HistoryViewController
         if history.isViewLoaded {
             history.reloadData()
