@@ -9,8 +9,6 @@ import UIKit
 
 class ExportViewController: UIViewController {
 
-    
-    
     @IBOutlet weak var fromDatePicker: UIDatePicker!
     @IBOutlet weak var toDatePicker: UIDatePicker!
     @IBOutlet weak var fileTextBox: UITextField!
@@ -52,7 +50,7 @@ class ExportViewController: UIViewController {
         // Reload
         self.reloadData()
         
-        // Do any additional setup after loading the view.
+
     }
     
     /* * Actions * */
@@ -93,11 +91,13 @@ class ExportViewController: UIViewController {
         self.doneWithKeyboard(fileTextBox)
         
         // Create file
-        let items: [Any] = [createCSV(filename: text)]
-        
+        guard let file = createCSV(filename: text) else {
+            self.csvFailedToWrite()
+            return
+        }
         
         // Present view that allows user to choose where to send the file
-        let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        let ac = UIActivityViewController(activityItems: [file], applicationActivities: nil)
         ac.excludedActivityTypes = [.addToReadingList,.assignToContact,.saveToCameraRoll,.postToFacebook,.postToWeibo,.postToVimeo,.postToFlickr,.postToTwitter,.postToTencentWeibo]
         
         present(ac, animated: true)
@@ -113,9 +113,11 @@ class ExportViewController: UIViewController {
         self.fileLabel.text = ""
     }
     
-    func createCSV(filename: String) -> URL {
+    func createCSV(filename: String) -> URL? {
         
-        let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("\(filename).csv")!
+        guard let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("\(filename).csv") else {
+            return nil
+        }
         var csvText = "Date,Start Time,End Time,Distance\n"
         
         let end = Calendar(identifier: .gregorian).date(byAdding: .day, value: 1, to: self.toDatePicker.date)!
@@ -140,7 +142,7 @@ class ExportViewController: UIViewController {
         } catch {
             print("Failed to create file")
             print("\(error)")
-            self.csvFailedToWrite()
+            return nil
         }
         
         return path
