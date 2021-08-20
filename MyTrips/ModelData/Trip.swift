@@ -40,7 +40,7 @@ class Trip  {
     // Decodable
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        self.description = try values.decode(String.self, forKey: .description)
+        self.description = try values.decode(String?.self, forKey: .description)
         self.start = try values.decode(Location.self, forKey: .start)
         self.end = try values.decode(Location.self, forKey: .end)
         self.distance = try values.decode(Double.self, forKey: .distance)

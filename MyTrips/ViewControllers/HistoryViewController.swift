@@ -160,11 +160,13 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func deleteTrip(_ tableView: UITableView, forRowAt indexPath: IndexPath){
         // present an alert asking the user if they really want to delete the trip
-        DispatchQueue.main.async {
-            let alert = UIAlertController(title: "Delete Trip", message: "Are you sure you want to remove this trip?", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Delete", style: .default, handler: { (alert: UIAlertAction!) in
-                print("")
-                
+        let alert = UIAlertController(title: "Delete Trip", message: "Are you sure you want to remove this trip?", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(
+            title: "Delete",
+            style: .default,
+            handler: { _ in
+            
                 // Remove from data structure
                 let _ = self.tripData.remove(row: indexPath.row, section: indexPath.section)
                 
@@ -173,17 +175,16 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
                 
                 // Reload
                 self.parentController.reloadData()
-                
-                self.dismiss(animated: true, completion: nil)
-                
-            }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (alert: UIAlertAction!) in
-                print("")
-
-                self.dismiss(animated: true, completion: nil)
-            }))
-            self.present(alert, animated: true, completion: nil)
-            
-        }
+            }
+        ))
+        
+        alert.addAction(UIAlertAction(
+            title: "Cancel",
+            style: .cancel,
+            handler: { _ in }
+        ))
+        
+        self.present(alert, animated: true, completion: nil)
+        
     }
 }

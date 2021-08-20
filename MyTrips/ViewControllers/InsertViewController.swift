@@ -11,6 +11,7 @@ import LocationPicker
 
 class InsertViewController: UIViewController {
 
+    @IBOutlet weak var descriptionTextBox: UITextField!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var startTimePicker: UIDatePicker!
     @IBOutlet weak var endTimePicker: UIDatePicker!
@@ -21,13 +22,18 @@ class InsertViewController: UIViewController {
     @IBOutlet weak var locLabel: UILabel!
     @IBOutlet weak var insertButton: UIButton!
     
-    var startLoc: CLLocationCoordinate2D? = nil
-    var endLoc: CLLocationCoordinate2D? = nil
+    var startLoc: CLLocationCoordinate2D?
+    var endLoc: CLLocationCoordinate2D?
     
-    var delegate: TabBarController? = nil
+    var delegate: TabBarController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // TextBox
+        self.descriptionTextBox.autocorrectionType = .no
+        self.descriptionTextBox.autocapitalizationType = .words
+        self.descriptionTextBox.returnKeyType = .done
         
         // DatePicker
         self.datePicker.maximumDate = Date()
@@ -57,6 +63,9 @@ class InsertViewController: UIViewController {
         
     }
     
+    @IBAction func doneWithKeyboard(_ sender: UITextField) {
+        sender.resignFirstResponder()
+    }
     
     @IBAction func insertButtonTapped(_ sender: UIButton) {
         if startLoc == nil || endLoc == nil {
@@ -110,6 +119,9 @@ class InsertViewController: UIViewController {
         request.transportType = MKDirectionsTransportType.automobile
         request.requestsAlternateRoutes = false
         
+        // Get description
+        let description = self.descriptionTextBox.text
+        
         // Find directions
         let directions = MKDirections(request: request)
         directions.calculate { (response, error) in
@@ -118,6 +130,7 @@ class InsertViewController: UIViewController {
                 // Add to data structure
                 let data = self.delegate!.data
                 data.tripData.insert(Trip(
+                    description: description,
                     startDate: startDate,
                     endDate: endDate,
                     route: route

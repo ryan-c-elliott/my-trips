@@ -140,10 +140,28 @@ class ExportViewController: UIViewController {
         } catch {
             print("Failed to create file")
             print("\(error)")
+            self.csvFailedToWrite()
         }
         
         return path
  
+    }
+    
+    /* * Alerts * */
+    
+    func csvFailedToWrite() {
+        
+        let alert = UIAlertController(title: "Error!", message: "Unable to create file. Please try again.", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(
+            title: "Ok",
+            style: .default,
+            handler: { _ in }
+        
+        ))
+        
+        self.present(alert, animated: true, completion: nil)
+
     }
     
 }

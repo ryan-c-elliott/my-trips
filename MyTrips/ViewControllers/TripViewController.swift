@@ -176,11 +176,7 @@ class TripViewController: UIViewController {
             title: "Done",
             style: .default,
             handler: { [unowned alert] _ in
-        
-                
-                
 
-             
                 trip.setDescription(alert.textFields![0].text)
                 
                 // Add trip
@@ -204,6 +200,21 @@ class TripViewController: UIViewController {
 
     }
     
+    func failedToCalculateRoute() {
+        
+        let alert = UIAlertController(title: "Error!", message: "Couldn't calculate route.", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(
+            title: "Ok",
+            style: .default,
+            handler: {  _ in }
+        
+        ))
+
+        self.present(alert, animated: true, completion: nil)
+
+    }
+    
     /* * Actions * */
 
     @IBAction func tripButtonTapped(_ sender: TripButton) {
@@ -213,14 +224,12 @@ class TripViewController: UIViewController {
             return
         }
 
-
-        
         sender.toggle()
+        self.toggleActivityIndicator()
         self.manager.requestLocation()
-        
+
         // Most work will be done in the locationManager didUpdateLocations function
-        
-        
+
     }
 
 }
@@ -231,7 +240,6 @@ extension TripViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager,
                          didUpdateLocations locations: [CLLocation]) {
         print("location retrieved")
-        self.toggleActivityIndicator()
         let loc = manager.location!
         
         
@@ -269,6 +277,8 @@ extension TripViewController: CLLocationManagerDelegate {
                     ))
                     
                 } else {
+                    
+                    self.failedToCalculateRoute()
                     print("couldn't calculate route")
                 }
             }
