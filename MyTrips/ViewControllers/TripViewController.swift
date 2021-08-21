@@ -16,7 +16,8 @@ class TripViewController: UIViewController {
     @IBOutlet weak var activityIndicatorView: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    var manager: CLLocationManager = CLLocationManager()
+    let manager: CLLocationManager = CLLocationManager()
+    
     var start: CLLocation?
     var overlay: MKOverlay?
     
@@ -24,9 +25,7 @@ class TripViewController: UIViewController {
         super.viewDidLoad()
 
         let parent = self.parent as! TabBarController
-        
-        
-        
+
         // Manager
         self.manager.delegate = self
         self.manager.requestWhenInUseAuthorization()
@@ -38,7 +37,6 @@ class TripViewController: UIViewController {
         self.map.isPitchEnabled = false
         self.map.isRotateEnabled = false
         self.map.delegate = self
-        
         
         // Arrange subviews
         self.view.bringSubviewToFront(self.tripButton)
@@ -131,37 +129,29 @@ class TripViewController: UIViewController {
         )
         
     }
-    
 
-    
-    
-    
     /* * Alerts * */
     
     func requestLocationServices() {
-  
-        DispatchQueue.main.async {
-            let alert = UIAlertController(title: "Error!", message: "Location services needs to be enabled to start a trip.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Error!", message: "Location services needs to be enabled to start a trip.", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(
+            title: "Settings",
+            style: .default,
+            handler: { _ in
+        
+                UIApplication.shared.open(NSURL(string: UIApplication.openSettingsURLString)! as URL)
             
-            alert.addAction(UIAlertAction(
-                title: "Settings",
-                style: .default,
-                handler: { _ in
-            
-                    UIApplication.shared.open(NSURL(string: UIApplication.openSettingsURLString)! as URL)
-                
-                }
-            ))
-            
-            alert.addAction(UIAlertAction(
-                title: "Cancel",
-                style: .cancel,
-                handler: { _ in } // dismiss view
-            ))
-            
-            self.present(alert, animated: true, completion: nil)
-            
-        }
+            }
+        ))
+        
+        alert.addAction(UIAlertAction(
+            title: "Cancel",
+            style: .cancel,
+            handler: nil
+        ))
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
     func promptDescription(_ trip: Trip) {
@@ -194,10 +184,7 @@ class TripViewController: UIViewController {
         
         ))
         
-        
-        
         self.present(alert, animated: true, completion: nil)
-
     }
     
     func failedToCalculateRoute() {
@@ -207,7 +194,22 @@ class TripViewController: UIViewController {
         alert.addAction(UIAlertAction(
             title: "Ok",
             style: .default,
-            handler: {  _ in }
+            handler: nil
+        
+        ))
+
+        self.present(alert, animated: true, completion: nil)
+
+    }
+    
+    func failedToFindLocation() {
+        
+        let alert = UIAlertController(title: "Error!", message: "Couldn't find location.", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(
+            title: "Ok",
+            style: .default,
+            handler: nil
         
         ))
 
@@ -241,8 +243,7 @@ extension TripViewController: CLLocationManagerDelegate {
                          didUpdateLocations locations: [CLLocation]) {
         print("location retrieved")
         let loc = manager.location!
-        
-        
+
         if let start = self.start {   // Trip was just ended
             
             // Convert to MKPlacemark
@@ -259,8 +260,6 @@ extension TripViewController: CLLocationManagerDelegate {
       
             directions.calculate { (response, error) in
                 if let response = response, let route = response.routes.first {
-                    
-                    
                     
                     //show on map
                     self.overlay = route.polyline
@@ -301,9 +300,7 @@ extension TripViewController: CLLocationManagerDelegate {
             self.setRegion()
         }
         
-        
         self.toggleActivityIndicator()
-        
     }
 
     // When the authorization status of the app is changed
@@ -314,7 +311,8 @@ extension TripViewController: CLLocationManagerDelegate {
     // When manager fails
     func locationManager(_ manager: CLLocationManager,
                          didFailWithError error: Error) {
-        self.toggleActivityIndicator()
+        
+        manager.requestLocation()
         print(error)
     }
 }

@@ -25,7 +25,7 @@ class InsertViewController: UIViewController {
     var startLoc: CLLocationCoordinate2D?
     var endLoc: CLLocationCoordinate2D?
     
-    var delegate: TabBarController?
+    var delegate: TabBarController = TabBarController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +59,7 @@ class InsertViewController: UIViewController {
                 self.endLoc = location?.coordinate
             }
         }
-        navigationController!.pushViewController(lp, animated: true)
+        self.navigationController!.pushViewController(lp, animated: true)
         
     }
     
@@ -105,8 +105,6 @@ class InsertViewController: UIViewController {
             endComponents.day! += 1
         }
         
-        
-        
         let startDate = calendar.date(from: startComponents)!
         let endDate = calendar.date(from: endComponents)!
         
@@ -128,7 +126,7 @@ class InsertViewController: UIViewController {
             if let response = response, let route = response.routes.first {
     
                 // Add to data structure
-                let data = self.delegate!.data
+                let data = self.delegate.data
                 data.tripData.insert(Trip(
                     description: description,
                     startDate: startDate,
@@ -140,7 +138,7 @@ class InsertViewController: UIViewController {
                 tripsWrite(data: data)
                 
                 // Reload
-                self.delegate!.reloadData()
+                self.delegate.reloadData()
                 
                 // Dismiss
                 self.dismiss(animated: true, completion: nil)

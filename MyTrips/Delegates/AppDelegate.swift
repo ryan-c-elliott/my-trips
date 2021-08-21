@@ -31,6 +31,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
+    func applicationSignificantTimeChange(_ application: UIApplication) {
+        if (application.windows.count == 0) {
+            return
+        }
+        let tabBarController = application.windows[0].rootViewController as! TabBarController
+        tabBarController.reloadData()
+    }
 
 }
 

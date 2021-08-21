@@ -19,7 +19,7 @@ class Trip  {
     
     convenience init(description: String?, startDate: Date, endDate: Date, route: MKRoute) {
         self.init(startDate: startDate, endDate: endDate, route: route)
-        self.description = description
+        self.setDescription(description)
     }
     
     init(startDate: Date, endDate: Date, route: MKRoute) {

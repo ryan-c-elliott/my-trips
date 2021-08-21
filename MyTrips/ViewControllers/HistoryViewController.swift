@@ -53,7 +53,7 @@ class HistoryViewController: UIViewController {
     @IBAction func insertButtonTapped(_ sender: UIButton) {
         
         let vc = self.storyboard!.instantiateViewController(withIdentifier: "Insert") as! InsertViewController
-        vc.delegate = self.parent as? TabBarController
+        vc.delegate = self.parent as! TabBarController
         vc.title = "Create Trip"
         let navController = UINavigationController(rootViewController: vc)
         self.present(navController, animated: true, completion: nil)
@@ -116,6 +116,12 @@ class HistoryViewController: UIViewController {
         let alert = UIAlertController(title: "Delete Trip", message: "Are you sure you want to remove this trip?", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(
+            title: "Cancel",
+            style: .cancel,
+            handler: nil
+        ))
+        
+        alert.addAction(UIAlertAction(
             title: "Delete",
             style: .default,
             handler: { _ in
@@ -129,12 +135,6 @@ class HistoryViewController: UIViewController {
                 // Reload
                 self.parentController.reloadData()
             }
-        ))
-        
-        alert.addAction(UIAlertAction(
-            title: "Cancel",
-            style: .cancel,
-            handler: nil
         ))
         
         self.present(alert, animated: true, completion: nil)
@@ -169,7 +169,7 @@ extension HistoryViewController: UITableViewDataSource {
         
         let trip = self.tripData.get(row: indexPath.row, section: indexPath.section)!
         
-        cell.textLabel?.text = { () -> String in
+        cell.descriptionLabel?.text = { () -> String in
             if let description = trip.description {
                 return description
             } else {
@@ -178,8 +178,6 @@ extension HistoryViewController: UITableViewDataSource {
                 return "\(startTime) - \(endTime)"
             }
         }()
-        
-        
         
         cell.mileLabel.text = "\((trip.distance * 10).rounded() / 10) mi"
                 

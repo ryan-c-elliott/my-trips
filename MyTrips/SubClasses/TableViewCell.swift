@@ -9,6 +9,8 @@ import UIKit
 
 class TableViewCell: UITableViewCell {
 
+    
+    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var mileLabel: UILabel!
     
     override func awakeFromNib() {

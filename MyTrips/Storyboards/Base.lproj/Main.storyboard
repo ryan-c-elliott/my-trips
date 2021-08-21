@@ -22,26 +22,35 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="5KW-ca-Ae0" customClass="TableViewCell" customModule="MyTrips" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="43"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5KW-ca-Ae0" id="XJ6-cZ-pOl">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_ mi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9pd-fn-0T4">
-                                                    <rect key="frame" x="362" y="11" width="32" height="21"/>
+                                                    <rect key="frame" x="362" y="11.5" width="32" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Description Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mVY-En-ayw">
+                                                    <rect key="frame" x="20" y="11.5" width="133" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="mVY-En-ayw" firstAttribute="leading" secondItem="XJ6-cZ-pOl" secondAttribute="leadingMargin" id="Fro-NC-RTG"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="9pd-fn-0T4" secondAttribute="trailing" id="WOJ-Xt-iR8"/>
-                                                <constraint firstItem="9pd-fn-0T4" firstAttribute="top" secondItem="XJ6-cZ-pOl" secondAttribute="topMargin" id="h5H-pP-Hrw"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="9pd-fn-0T4" secondAttribute="bottom" id="lJq-qG-PRo"/>
+                                                <constraint firstItem="mVY-En-ayw" firstAttribute="centerY" secondItem="XJ6-cZ-pOl" secondAttribute="centerY" id="fFh-PN-rn4"/>
+                                                <constraint firstItem="9pd-fn-0T4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mVY-En-ayw" secondAttribute="trailing" constant="25" id="l3I-ze-m6L"/>
+                                                <constraint firstItem="9pd-fn-0T4" firstAttribute="centerY" secondItem="XJ6-cZ-pOl" secondAttribute="centerY" id="t3P-Py-cco"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="descriptionLabel" destination="mVY-En-ayw" id="ZGS-qg-mhY"/>
                                             <outlet property="mileLabel" destination="9pd-fn-0T4" id="LIt-2z-lQP"/>
                                         </connections>
                                     </tableViewCell>
