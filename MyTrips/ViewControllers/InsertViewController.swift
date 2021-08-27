@@ -25,6 +25,8 @@ class InsertViewController: UIViewController {
     var startLoc: CLLocationCoordinate2D?
     var endLoc: CLLocationCoordinate2D?
     
+    let noLoc = "No Location Selected"
+    
     var delegate: TabBarController = TabBarController()
     
     override func viewDidLoad() {
@@ -41,9 +43,32 @@ class InsertViewController: UIViewController {
         // LocLabel
         self.locLabel.text = ""
         
+        // Start and End Labels
+        self.startLabel.text = self.noLoc
+        self.endLabel.text = self.noLoc
+        
         
         // Do any additional setup after loading the view.
     }
+    
+    /* * Alerts * */
+    
+    
+    func failedToFindLocation() {
+        
+        let alert = UIAlertController(title: "Error!", message: "Couldn't find location.", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(
+            title: "Ok",
+            style: .default,
+            handler: nil
+        
+        ))
+
+        self.present(alert, animated: true, completion: nil)
+
+    }
+    
     
     /* * Actions * */
     
@@ -51,12 +76,21 @@ class InsertViewController: UIViewController {
         self.locLabel.text = ""
         let lp = LocationPickerViewController()
         lp.completion = { location in
+            guard let location = location else {
+                
+                self.failedToFindLocation()
+                
+                return
+            }
+            
+            
             if sender == self.startButton {
-                self.startLabel.text = location?.name
-                self.startLoc = location?.coordinate
+                
+                self.startLabel.text = location.name ?? location.address
+                self.startLoc = location.coordinate
             } else {
-                self.endLabel.text = location?.name
-                self.endLoc = location?.coordinate
+                self.endLabel.text = location.name ?? location.address
+                self.endLoc = location.coordinate
             }
         }
         self.navigationController!.pushViewController(lp, animated: true)

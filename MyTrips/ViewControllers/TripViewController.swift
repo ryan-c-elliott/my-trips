@@ -226,7 +226,6 @@ class TripViewController: UIViewController {
             return
         }
 
-        sender.toggle()
         self.toggleActivityIndicator()
         self.manager.requestLocation()
 
@@ -275,6 +274,9 @@ extension TripViewController: CLLocationManagerDelegate {
                         route: route
                     ))
                     
+                    // change tripButton
+                    self.tripButton.toggle()
+                    
                 } else {
                     
                     self.failedToCalculateRoute()
@@ -298,6 +300,9 @@ extension TripViewController: CLLocationManagerDelegate {
             
             // Show location
             self.setRegion()
+            
+            // Change tripbutton
+            self.tripButton.toggle()
         }
         
         self.toggleActivityIndicator()
@@ -312,7 +317,7 @@ extension TripViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager,
                          didFailWithError error: Error) {
         
-        manager.requestLocation()
+        self.failedToFindLocation()
         print(error)
     }
 }
