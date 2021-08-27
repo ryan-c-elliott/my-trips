@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		94140BEC26D93B090066E068 /* DescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94140BEB26D93B090066E068 /* DescriptionViewController.swift */; };
 		942E57BC26ABBD9000F96E9D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E57BB26ABBD9000F96E9D /* AppDelegate.swift */; };
 		942E57BE26ABBD9000F96E9D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E57BD26ABBD9000F96E9D /* SceneDelegate.swift */; };
 		942E57C326ABBD9000F96E9D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 942E57C126ABBD9000F96E9D /* Main.storyboard */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		94140BEB26D93B090066E068 /* DescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewController.swift; sourceTree = "<group>"; };
 		942E57B826ABBD9000F96E9D /* MyTrips.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTrips.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		942E57BB26ABBD9000F96E9D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		942E57BD26ABBD9000F96E9D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				944E062C26B72F5A00A49B81 /* TabBarController.swift */,
 				942E57ED26ACAF6800F96E9D /* TripViewController.swift */,
 				942E57EB26ACAF4B00F96E9D /* HistoryViewController.swift */,
+				94140BEB26D93B090066E068 /* DescriptionViewController.swift */,
 				9489295A26BB611E00A3F5AF /* InsertViewController.swift */,
 				94FE30FA26B8D7A000F52F61 /* ExportViewController.swift */,
 			);
@@ -346,6 +349,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				942E57EE26ACAF6800F96E9D /* TripViewController.swift in Sources */,
+				94140BEC26D93B090066E068 /* DescriptionViewController.swift in Sources */,
 				944E062D26B72F5A00A49B81 /* TabBarController.swift in Sources */,
 				9469A44E26C3112E00DC6996 /* Day.swift in Sources */,
 				9469A44A26C1C63F00DC6996 /* TripDataIterator.swift in Sources */,

@@ -245,21 +245,8 @@ extension TripViewController: CLLocationManagerDelegate {
 
         if let start = self.start {   // Trip was just ended
             
-            // Convert to MKPlacemark
-            let request = MKDirections.Request()
-            let source = MKPlacemark(coordinate: start.coordinate)
-            let dest = MKPlacemark(coordinate: loc.coordinate)
-            request.source = MKMapItem(placemark: source)
-            request.destination = MKMapItem(placemark: dest)
-            request.transportType = MKDirectionsTransportType.automobile
-            request.requestsAlternateRoutes = false
-            
-            // Find directions
-            let directions = MKDirections(request: request)
-      
-            directions.calculate { (response, error) in
-                if let response = response, let route = response.routes.first {
-                    
+            route(start: start, end: loc, onSuccess: { route in
+                
                     //show on map
                     self.overlay = route.polyline
                     self.map.addOverlay(self.overlay!)
@@ -277,12 +264,7 @@ extension TripViewController: CLLocationManagerDelegate {
                     // change tripButton
                     self.tripButton.toggle()
                     
-                } else {
-                    
-                    self.failedToCalculateRoute()
-                    print("couldn't calculate route")
-                }
-            }
+            }, onFailure: self.failedToCalculateRoute)
             
         } else { // Trip was just started
             
@@ -296,7 +278,7 @@ extension TripViewController: CLLocationManagerDelegate {
             // Change start
             self.start = loc
             parent.data.start = Location(location: loc)
-            write(url: getURL(filename: "data")!, data: parent.data)
+            tripsWrite(data: parent.data)
             
             // Show location
             self.setRegion()

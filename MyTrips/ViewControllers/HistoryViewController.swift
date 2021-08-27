@@ -41,7 +41,7 @@ class HistoryViewController: UIViewController {
         // TableView
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.allowsSelection = false
+        //self.tableView.allowsSelection = false
         
         // Reload
         self.reloadData()
@@ -142,7 +142,16 @@ class HistoryViewController: UIViewController {
     }
 }
 
-extension HistoryViewController: UITableViewDelegate { }
+extension HistoryViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = self.storyboard!.instantiateViewController(withIdentifier: "Description") as! DescriptionViewController
+        vc.delegate = self
+        vc.dateFormatter = self.dateFormatter
+        vc.timeFormatter = self.timeFormatter
+        vc.trip = self.tripData.get(row: indexPath.row, section: indexPath.section)!
+        self.present(vc, animated: true, completion: nil)
+    }
+}
 
 extension HistoryViewController: UITableViewDataSource {
     

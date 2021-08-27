@@ -30,11 +30,16 @@ class Trip  {
         self.distance = metersToMiles(route.distance)
     }
     
-    // Dummy initializer
+    // Dummy initializer to store start date
     init(_ date: Date) {
-        self.start = Location()
+        self.start = Location(date)
         self.end = Location()
         self.distance = 0
+    }
+    
+    // Another dummy initializer
+    convenience init() {
+        self.init(Date())
     }
     
     // Decodable

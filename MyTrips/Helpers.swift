@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreLocation
+import MapKit
 
 func toLocation(_ loc: CLLocation) -> Location {
     let coords = loc.coordinate
@@ -18,6 +19,10 @@ func mid(_ v1: Double, _ v2: Double) -> Double {
 }
 
 func toCLLocation(_ loc: Location) -> CLLocation {
+    CLLocation(latitude: loc.latitude, longitude: loc.longitude)
+}
+
+func toCLLocation(_ loc: CLLocationCoordinate2D) -> CLLocation {
     CLLocation(latitude: loc.latitude, longitude: loc.longitude)
 }
 
@@ -133,4 +138,27 @@ func binarySearch<T: Comparable>(arr: [T], item: T) -> Int {
     }
     
     return l
+}
+
+func route(start: CLLocation, end: CLLocation, onSuccess: @escaping (MKRoute) -> (), onFailure: @escaping () -> ()) {
+    // Convert to MKPlacemark
+    let request = MKDirections.Request()
+    let source = MKPlacemark(coordinate: start.coordinate)
+    let dest = MKPlacemark(coordinate: end.coordinate)
+    request.source = MKMapItem(placemark: source)
+    request.destination = MKMapItem(placemark: dest)
+    request.transportType = MKDirectionsTransportType.automobile
+    request.requestsAlternateRoutes = false
+    
+    // Find directions
+    let directions = MKDirections(request: request)
+
+    directions.calculate { (response, error) in
+        if let route = response?.routes.first {
+            onSuccess(route)
+        } else {
+            onFailure()
+            print("couldn't calculate route")
+        }
+    }
 }

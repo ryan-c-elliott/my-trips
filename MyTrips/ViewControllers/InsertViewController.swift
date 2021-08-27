@@ -142,47 +142,30 @@ class InsertViewController: UIViewController {
         let startDate = calendar.date(from: startComponents)!
         let endDate = calendar.date(from: endComponents)!
         
-        // Convert to MKPlacemark
-        let request = MKDirections.Request()
-        let source = MKPlacemark(coordinate: startLoc!)
-        let dest = MKPlacemark(coordinate: endLoc!)
-        request.source = MKMapItem(placemark: source)
-        request.destination = MKMapItem(placemark: dest)
-        request.transportType = MKDirectionsTransportType.automobile
-        request.requestsAlternateRoutes = false
-        
         // Get description
         let description = self.descriptionTextBox.text
         
-        // Find directions
-        let directions = MKDirections(request: request)
-        directions.calculate { (response, error) in
-            if let response = response, let route = response.routes.first {
-    
-                // Add to data structure
-                let data = self.delegate.data
-                data.tripData.insert(Trip(
-                    description: description,
-                    startDate: startDate,
-                    endDate: endDate,
-                    route: route
-                ))
-                
-                // Write
-                tripsWrite(data: data)
-                
-                // Reload
-                self.delegate.reloadData()
-                
-                // Dismiss
-                self.dismiss(animated: true, completion: nil)
- 
-            } else {
-                self.locLabel.text = "Couldn't calculate route"
-            }
-        }
-        
-        
+        route(start: toCLLocation(startLoc!), end: toCLLocation(endLoc!), onSuccess: { route in
+            // Add to data structure
+            let data = self.delegate.data
+            data.tripData.insert(Trip(
+                description: description,
+                startDate: startDate,
+                endDate: endDate,
+                route: route
+            ))
+            
+            // Write
+            tripsWrite(data: data)
+            
+            // Reload
+            self.delegate.reloadData()
+            
+            // Dismiss
+            self.dismiss(animated: true, completion: nil)
+        }, onFailure: {
+            self.locLabel.text = "Couldn't calculate route"
+        })
         
         
     }
