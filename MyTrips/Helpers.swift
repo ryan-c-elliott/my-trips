@@ -30,9 +30,10 @@ func addLocation(_ location: CLLocation, map: MKMapView) {
     
     // Look up the location and pass it to the completion handler
     CLGeocoder().reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
+        let location: CLLocation = placemarks?[0].location ?? location
         let point = MKPointAnnotation()
         point.coordinate = location.coordinate
-        point.title = error == nil ? placemarks?[0].name : "Unknown Location"
+        point.title = placemarks?[0].name ?? location.description
         map.addAnnotation(point)
     })
 }

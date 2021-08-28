@@ -23,7 +23,6 @@ class Trip  {
     }
     
     init(startDate: Date, endDate: Date, route: MKRoute) {
-        
         self.start = Location(point: route.steps[0].polyline.points()[0], date: startDate)
         let end = route.steps.last!.polyline
         self.end = Location(point: end.points()[end.pointCount-1], date: endDate)
