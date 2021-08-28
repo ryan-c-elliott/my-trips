@@ -52,9 +52,8 @@ class TripViewController: UIViewController {
                 coordinate: CLLocationCoordinate2D(
                     latitude: start.latitude,
                     longitude: start.longitude
-                
                 ),
-                altitude: 0,
+                altitude: 0,    // doesn't matter right now
                 horizontalAccuracy: self.manager.desiredAccuracy,
                 verticalAccuracy: self.manager.desiredAccuracy,
                 timestamp: start.date
@@ -78,6 +77,7 @@ class TripViewController: UIViewController {
         self.showRouteOnMap(pickupCoordinate: self.start!.coordinate, destinationCoordinate: endCoords)
         */
         // TripButton
+        self.tripButton.configure()
         let tripStarted = self.start != nil
         if tripStarted != self.tripButton.trip {
             self.tripButton.toggle()
@@ -103,13 +103,13 @@ class TripViewController: UIViewController {
         if self.activityIndicator.isAnimating { // Stop animating
             print("stopping animation")
             self.activityIndicator.stopAnimating()
-            self.tripButton.isUserInteractionEnabled = true
+            self.view.isUserInteractionEnabled = true
             self.activityIndicatorView.alpha = 0
         } else {                                // Start animating
             print("starting animation")
             self.activityIndicator.startAnimating()
-            self.tripButton.isUserInteractionEnabled = false
-            self.activityIndicatorView.alpha = 0.9
+            self.view.isUserInteractionEnabled = false
+            self.activityIndicatorView.alpha = 0.8
         }
     }
     
@@ -239,8 +239,11 @@ extension TripViewController: CLLocationManagerDelegate {
     // When new location is retrieved
     func locationManager(_ manager: CLLocationManager,
                          didUpdateLocations locations: [CLLocation]) {
-        print("location retrieved")
-        let loc = manager.location!
+        guard let loc = manager.location else {
+            self.toggleActivityIndicator()
+            self.failedToFindLocation()
+            return
+        }
 
         if let start = self.start {   // Trip was just ended
             
