@@ -30,6 +30,12 @@ class Trip  {
         self.distance = metersToMiles(route.distance)
     }
     
+    init(start: CLLocation, end: CLLocation, distance: Double) {
+        self.start = Location(coords: start.coordinate, date: start.timestamp)
+        self.end = Location(coords: end.coordinate, date: end.timestamp)
+        self.distance = metersToMiles(distance)
+    }
+    
     // Dummy initializer to store start date
     init(_ date: Date) {
         self.start = Location(date)

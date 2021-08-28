@@ -50,8 +50,8 @@ class DescriptionViewController: UIViewController {
         // Add named points on map
         let startLoc = trip.start.toCLLocation();
         let endLoc = trip.end.toCLLocation();
-        self.addLocation(startLoc)
-        self.addLocation(endLoc)
+        addLocation(startLoc, map: self.map)
+        addLocation(endLoc, map: self.map)
         
         route(start: startLoc, end: endLoc, onSuccess: { route in
             
@@ -60,7 +60,9 @@ class DescriptionViewController: UIViewController {
             
             //set the map area to show the route
             self.map.setVisibleMapRect(route.polyline.boundingMapRect, edgePadding: UIEdgeInsets.init(top: 80.0, left: 20.0, bottom: 100.0, right: 20.0), animated: true)
-        }, onFailure: {})
+        }, onFailure: {
+            
+        })
         
     }
     
@@ -74,19 +76,6 @@ class DescriptionViewController: UIViewController {
     
     @IBAction func doneWithKeyboard(_ sender: UITextField) {
         sender.resignFirstResponder()
-    }
-    
-    /* * Helpers * */
-    
-    func addLocation(_ location: CLLocation) {
-        
-        // Look up the location and pass it to the completion handler
-        CLGeocoder().reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
-            let point = MKPointAnnotation()
-            point.coordinate = location.coordinate
-            point.title = error == nil ? placemarks?[0].name : "Unknown Location"
-            self.map.addAnnotation(point)
-        })
     }
     
 }

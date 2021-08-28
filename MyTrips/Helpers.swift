@@ -26,6 +26,17 @@ func toCLLocation(_ loc: CLLocationCoordinate2D) -> CLLocation {
     CLLocation(latitude: loc.latitude, longitude: loc.longitude)
 }
 
+func addLocation(_ location: CLLocation, map: MKMapView) {
+    
+    // Look up the location and pass it to the completion handler
+    CLGeocoder().reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
+        let point = MKPointAnnotation()
+        point.coordinate = location.coordinate
+        point.title = error == nil ? placemarks?[0].name : "Unknown Location"
+        map.addAnnotation(point)
+    })
+}
+
 func loadJson(url: URL) -> ResponseData? {
     do {
 

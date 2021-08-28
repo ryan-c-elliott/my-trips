@@ -19,7 +19,6 @@ class TripViewController: UIViewController {
     let manager: CLLocationManager = CLLocationManager()
     
     var start: CLLocation?
-    var overlay: MKOverlay?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -245,20 +244,21 @@ extension TripViewController: CLLocationManagerDelegate {
 
         if let start = self.start {   // Trip was just ended
             
+            addLocation(loc, map: self.map)
+            
             route(start: start, end: loc, onSuccess: { route in
                 
                     //show on map
-                    self.overlay = route.polyline
-                    self.map.addOverlay(self.overlay!)
+                    self.map.addOverlay(route.polyline)
                     
                     //set the map area to show the route
                     self.map.setVisibleMapRect(route.polyline.boundingMapRect, edgePadding: UIEdgeInsets.init(top: 80.0, left: 20.0, bottom: 100.0, right: 20.0), animated: true)
                     
                     //prompt description for trip, add trip on close
                     self.promptDescription(Trip(
-                        startDate: start.timestamp,
-                        endDate: loc.timestamp,
-                        route: route
+                        start: start,
+                        end: loc,
+                        distance: route.distance
                     ))
                     
                     // change tripButton
@@ -270,10 +270,9 @@ extension TripViewController: CLLocationManagerDelegate {
             
             let parent = self.parent as! TabBarController
             
-            // Remove last route from map
-            if let overlay = self.overlay {
-                self.map.removeOverlay(overlay)
-            }
+            // Clear map
+            self.map.removeOverlays(self.map.overlays)
+            self.map.removeAnnotations(self.map.annotations)
         
             // Change start
             self.start = loc
@@ -281,6 +280,7 @@ extension TripViewController: CLLocationManagerDelegate {
             tripsWrite(data: parent.data)
             
             // Show location
+            addLocation(loc, map: self.map)
             self.setRegion()
             
             // Change tripbutton
