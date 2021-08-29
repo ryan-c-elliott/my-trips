@@ -95,6 +95,8 @@ class HistoryViewController: UIViewController {
             //  so just animate to "today"
             self.calendarView.setDate(today, animated: true)
         }
+        
+        self.dateChanged(self.calendarView)
     }
     
     @IBAction func dateChanged(_ sender: UIDatePicker) {
