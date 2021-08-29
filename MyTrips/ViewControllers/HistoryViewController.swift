@@ -10,6 +10,8 @@ import UIKit
 class HistoryViewController: UIViewController {
 
     @IBOutlet weak var calendarView: UIDatePicker!
+    @IBOutlet weak var insertButton: UIButton!
+    @IBOutlet weak var todayButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
 
@@ -37,6 +39,10 @@ class HistoryViewController: UIViewController {
         self.tripData = parentController.data.tripData
         self.dateFormatter = parentController.dateFormatter
         self.timeFormatter = parentController.timeFormatter
+        
+        // Buttons
+        self.insertButton.layer.cornerRadius = 12.5
+        self.todayButton.layer.cornerRadius = 12.5
         
         // TableView
         self.tableView.delegate = self

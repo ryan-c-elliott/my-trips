@@ -13,6 +13,7 @@ class ExportViewController: UIViewController {
     @IBOutlet weak var toDatePicker: UIDatePicker!
     @IBOutlet weak var fileTextBox: UITextField!
     @IBOutlet weak var fileLabel: UILabel!
+    @IBOutlet weak var exportButton: UIButton!
     
     var tripData: TripData = TripData()
     var dateFormatter: DateFormatter = DateFormatter()
@@ -22,7 +23,6 @@ class ExportViewController: UIViewController {
         // DatePickers
         let today = Date()
         let min = self.tripData.get(row: 0, section: 0)?.getStartDate() ?? today
-        
         self.fromDatePicker.maximumDate = today
         self.toDatePicker.maximumDate = today
         self.fromDatePicker.minimumDate = min
@@ -31,6 +31,11 @@ class ExportViewController: UIViewController {
         
         // Labels
         self.clearLabels()
+        
+        // Export Button
+        self.exportButton.layer.cornerRadius = 12.5
+        
+        
     }
     
     override func viewDidLoad() {

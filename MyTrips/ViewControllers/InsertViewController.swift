@@ -43,6 +43,10 @@ class InsertViewController: UIViewController {
         // LocLabel
         self.locLabel.text = ""
         
+        // Start and End Buttons
+        self.startButton.layer.cornerRadius = 12.5
+        self.endButton.layer.cornerRadius = 12.5
+        
         // Start and End Labels
         self.startLabel.text = self.noLoc
         self.endLabel.text = self.noLoc

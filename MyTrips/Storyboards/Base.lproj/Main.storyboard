@@ -132,7 +132,9 @@
                     <tabBarItem key="tabBarItem" title="History" image="list.bullet.rectangle" catalog="system" id="nUN-Ud-Zep"/>
                     <connections>
                         <outlet property="calendarView" destination="fjH-P1-ing" id="LfB-ef-Tbo"/>
+                        <outlet property="insertButton" destination="5fV-x8-770" id="F48-84-g7z"/>
                         <outlet property="tableView" destination="vOL-z0-JWN" id="TdL-Vc-Yma"/>
+                        <outlet property="todayButton" destination="hzD-cs-1ec" id="B2r-rv-27y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gbl-pz-JyP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -508,6 +510,7 @@
                     <tabBarItem key="tabBarItem" title="Export" image="square.and.arrow.up" catalog="system" id="Duf-ih-g9x"/>
                     <navigationItem key="navigationItem" id="vcy-sO-m1q"/>
                     <connections>
+                        <outlet property="exportButton" destination="v34-7q-rem" id="ey9-NX-LZ1"/>
                         <outlet property="fileLabel" destination="Jbu-lN-WhZ" id="2LS-HQ-Bkq"/>
                         <outlet property="fileTextBox" destination="Gwb-jZ-UYS" id="Ucp-mn-o1Q"/>
                         <outlet property="fromDatePicker" destination="7Zd-k2-ryH" id="6pE-kG-mrs"/>
