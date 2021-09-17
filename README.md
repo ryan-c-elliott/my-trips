@@ -6,4 +6,4 @@ This app can calculate a route given a start and end location and store that rou
 
 Works for driven routes only. Compatible with iOS dark mode. 
 
-I used the LocationPicker API for the insertion of trips, everything else was built using the built-in swift framework.
+I used the LocationPicker API by almassapargali on GitHub for the insertion of trips, everything else was built using the built-in swift framework.
